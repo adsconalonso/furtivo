@@ -1,0 +1,10 @@
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Dependencias Node (si aplica a futuro)
+node_modules/
+
+# Archivos de Firebase
+.firebase/
+firebase-debug.log*

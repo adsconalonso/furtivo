@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicios Furtivo | Barbería Premium</title>
+  <meta name="description" content="Lista completa de servicios en Furtivo Barbería. Cortes, barba, cuidado facial y capilar.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✂️</text></svg>">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo">Fur<span>tivo</span></a>
+      <div class="navbar__menu" id="navMenu">
+        <a href="experiencias.html" class="navbar__link">Experiencias</a>
+        <a href="servicios.html" class="navbar__link" style="color:var(--accent);">Servicios</a>
+        <a href="barberos.html" class="navbar__link">Barberos</a>
+        <a href="club.html" class="navbar__link">Club Furtivo</a>
+        <a href="agendar.html" class="btn btn--primary btn--sm navbar__cta">Agendar Cita</a>
+      </div>
+      <button class="navbar__toggle" id="navToggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="experiencias.html" class="mobile-menu__link">Experiencias</a>
+    <a href="servicios.html" class="mobile-menu__link">Servicios</a>
+    <a href="barberos.html" class="mobile-menu__link">Barberos</a>
+    <a href="club.html" class="mobile-menu__link">Club Furtivo</a>
+    <a href="agendar.html" class="btn btn--primary btn--lg">Agendar Cita</a>
+  </div>
+
+  <!-- HERO SERVICIOS -->
+  <section class="hero hero--subpage" style="height: 50vh; min-height: 400px;">
+    <div class="hero__bg">
+      <img src="assets/images/gallery-5.jpg" alt="Herramientas de barbería" loading="eager" style="object-position: center 80%; filter: brightness(0.6);">
+    </div>
+    <div class="hero__overlay"></div>
+    <div class="container">
+      <div class="hero__content" style="max-width: 800px; text-align: center; margin: 0 auto;">
+        <span class="hero__subtitle">El Menú Completo</span>
+        <h1 class="heading-xl hero__title">Nuestros Servicios</h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- LISTA DE SERVICIOS -->
+  <section class="section">
+    <div class="container">
+      
+      <!-- CORTES -->
+      <div style="margin-bottom: var(--space-2xl);">
+        <h2 class="heading-lg reveal" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; margin-bottom: 2rem;">Cortes & Styling</h2>
+        <div class="services-grid">
+          <div class="service-item reveal">
+            <div class="service-item__content">
+              <h3 class="service-item__title">Corte Clásico / Fade</h3>
+              <p class="service-item__description">Asesoría de imagen, corte a máquina y tijera, lavado y peinado.</p>
+            </div>
+            <div class="service-item__price-box">
+              <span class="service-item__price">$36.000</span>
+            </div>
+          </div>
+          <div class="service-item reveal">
+            <div class="service-item__content">
+              <h3 class="service-item__title">Corte Estudiantes</h3>
+              <p class="service-item__description">Misma calidad Furtivo, tarifa especial (con carnet).</p>
+            </div>
+            <div class="service-item__price-box">
+              <span class="service-item__price">$28.000</span>
+            </div>
+          </div>
+          <div class="service-item reveal">
+            <div class="service-item__content">
+              <h3 class="service-item__title">Camuflaje de Canas</h3>
+              <p class="service-item__description">Tinte rápido para atenuar canas sutilmente.</p>
+            </div>
+            <div class="service-item__price-box">
+              <span class="service-item__price">$25.000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BARBA -->
+      <div style="margin-bottom: var(--space-2xl);">
+        <h2 class="heading-lg reveal" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; margin-bottom: 2rem;">Barba & Ritual</h2>
+        <div class="services-grid">
+          <div class="service-item reveal">
+            <div class="service-item__content">
+              <h3 class="service-item__title">Arreglo de Barba Express</h3>
+              <p class="service-item__description">Perfilado y recorte a máquina.</p>
+            </div>
+            <div class="service-item__price-box">
+              <span class="service-item__price">$22.000</span>
+            </div>
+          </div>
+          <div class="service-item reveal">
+            <div class="service-item__content">
+              <h3 class="service-item__title">Barba con Ritual (Toalla Caliente)</h3>
+              <p class="service-item__description">Experiencia spa para la barba, con vapor y aceites esenciales.</p>
+            </div>
+            <div class="service-item__price-box">
+              <span class="service-item__price">$27.000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CUIDADO PERSONAL -->
+      <div style="margin-bottom: var(--space-2xl);">
+        <h2 class="heading-lg reveal" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; margin-bottom: 2rem;">Cuidado Facial & Capilar</h2>
+        <div class="services-grid">
+          <div class="service-item reveal">
+            <div class="service-item__content">
+              <h3 class="service-item__title">Limpieza Facial Profunda</h3>
+              <p class="service-item__description">Exfoliación, extracción de puntos negros y mascarilla.</p>
+            </div>
+            <div class="service-item__price-box">
+              <span class="service-item__price">$23.000</span>
+            </div>
+          </div>
+          <div class="service-item reveal">
+            <div class="service-item__content">
+              <h3 class="service-item__title">Hidratación Capilar</h3>
+              <p class="service-item__description">Tratamiento para restaurar el brillo y la fuerza del cabello.</p>
+            </div>
+            <div class="service-item__price-box">
+              <span class="service-item__price">$17.000</span>
+            </div>
+          </div>
+          <div class="service-item reveal">
+            <div class="service-item__content">
+              <h3 class="service-item__title">Depilación Nasal / Orejas</h3>
+              <p class="service-item__description">Remoción de vello con cera caliente (indoloro).</p>
+            </div>
+            <div class="service-item__price-box">
+              <span class="service-item__price">$10.000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQS -->
+  <section class="section section--alt" style="padding-top: var(--space-lg);">
+    <div class="container">
+      <div style="max-width: 800px; margin: 0 auto;">
+        <span class="section-label reveal" style="justify-content: center;">Preguntas Frecuentes</span>
+        <h2 class="heading-lg reveal" style="text-align: center; margin-bottom: 3rem;">Lo que debes saber</h2>
+
+        <div class="reveal" style="margin-bottom: 2rem; background: var(--bg-card); padding: 2rem; border-radius: var(--radius-md);">
+          <h4 style="font-family: var(--font-heading); font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--accent);">¿Cuánto dura un corte normal?</h4>
+          <p style="color: var(--text-muted);">Un servicio de corte sencillo toma aproximadamente 45 minutos. Nos tomamos el tiempo necesario para garantizar un resultado perfecto, sin prisas.</p>
+        </div>
+
+        <div class="reveal" style="margin-bottom: 2rem; background: var(--bg-card); padding: 2rem; border-radius: var(--radius-md);">
+          <h4 style="font-family: var(--font-heading); font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--accent);">¿Puedo ir sin cita?</h4>
+          <p style="color: var(--text-muted);">Recomendamos agendar cita para asegurar tu espacio. Aceptamos walk-ins si tenemos disponibilidad, pero para evitar esperas, lo mejor es reservar en línea.</p>
+        </div>
+
+        <div class="reveal" style="margin-bottom: 2rem; background: var(--bg-card); padding: 2rem; border-radius: var(--radius-md);">
+          <h4 style="font-family: var(--font-heading); font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--accent);">¿Qué productos utilizan?</h4>
+          <p style="color: var(--text-muted);">Solo trabajamos con marcas premium para el cuidado del cabello y la barba (como Reuzel, Suavecito, y nuestra propia línea Furtivo).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="navbar__logo">Fur<span>tivo</span></a>
+          <p style="margin-top: 1rem; color: var(--text-muted);">El estilo empieza con un buen corte.</p>
+        </div>
+        <div>
+          <h4 class="footer__heading">Navegación</h4>
+          <div class="footer__links">
+            <a href="experiencias.html" class="footer__link">Experiencias</a>
+            <a href="servicios.html" class="footer__link">Servicios</a>
+            <a href="barberos.html" class="footer__link">Barberos</a>
+            <a href="club.html" class="footer__link">Club Furtivo</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__heading">Contacto</h4>
+          <div class="footer__links">
+            <span class="footer__link" style="pointer-events: none;">📍 Calle 123 #45-67, El Poblado</span>
+            <span class="footer__link" style="pointer-events: none;">📞 +57 300 123 4567</span>
+            <span class="footer__link" style="pointer-events: none;">✉️ reservas@furtivo.com</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 Furtivo Barbería Premium. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/573001234567" target="_blank" class="floating-wa" aria-label="Reservar por WhatsApp">
+    <svg viewBox="0 0 24 24">
+      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.665.592 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 1.856.001 3.598.723 4.907 2.034 1.31 1.311 2.031 3.054 2.03 4.908-.001 3.825-3.113 6.938-6.937 6.938z"/>
+    </svg>
+    <span>Reservar ahora</span>
+  </a>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Equipo Furtivo | Barbería Premium</title>
+  <meta name="description" content="Conoce a los expertos detrás de Furtivo Barbería. Carlos, Andrés y Sebastián.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✂️</text></svg>">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo">Fur<span>tivo</span></a>
+      <div class="navbar__menu" id="navMenu">
+        <a href="experiencias.html" class="navbar__link">Experiencias</a>
+        <a href="servicios.html" class="navbar__link">Servicios</a>
+        <a href="barberos.html" class="navbar__link" style="color:var(--accent);">Barberos</a>
+        <a href="club.html" class="navbar__link">Club Furtivo</a>
+        <a href="agendar.html" class="btn btn--primary btn--sm navbar__cta">Agendar Cita</a>
+      </div>
+      <button class="navbar__toggle" id="navToggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="experiencias.html" class="mobile-menu__link">Experiencias</a>
+    <a href="servicios.html" class="mobile-menu__link">Servicios</a>
+    <a href="barberos.html" class="mobile-menu__link">Barberos</a>
+    <a href="club.html" class="mobile-menu__link">Club Furtivo</a>
+    <a href="agendar.html" class="btn btn--primary btn--lg">Agendar Cita</a>
+  </div>
+
+  <!-- HERO BARBEROS -->
+  <section class="hero hero--subpage" style="height: 50vh; min-height: 400px;">
+    <div class="hero__bg">
+      <img src="assets/images/hero-bg.jpg" alt="Barberos Furtivo" loading="eager" style="object-position: center 20%; filter: brightness(0.4) grayscale(0.5);">
+    </div>
+    <div class="hero__overlay"></div>
+    <div class="container">
+      <div class="hero__content" style="max-width: 800px; text-align: center; margin: 0 auto;">
+        <span class="hero__subtitle">Maestros del Oficio</span>
+        <h1 class="heading-xl hero__title">Conoce al Equipo</h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERFILES DETALLADOS -->
+  <section class="section">
+    <div class="container">
+      
+      <!-- Carlos -->
+      <div class="reveal" style="display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-xl); align-items: center; margin-bottom: 5rem; background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden;">
+        <img src="assets/images/barber-1.jpg" alt="Carlos Restrepo" style="width: 100%; height: 100%; object-fit: cover;">
+        <div style="padding: 3rem;">
+          <h3 class="heading-lg" style="margin-bottom: 0.5rem; color: var(--text-light);">Carlos Restrepo</h3>
+          <p style="color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5rem; font-size: 0.85rem;">Master Barber</p>
+          <p style="color: var(--text-muted); margin-bottom: 2rem; line-height: 1.8;">Con más de 8 años de experiencia, Carlos es el fundador de la estética Furtivo. Su especialidad son los fades perfectos, la estructura clásica y modernizar cortes tradicionales. Si buscas una asesoría de cambio de look completo, él es tu hombre.</p>
+          <a href="agendar.html" class="btn btn--primary">Reservar con Carlos</a>
+        </div>
+      </div>
+
+      <!-- Andrés -->
+      <div class="reveal" style="display: grid; grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); align-items: center; margin-bottom: 5rem; background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden;">
+        <div style="padding: 3rem;">
+          <h3 class="heading-lg" style="margin-bottom: 0.5rem; color: var(--text-light);">Andrés Muñoz</h3>
+          <p style="color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5rem; font-size: 0.85rem;">Senior Barber</p>
+          <p style="color: var(--text-muted); margin-bottom: 2rem; line-height: 1.8;">El detallista del equipo. Andrés es un obsesivo con la simetría de la barba. Su especialidad es el ritual completo con toalla caliente, esculpir barbas largas y realizar perfilados precisos a navaja. La relajación está garantizada en su silla.</p>
+          <a href="agendar.html" class="btn btn--primary">Reservar con Andrés</a>
+        </div>
+        <img src="assets/images/barber-2.jpg" alt="Andrés Muñoz" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+
+      <!-- Sebastián -->
+      <div class="reveal" style="display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-xl); align-items: center; margin-bottom: 2rem; background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden;">
+        <img src="assets/images/barber-3.jpg" alt="Sebastián Ríos" style="width: 100%; height: 100%; object-fit: cover;">
+        <div style="padding: 3rem;">
+          <h3 class="heading-lg" style="margin-bottom: 0.5rem; color: var(--text-light);">Sebastián Ríos</h3>
+          <p style="color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5rem; font-size: 0.85rem;">Barber & Stylist</p>
+          <p style="color: var(--text-muted); margin-bottom: 2rem; line-height: 1.8;">La sangre joven del equipo. Sebastián siempre está un paso adelante en cuanto a tendencias. Especialista en cortes creativos, texturizados, mullet, burst fades y coloración sutil. Si quieres algo moderno, él tiene la visión.</p>
+          <a href="agendar.html" class="btn btn--primary">Reservar con Sebastián</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FILOSOFIA -->
+  <section class="section section--alt">
+    <div class="container text-center" style="max-width: 800px; margin: 0 auto; text-align: center;">
+      <h2 class="heading-lg reveal">El Estándar Furtivo</h2>
+      <p class="body-lg reveal" style="margin-top: 1.5rem; color: var(--text-muted);">No importa en qué silla te sientes, la calidad es innegociable. Todo nuestro equipo está capacitado bajo la misma técnica y los mismos valores: respeto por tu tiempo, atención al detalle y excelencia en el servicio.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="navbar__logo">Fur<span>tivo</span></a>
+          <p style="margin-top: 1rem; color: var(--text-muted);">El estilo empieza con un buen corte.</p>
+        </div>
+        <div>
+          <h4 class="footer__heading">Navegación</h4>
+          <div class="footer__links">
+            <a href="experiencias.html" class="footer__link">Experiencias</a>
+            <a href="servicios.html" class="footer__link">Servicios</a>
+            <a href="barberos.html" class="footer__link">Barberos</a>
+            <a href="club.html" class="footer__link">Club Furtivo</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 Furtivo Barbería Premium. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/573001234567" target="_blank" class="floating-wa" aria-label="Reservar por WhatsApp">
+    <svg viewBox="0 0 24 24">
+      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.665.592 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 1.856.001 3.598.723 4.907 2.034 1.31 1.311 2.031 3.054 2.03 4.908-.001 3.825-3.113 6.938-6.937 6.938z"/>
+    </svg>
+    <span>Reservar ahora</span>
+  </a>
+</body>
+</html>
