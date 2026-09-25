@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=FINAL2">
 
   <!-- Favicon (inline SVG) -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✂️</text></svg>">
@@ -28,14 +28,14 @@
        ============================================================ -->
   <nav class="navbar" id="navbar">
     <div class="navbar__inner">
-      <a href="#" class="navbar__logo">Fur<span>tivo</span></a>
+      <a href="#" class="navbar__logo"><img src="assets/images/furtivo-logo-oficial.png?v=FINAL" alt="Furtivo Barbería"></a>
 
       <div class="navbar__menu" id="navMenu">
         <a href="experiencias.html" class="navbar__link">Experiencias</a>
         <a href="servicios.html" class="navbar__link">Servicios</a>
         <a href="barberos.html" class="navbar__link">Barberos</a>
         <a href="club.html" class="navbar__link">Club Furtivo</a>
-        <a href="agendar.html" class="btn btn--primary btn--sm navbar__cta">Agendar Cita</a>
+        <a href="#" onclick="openBookingModal(); return false;" class="btn btn--primary btn--sm navbar__cta">Agendar Cita</a>
       </div>
 
       <button class="navbar__toggle" id="navToggle" aria-label="Abrir menú">
@@ -51,7 +51,7 @@
     <a href="servicios.html" class="mobile-menu__link">Servicios</a>
     <a href="barberos.html" class="mobile-menu__link">Barberos</a>
     <a href="club.html" class="mobile-menu__link">Club Furtivo</a>
-    <a href="agendar.html" class="btn btn--primary btn--lg">Agendar Cita</a>
+    <a href="#" onclick="openBookingModal(); return false;" class="btn btn--primary btn--lg">Agendar Cita</a>
   </div>
 
   <!-- ============================================================
@@ -69,7 +69,7 @@
         <h1 class="heading-xl hero__title">Tu estilo empieza con un buen corte.</h1>
         <p class="hero__description">Cortes, barba y cuidado personal en un espacio creado para verte bien, sentirte bien y salir mejor de como llegaste.</p>
         <div class="btn-group">
-          <a href="agendar.html" class="btn btn--primary btn--lg">Agendar mi cita</a>
+          <a href="#" onclick="openBookingModal(); return false;" class="btn btn--primary btn--lg">Agendar mi cita</a>
           <a href="servicios.html" class="btn btn--outline btn--lg">Ver servicios y precios</a>
         </div>
       </div>
@@ -94,7 +94,7 @@
 
       <div class="combo-grid">
         <!-- PLATA -->
-        <div class="combo-card reveal stagger-1">
+        <div class="combo-card reveal stagger-1" data-service-id="plata">
           <span class="combo-card__badge">Plata</span>
           <div class="combo-card__price">$40.000</div>
           <p class="combo-card__price-label">por sesión</p>
@@ -103,12 +103,12 @@
             <li>Mascarilla</li>
             <li>Lavado</li>
           </ul>
-          <a href="agendar.html" class="btn btn--outline" style="width:100%">Reservar Plata</a>
+          <a href="#" onclick="openBookingModal('plata'); return false;" class="btn btn--outline" style="width:100%">Reservar Plata</a>
           <p class="combo-card__description">Una experiencia sencilla para renovar tu imagen y seguir.</p>
         </div>
 
         <!-- ORO -->
-        <div class="combo-card combo-card--featured reveal stagger-2">
+        <div class="combo-card combo-card--featured reveal stagger-2" data-service-id="oro">
           <span class="combo-card__badge">Oro</span>
           <div class="combo-card__price">$50.000</div>
           <p class="combo-card__price-label">por sesión</p>
@@ -118,12 +118,12 @@
             <li>Vapor</li>
             <li>Lavado</li>
           </ul>
-          <a href="agendar.html" class="btn btn--primary" style="width:100%">Reservar Oro</a>
+          <a href="#" onclick="openBookingModal('oro'); return false;" class="btn btn--primary" style="width:100%">Reservar Oro</a>
           <p class="combo-card__description">Para quienes quieren dedicarle un poco más de tiempo a su imagen.</p>
         </div>
 
         <!-- DIAMANTE -->
-        <div class="combo-card reveal stagger-3">
+        <div class="combo-card reveal stagger-3" data-service-id="diamante">
           <span class="combo-card__badge">Diamante</span>
           <div class="combo-card__price">$60.000</div>
           <p class="combo-card__price-label">por sesión</p>
@@ -135,7 +135,7 @@
             <li>Lavado final</li>
             <li>Limpieza facial</li>
           </ul>
-          <a href="agendar.html" class="btn btn--outline" style="width:100%">Reservar Diamante</a>
+          <a href="#" onclick="openBookingModal('diamante'); return false;" class="btn btn--outline" style="width:100%">Reservar Diamante</a>
           <p class="combo-card__description">La experiencia Furtivo completa.</p>
         </div>
       </div>
@@ -157,23 +157,23 @@
       </div>
 
       <div class="services-grid">
-        <div class="service-item reveal stagger-1">
+        <div class="service-item reveal stagger-1" data-service-id="corte">
           <div class="service-item__info">
-            <h3 class="service-item__name">Corte</h3>
-            <p class="service-item__desc">Un corte pensado según tu estilo, tipo de cabello y resultado que estás buscando.</p>
+            <h3 class="service-item__name">Corte Clásico</h3>
+            <p class="service-item__desc">Un corte pensado según tu estilo y resultado que estás buscando.</p>
           </div>
-          <span class="service-item__price">$36.000</span>
+          <span class="service-item__price">$30.000</span>
         </div>
 
-        <div class="service-item reveal stagger-2">
+        <div class="service-item reveal stagger-2" data-service-id="barba">
           <div class="service-item__info">
-            <h3 class="service-item__name">Barba</h3>
+            <h3 class="service-item__name">Barba Express</h3>
             <p class="service-item__desc">Perfilado y arreglo para recuperar forma, definición y presencia.</p>
           </div>
-          <span class="service-item__price">$22.000</span>
+          <span class="service-item__price">$20.000</span>
         </div>
 
-        <div class="service-item reveal stagger-3">
+        <div class="service-item reveal stagger-3" data-service-id="corte_barba">
           <div class="service-item__info">
             <h3 class="service-item__name">Corte + Barba</h3>
             <p class="service-item__desc">Todo lo necesario para renovar tu imagen en una sola visita.</p>
@@ -181,15 +181,15 @@
           <span class="service-item__price">$50.000</span>
         </div>
 
-        <div class="service-item reveal stagger-4">
+        <div class="service-item reveal stagger-4" data-service-id="barba_ritual">
           <div class="service-item__info">
-            <h3 class="service-item__name">Barba con ritual</h3>
+            <h3 class="service-item__name">Barba con Ritual</h3>
             <p class="service-item__desc">Más tiempo, más detalle y una experiencia de cuidado completa para tu barba.</p>
           </div>
-          <span class="service-item__price">$27.000</span>
+          <span class="service-item__price">$30.000</span>
         </div>
 
-        <div class="service-item reveal stagger-5">
+        <div class="service-item reveal stagger-5" data-service-id="corte_barba_ritual">
           <div class="service-item__info">
             <h3 class="service-item__name">Corte + Barba con ritual</h3>
             <p class="service-item__desc">Cabello y barba trabajados como una sola imagen.</p>
@@ -197,37 +197,18 @@
           <span class="service-item__price">$60.000</span>
         </div>
 
-        <div class="service-item reveal stagger-6">
+        <div class="service-item reveal stagger-6" data-service-id="full_servicio">
           <div class="service-item__info">
-            <h3 class="service-item__name">Limpieza facial</h3>
+            <h3 class="service-item__name">Limpieza Facial Profunda</h3>
             <p class="service-item__desc">Una pausa para limpiar, cuidar y refrescar tu rostro.</p>
           </div>
-          <span class="service-item__price">$23.000</span>
+          <span class="service-item__price">$25.000</span>
         </div>
 
-        <div class="service-item reveal stagger-7">
-          <div class="service-item__info">
-            <h3 class="service-item__name">Depilación nasal</h3>
-          </div>
-          <span class="service-item__price">$10.000</span>
-        </div>
 
-        <div class="service-item reveal stagger-8">
-          <div class="service-item__info">
-            <h3 class="service-item__name">Hidratación capilar</h3>
-          </div>
-          <span class="service-item__price">$17.000</span>
-        </div>
-
-        <div class="service-item reveal stagger-9">
-          <div class="service-item__info">
-            <h3 class="service-item__name">Corte estudiantes</h3>
-          </div>
-          <span class="service-item__price">$28.000</span>
-        </div>
 
         <!-- Featured Full Service -->
-        <div class="service-item service-item--featured reveal stagger-10">
+        <div class="service-item service-item--featured reveal stagger-10" data-service-id="full_servicio">
           <div class="service-item__info">
             <h3 class="service-item__name">Full servicio Furtivo</h3>
             <p class="service-item__desc">Para el que no quiere escoger. Quiere salir completo.</p>
@@ -243,41 +224,116 @@
   </section>
 
   <!-- ============================================================
-       RESULTADOS / GALERÍA
+       ANTES Y DESPUÉS
        ============================================================ -->
   <section class="section section--alt" id="resultados">
     <div class="container">
       <div class="section__header reveal">
         <span class="section-label">El trabajo habla</span>
-        <h2 class="heading-lg">Mira cómo se ve Furtivo.</h2>
-        <p class="body-lg">Cada persona llega con un estilo, un tipo de cabello y una idea diferente. Nuestro trabajo es convertir eso en un resultado que realmente le quede bien.</p>
+        <h2 class="heading-lg">Mira la diferencia Furtivo.</h2>
+        <p class="body-lg">Cada persona llega con un estilo, un tipo de cabello y una idea diferente. Desliza para ver cómo transformamos cada visita en un resultado que realmente le queda bien.</p>
       </div>
 
-      <div class="gallery-grid reveal">
-        <div class="gallery-item">
-          <img src="assets/images/gallery-1.jpg" alt="Corte moderno texturizado" loading="lazy">
-          <div class="gallery-item__overlay"></div>
+      <div class="ba-carousel-wrapper reveal">
+        <div class="swiper ba-swiper">
+          <div class="swiper-wrapper">
+
+            <!-- Slide 1 -->
+            <div class="swiper-slide">
+              <div class="ba-slide">
+                <div class="ba-comparison" data-ba-comparison>
+                  <div class="ba-image ba-image--before">
+                    <img src="assets/images/before-after/before-1.jpg" alt="Antes: cabello sin definir" loading="lazy" draggable="false">
+                    <span class="ba-label ba-label--before">Antes</span>
+                  </div>
+                  <div class="ba-image ba-image--after">
+                    <img src="assets/images/before-after/after-1.jpg" alt="Después: corte texturizado con fade" loading="lazy" draggable="false">
+                    <span class="ba-label ba-label--after">Después</span>
+                  </div>
+                  <div class="ba-handle" aria-label="Desliza para comparar">
+                    <div class="ba-handle__line"></div>
+                    <div class="ba-handle__circle">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4L3 10L7 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 4L17 10L13 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="ba-handle__line"></div>
+                  </div>
+                </div>
+                <div class="ba-slide__info">
+                  <span class="ba-slide__service">Corte texturizado + Fade</span>
+                  <span class="ba-slide__barber">Barbero: Juan Quintero</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="swiper-slide">
+              <div class="ba-slide">
+                <div class="ba-comparison" data-ba-comparison>
+                  <div class="ba-image ba-image--before">
+                    <img src="assets/images/before-after/before-2.jpg" alt="Antes: cabello largo sin forma" loading="lazy" draggable="false">
+                    <span class="ba-label ba-label--before">Antes</span>
+                  </div>
+                  <div class="ba-image ba-image--after">
+                    <img src="assets/images/before-after/after-2.jpg" alt="Después: slicked back con undercut" loading="lazy" draggable="false">
+                    <span class="ba-label ba-label--after">Después</span>
+                  </div>
+                  <div class="ba-handle" aria-label="Desliza para comparar">
+                    <div class="ba-handle__line"></div>
+                    <div class="ba-handle__circle">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4L3 10L7 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 4L17 10L13 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="ba-handle__line"></div>
+                  </div>
+                </div>
+                <div class="ba-slide__info">
+                  <span class="ba-slide__service">Slicked Back + Undercut</span>
+                  <span class="ba-slide__barber">Barbero: Fernando Carmona</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="swiper-slide">
+              <div class="ba-slide">
+                <div class="ba-comparison" data-ba-comparison>
+                  <div class="ba-image ba-image--before">
+                    <img src="assets/images/before-after/before-3.jpg" alt="Antes: rizado desordenado con barba" loading="lazy" draggable="false">
+                    <span class="ba-label ba-label--before">Antes</span>
+                  </div>
+                  <div class="ba-image ba-image--after">
+                    <img src="assets/images/before-after/after-3.jpg" alt="Después: rizado definido con barba esculpida" loading="lazy" draggable="false">
+                    <span class="ba-label ba-label--after">Después</span>
+                  </div>
+                  <div class="ba-handle" aria-label="Desliza para comparar">
+                    <div class="ba-handle__line"></div>
+                    <div class="ba-handle__circle">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4L3 10L7 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 4L17 10L13 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="ba-handle__line"></div>
+                  </div>
+                </div>
+                <div class="ba-slide__info">
+                  <span class="ba-slide__service">Curly Top + Barba esculpida</span>
+                  <span class="ba-slide__barber">Barbero: Juan Quintero</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="ba-swiper-pagination"></div>
         </div>
-        <div class="gallery-item">
-          <img src="assets/images/gallery-2.jpg" alt="Arreglo de barba con navaja" loading="lazy">
-          <div class="gallery-item__overlay"></div>
-        </div>
-        <div class="gallery-item">
-          <img src="assets/images/gallery-5.jpg" alt="Resultado corte slicked back" loading="lazy">
-          <div class="gallery-item__overlay"></div>
-        </div>
-        <div class="gallery-item">
-          <img src="assets/images/gallery-3.jpg" alt="Corte en progreso" loading="lazy">
-          <div class="gallery-item__overlay"></div>
-        </div>
-        <div class="gallery-item">
-          <img src="assets/images/gallery-4.jpg" alt="Productos premium de barbería" loading="lazy">
-          <div class="gallery-item__overlay"></div>
-        </div>
+
+        <!-- Navigation Arrows -->
+        <button class="ba-nav ba-nav--prev" aria-label="Anterior">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="ba-nav ba-nav--next" aria-label="Siguiente">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
 
       <div style="text-align: center; margin-top: var(--space-lg);">
-        <a href="agendar.html" class="btn btn--primary btn--lg reveal">Quiero mi cambio</a>
+        <a href="#" onclick="openBookingModal(); return false;" class="btn btn--primary btn--lg reveal">Quiero mi cambio</a>
       </div>
     </div>
   </section>
@@ -316,40 +372,28 @@
         <p class="body-lg">Cada barbero tiene su técnica, experiencia y estilo. Conoce su trabajo y reserva directamente con quien más conecte contigo.</p>
       </div>
 
-      <div class="barbers-grid">
+            <div class="barbers-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); max-width: 900px; margin: 0 auto;">
         <div class="barber-card reveal stagger-1">
           <div class="barber-card__image">
-            <img src="assets/images/barber-1.jpg" alt="Carlos - Barbero en Furtivo" loading="lazy">
+            <img src="assets/images/barber-1.jpg?v=FINAL" alt="Juan Quintero - Barbero en Furtivo" loading="lazy">
           </div>
           <div class="barber-card__info">
-            <h3 class="barber-card__name">Carlos Restrepo</h3>
-            <p class="barber-card__role">Master Barber</p>
-            <p class="barber-card__bio">+8 años de experiencia. Especialista en fades y cortes clásicos modernizados.</p>
-            <a href="agendar.html" class="btn btn--ghost" style="margin-top: 0.75rem;">Reservar con Carlos →</a>
+            <h3 class="barber-card__name">Juan Quintero</h3>
+            <p class="barber-card__role">Senior Barber • <span style="color:var(--accent); font-weight:600;">10 años exp.</span></p>
+            <p class="barber-card__bio">Experiencia perfeccionando la técnica. Excelencia comprobada en cada corte clásico y estructurado.</p>
+            <a href="#" onclick="openBookingModal('juan'); return false;" class="btn btn--ghost" style="margin-top: 0.75rem;">Reservar con Juan →</a>
           </div>
         </div>
 
         <div class="barber-card reveal stagger-2">
           <div class="barber-card__image">
-            <img src="assets/images/barber-2.jpg" alt="Andrés - Barbero en Furtivo" loading="lazy">
+            <img src="assets/images/barber-2.jpg?v=FINAL" alt="Fernando Carmona - Barbero en Furtivo" loading="lazy">
           </div>
           <div class="barber-card__info">
-            <h3 class="barber-card__name">Andrés Muñoz</h3>
-            <p class="barber-card__role">Senior Barber</p>
-            <p class="barber-card__bio">Detallista con la barba. Su especialidad es el ritual completo y la experiencia en silla.</p>
-            <a href="agendar.html" class="btn btn--ghost" style="margin-top: 0.75rem;">Reservar con Andrés →</a>
-          </div>
-        </div>
-
-        <div class="barber-card reveal stagger-3">
-          <div class="barber-card__image">
-            <img src="assets/images/barber-3.jpg" alt="Sebastián - Barbero en Furtivo" loading="lazy">
-          </div>
-          <div class="barber-card__info">
-            <h3 class="barber-card__name">Sebastián Ríos</h3>
-            <p class="barber-card__role">Barber & Stylist</p>
-            <p class="barber-card__bio">Tendencias actuales y cortes creativos. Siempre un paso adelante en estilo.</p>
-            <a href="agendar.html" class="btn btn--ghost" style="margin-top: 0.75rem;">Reservar con Sebastián →</a>
+            <h3 class="barber-card__name">Fernando Carmona</h3>
+            <p class="barber-card__role">Senior Barber • <span style="color:var(--accent); font-weight:600;">17 años exp.</span></p>
+            <p class="barber-card__bio">Especialista en atención al detalle y acabados premium. Tu experiencia en la silla es su máxima prioridad.</p>
+            <a href="#" onclick="openBookingModal('fernando'); return false;" class="btn btn--ghost" style="margin-top: 0.75rem;">Reservar con Fernando →</a>
           </div>
         </div>
       </div>
@@ -477,54 +521,50 @@
       <div class="membership-grid">
         <!-- CLÁSICA -->
         <div class="membership-card reveal stagger-1">
-          <span class="membership-card__tier">Clásica</span>
-          <div class="membership-card__price">$60.000 <span>/ mes</span></div>
-          <div class="membership-card__divider"></div>
-          <ul class="membership-card__features">
-            <li class="membership-card__feature">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6.5 11.5L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span><strong>2 Cortes</strong> de cabello al mes</span>
-            </li>
-            <li class="membership-card__feature">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6.5 11.5L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span><strong>1 Arreglo</strong> de barba básico</span>
-            </li>
-            <li class="membership-card__feature">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6.5 11.5L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span>Bebida de <strong>cortesía</strong></span>
-            </li>
-          </ul>
-          <a href="club.html" class="btn btn--outline" style="width:100%">Unirme a Clásica</a>
-        </div>
-
-        <!-- PREMIUM VIP -->
-        <div class="membership-card membership-card--vip reveal stagger-2">
-          <span class="membership-card__tier">Premium VIP</span>
+          <span class="membership-card__tier">Membresía Clásica</span>
           <div class="membership-card__price">$100.000 <span>/ mes</span></div>
           <div class="membership-card__divider"></div>
           <ul class="membership-card__features">
             <li class="membership-card__feature">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6.5 11.5L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span>Cortes <strong>ILIMITADOS</strong> al mes</span>
+              <span><strong>3 cortes</strong> de cabello</span>
             </li>
             <li class="membership-card__feature">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6.5 11.5L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span>Arreglo de barba <strong>ILIMITADO</strong></span>
+              <span><strong>1 limpieza facial</strong> y bebidas de cortesía</span>
             </li>
             <li class="membership-card__feature">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6.5 11.5L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span><strong>1 Limpieza facial</strong> mensual</span>
-            </li>
-            <li class="membership-card__feature">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6.5 11.5L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span>Cerveza premium de <strong>cortesía</strong></span>
-            </li>
-            <li class="membership-card__feature">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6.5 11.5L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span><strong>Descuentos exclusivos</strong></span>
+              <span>Participación en <strong>Dinámicas</strong></span>
             </li>
           </ul>
-          <a href="club.html" class="btn btn--primary" style="width:100%">Unirme a Premium VIP</a>
+          <a href="https://wa.me/573001234567?text=Hola%20quiero%20adquirir%20la%20membresia%20Clasica" target="_blank" class="btn btn--outline" style="width:100%">Adquirir Membresía</a>
+        </div>
+
+        <!-- PREMIUM VIP -->
+        <div class="membership-card membership-card--vip reveal stagger-2">
+          <span class="membership-card__tier">Membresía VIP</span>
+          <div class="membership-card__price">$200.000 <span>/ mes</span></div>
+          <div class="membership-card__divider"></div>
+          <ul class="membership-card__features">
+            <li class="membership-card__feature">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6.5 11.5L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span><strong>4 cortes</strong> con barba</span>
+            </li>
+            <li class="membership-card__feature">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6.5 11.5L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span><strong>2 limpiezas</strong> faciales</span>
+            </li>
+            <li class="membership-card__feature">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6.5 11.5L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Bebida <strong>al gusto</strong></span>
+            </li>
+            <li class="membership-card__feature">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6.5 11.5L2.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Participación en <strong>Dinámicas</strong></span>
+            </li>
+          </ul>
+          <a href="https://wa.me/573001234567?text=Hola%20quiero%20adquirir%20la%20membresia%20VIP" target="_blank" class="btn btn--primary" style="width:100%">Adquirir Membresía</a>
         </div>
       </div>
 
@@ -545,10 +585,10 @@
           <h2 class="heading-lg">Una barbería para quienes valoran cómo se ven.</h2>
           <p>Nos gusta la buena barbería. La técnica, los detalles, una buena conversación y ese momento en el que te miras al espejo después del corte y sabes que quedó como debía quedar.</p>
           <p>Furtivo nace para convertir algo cotidiano en una experiencia a la que quieras regresar.</p>
-          <a href="agendar.html" class="btn btn--primary" style="align-self: flex-start; margin-top: 0.5rem;">Reservar mi lugar</a>
+          <a href="#" onclick="openBookingModal(); return false;" class="btn btn--primary" style="align-self: flex-start; margin-top: 0.5rem;">Reservar mi lugar</a>
         </div>
         <div class="about-image reveal-right">
-          <img src="assets/images/about.jpg" alt="Detalle del interior de Furtivo Barbería" loading="lazy">
+          <img src="assets/images/about.jpg?v=STATION" alt="Detalle del interior de Furtivo Barbería" loading="lazy">
         </div>
       </div>
     </div>
@@ -563,7 +603,26 @@
       <h2 class="cta-banner__title reveal">Tu próximo corte puede ser cualquiera.<br>O puede ser <span style="color:var(--accent)">Furtivo.</span></h2>
       <p class="cta-banner__text reveal">Elige tu servicio, reserva tu horario y nosotros nos encargamos del resto.</p>
       <div class="reveal" style="display:flex; justify-content:center;">
-        <a href="agendar.html" class="btn btn--primary btn--lg">Agendar mi cita ahora</a>
+        <a href="#" onclick="openBookingModal(); return false;" class="btn btn--primary btn--lg">Agendar mi cita ahora</a>
+      </div>
+      
+      <!-- Redes Sociales Destacadas -->
+      <div class="reveal" style="margin-top: 4rem; text-align: center;">
+        <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: var(--text-light); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em;">Encuéntranos en</h3>
+        <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+          <a href="#" class="cta-social-btn" aria-label="Instagram">
+            <svg width="24" height="24" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="1.5" width="13" height="13" rx="3.5" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.2"/><circle cx="12" cy="4" r="0.8" fill="currentColor"/></svg>
+            <span>Instagram</span>
+          </a>
+          <a href="#" class="cta-social-btn" aria-label="TikTok">
+            <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor"><path d="M11.5 1.5h-2v9a2.5 2.5 0 11-2-2.45V6a4.5 4.5 0 104 4.5V5.85a4.8 4.8 0 002.5.7V4.5a2.5 2.5 0 01-2.5-3z"/></svg>
+            <span>TikTok</span>
+          </a>
+          <a href="#" class="cta-social-btn" aria-label="Facebook">
+            <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor"><path d="M9 8h2l.5-2H9V4.5c0-.5.2-1 .9-1H11V1.5a12.2 12.2 0 00-1.8-.1C7.4 1.4 6 2.6 6 4.7V6H4v2h2v7h3V8z"/></svg>
+            <span>Facebook</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -577,7 +636,7 @@
         <div class="footer__grid">
           <!-- Brand -->
           <div class="footer__brand">
-            <div class="footer__logo">Fur<span>tivo</span></div>
+            <a href="index.html" class="footer__logo"><img src="assets/images/furtivo-logo-oficial.png?v=FINAL" alt="Furtivo Barbería"></a>
             <p class="footer__tagline">Cortes, barba y cuidado personal en un espacio creado para verte bien, sentirte bien y salir mejor de como llegaste.</p>
           </div>
 
@@ -648,7 +707,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js?v=FINAL"></script>
 
   <!-- WhatsApp Floating Button -->
   <a href="https://wa.me/573001234567" target="_blank" class="floating-wa" aria-label="Reservar por WhatsApp">

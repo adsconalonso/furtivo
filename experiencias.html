@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=FINAL2">
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✂️</text></svg>">
 </head>
@@ -20,13 +20,13 @@
   <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <div class="navbar__inner">
-      <a href="index.html" class="navbar__logo">Fur<span>tivo</span></a>
+      <a href="index.html" class="navbar__logo"><img src="assets/images/furtivo-logo-oficial.png?v=FINAL" alt="Furtivo Barbería"></a>
       <div class="navbar__menu" id="navMenu">
         <a href="experiencias.html" class="navbar__link" style="color:var(--accent);">Experiencias</a>
         <a href="servicios.html" class="navbar__link">Servicios</a>
         <a href="barberos.html" class="navbar__link">Barberos</a>
         <a href="club.html" class="navbar__link">Club Furtivo</a>
-        <a href="agendar.html" class="btn btn--primary btn--sm navbar__cta">Agendar Cita</a>
+        <a href="#" onclick="openBookingModal(); return false;" class="btn btn--primary btn--sm navbar__cta">Agendar Cita</a>
       </div>
       <button class="navbar__toggle" id="navToggle" aria-label="Abrir menú">
         <span></span><span></span><span></span>
@@ -39,7 +39,7 @@
     <a href="servicios.html" class="mobile-menu__link">Servicios</a>
     <a href="barberos.html" class="mobile-menu__link">Barberos</a>
     <a href="club.html" class="mobile-menu__link">Club Furtivo</a>
-    <a href="agendar.html" class="btn btn--primary btn--lg">Agendar Cita</a>
+    <a href="#" onclick="openBookingModal(); return false;" class="btn btn--primary btn--lg">Agendar Cita</a>
   </div>
 
   <!-- HERO EXPERIENCIAS -->
@@ -73,7 +73,7 @@
             <li style="margin-bottom: 0.5rem; display: flex; gap: 0.5rem;"><span style="color:var(--accent);">✓</span> Lavado final</li>
             <li style="margin-bottom: 0.5rem; display: flex; gap: 0.5rem;"><span style="color:var(--accent);">✓</span> Bebida de cortesía</li>
           </ul>
-          <a href="agendar.html" class="btn btn--outline">Reservar Plata</a>
+          <a href="#" onclick="openBookingModal('plata'); return false;" class="btn btn--outline">Reservar Plata</a>
         </div>
         <div class="about-image" style="border-radius: var(--radius-lg); overflow: hidden;">
           <img src="assets/images/gallery-3.jpg" alt="Corte de cabello">
@@ -96,7 +96,7 @@
             <li style="margin-bottom: 0.5rem; display: flex; gap: 0.5rem;"><span style="color:var(--accent);">✓</span> Lavado capilar relajante</li>
             <li style="margin-bottom: 0.5rem; display: flex; gap: 0.5rem;"><span style="color:var(--accent);">✓</span> Cerveza premium</li>
           </ul>
-          <a href="agendar.html" class="btn btn--primary">Reservar Oro</a>
+          <a href="#" onclick="openBookingModal('oro'); return false;" class="btn btn--primary">Reservar Oro</a>
         </div>
       </div>
 
@@ -113,7 +113,7 @@
             <li style="margin-bottom: 0.5rem; display: flex; gap: 0.5rem;"><span style="color:var(--accent);">✓</span> Limpieza facial profunda con exfoliación</li>
             <li style="margin-bottom: 0.5rem; display: flex; gap: 0.5rem;"><span style="color:var(--accent);">✓</span> Bebidas ilimitadas durante el servicio</li>
           </ul>
-          <a href="agendar.html" class="btn btn--outline">Reservar Diamante</a>
+          <a href="#" onclick="openBookingModal('diamante'); return false;" class="btn btn--outline">Reservar Diamante</a>
         </div>
         <div class="about-image" style="border-radius: var(--radius-lg); overflow: hidden;">
           <img src="assets/images/gallery-4.jpg" alt="Limpieza facial">
@@ -128,46 +128,104 @@
     <div class="container">
       <h2 class="cta-banner__title reveal">¿Listo para vivir la experiencia?</h2>
       <div class="reveal" style="display:flex; justify-content:center; margin-top: 2rem;">
-        <a href="agendar.html" class="btn btn--primary btn--lg">Agendar mi cita</a>
+        <a href="#" onclick="openBookingModal(); return false;" class="btn btn--primary btn--lg">Agendar mi cita</a>
+      </div>
+      
+      <!-- Redes Sociales Destacadas -->
+      <div class="reveal" style="margin-top: 4rem; text-align: center;">
+        <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: var(--text-light); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em;">Encuéntranos en</h3>
+        <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+          <a href="#" class="cta-social-btn" aria-label="Instagram">
+            <svg width="24" height="24" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="1.5" width="13" height="13" rx="3.5" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.2"/><circle cx="12" cy="4" r="0.8" fill="currentColor"/></svg>
+            <span>Instagram</span>
+          </a>
+          <a href="#" class="cta-social-btn" aria-label="TikTok">
+            <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor"><path d="M11.5 1.5h-2v9a2.5 2.5 0 11-2-2.45V6a4.5 4.5 0 104 4.5V5.85a4.8 4.8 0 002.5.7V4.5a2.5 2.5 0 01-2.5-3z"/></svg>
+            <span>TikTok</span>
+          </a>
+          <a href="#" class="cta-social-btn" aria-label="Facebook">
+            <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor"><path d="M9 8h2l.5-2H9V4.5c0-.5.2-1 .9-1H11V1.5a12.2 12.2 0 00-1.8-.1C7.4 1.4 6 2.6 6 4.7V6H4v2h2v7h3V8z"/></svg>
+            <span>Facebook</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
+    <footer class="footer" id="contacto">
     <div class="container">
-      <div class="footer__grid">
-        <div class="footer__brand">
-          <a href="index.html" class="navbar__logo">Fur<span>tivo</span></a>
-          <p style="margin-top: 1rem; color: var(--text-muted);">El estilo empieza con un buen corte.</p>
-        </div>
-        <div>
-          <h4 class="footer__heading">Navegación</h4>
-          <div class="footer__links">
-            <a href="experiencias.html" class="footer__link">Experiencias</a>
-            <a href="servicios.html" class="footer__link">Servicios</a>
-            <a href="barberos.html" class="footer__link">Barberos</a>
-            <a href="club.html" class="footer__link">Club Furtivo</a>
+      <div class="footer__top">
+        <div class="footer__grid">
+          <!-- Brand -->
+          <div class="footer__brand">
+            <a href="index.html" class="footer__logo"><img src="assets/images/furtivo-logo-oficial.png?v=FINAL" alt="Furtivo Barbería"></a>
+            <p class="footer__tagline">Cortes, barba y cuidado personal en un espacio creado para verte bien, sentirte bien y salir mejor de como llegaste.</p>
           </div>
-        </div>
-        <div>
-          <h4 class="footer__heading">Contacto</h4>
-          <div class="footer__links">
-            <span class="footer__link" style="pointer-events: none;">📍 Calle 123 #45-67, El Poblado</span>
-            <span class="footer__link" style="pointer-events: none;">📞 +57 300 123 4567</span>
-            <span class="footer__link" style="pointer-events: none;">✉️ reservas@furtivo.com</span>
+
+          <!-- Quick Links -->
+          <div>
+            <h4 class="footer__heading">Navegación</h4>
+            <div class="footer__links">
+              <a href="experiencias.html" class="footer__link">Experiencias</a>
+              <a href="servicios.html" class="footer__link">Servicios</a>
+              <a href="barberos.html" class="footer__link">Barberos</a>
+              <a href="club.html" class="footer__link">Club Furtivo</a>
+              <a href="index.html#resenas" class="footer__link">Reseñas</a>
+            </div>
+          </div>
+
+          <!-- Services -->
+          <div>
+            <h4 class="footer__heading">Servicios</h4>
+            <div class="footer__links">
+              <a href="servicios.html" class="footer__link">Corte</a>
+              <a href="servicios.html" class="footer__link">Barba</a>
+              <a href="servicios.html" class="footer__link">Limpieza facial</a>
+              <a href="experiencias.html" class="footer__link">Combos</a>
+              <a href="servicios.html" class="footer__link">Full servicio</a>
+            </div>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h4 class="footer__heading">Contacto</h4>
+            <div class="footer__info-item">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1C4.7 1 2 3.7 2 7c0 4.5 6 8 6 8s6-3.5 6-8c0-3.3-2.7-6-6-6zm0 8a2 2 0 110-4 2 2 0 010 4z" stroke="currentColor" stroke-width="1.2"/></svg>
+              <span>Dirección Furtivo</span>
+            </div>
+            <div class="footer__info-item">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4l6 4 6-4M2 4h12v8H2V4z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Lunes - Sábado: 9 AM - 8 PM</span>
+            </div>
+            <div class="footer__info-item">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14.5 11.2v1.8a1.2 1.2 0 01-1.3 1.2A11.9 11.9 0 011.8 2.8 1.2 1.2 0 013 1.5h1.8a1.2 1.2 0 011.2 1c.1.7.3 1.4.6 2a1.2 1.2 0 01-.3 1.3L5.2 6.9a9.6 9.6 0 004 4l1.1-1.1a1.2 1.2 0 011.3-.3c.6.3 1.3.5 2 .6a1.2 1.2 0 011 1.2z" stroke="currentColor" stroke-width="1.2"/></svg>
+              <span>+00 000 000 000</span>
+            </div>
           </div>
         </div>
       </div>
+
       <div class="footer__bottom">
-        <p>&copy; 2026 Furtivo Barbería Premium. Todos los derechos reservados.</p>
+        <p class="footer__copy">© 2026 Furtivo Barbería Premium. Todos los derechos reservados.</p>
+        <div class="footer__socials">
+          <a href="#" class="footer__social" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="1.5" width="13" height="13" rx="3.5" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.2"/><circle cx="12" cy="4" r="0.8" fill="currentColor"/></svg>
+          </a>
+          <a href="#" class="footer__social" aria-label="TikTok">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M11.5 1.5h-2v9a2.5 2.5 0 11-2-2.45V6a4.5 4.5 0 104 4.5V5.85a4.8 4.8 0 002.5.7V4.5a2.5 2.5 0 01-2.5-3z"/></svg>
+          </a>
+          <a href="#" class="footer__social" aria-label="WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1A7 7 0 001.2 12.3L1 15l2.8-.7A7 7 0 108 1zm3.3 9.7c-.1.4-.8.7-1.1.8-.3 0-.6.1-1.9-.4s-3.1-2.2-3.2-2.3-.7-1-.7-1.8.5-1.3.6-1.5.3-.2.4-.2h.3c.1 0 .3 0 .4.3s.5 1.2.5 1.3 0 .2-.1.3-.1.2-.2.2l-.3.3c-.1.1-.2.2-.1.4s.5.8 1 1.3c.7.6 1.2.8 1.4.9s.3 0 .4-.1.6-.7.7-.9.3-.2.4-.1l1.3.6c.2.1.3.1.3.2s0 .7-.2 1z"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js?v=FINAL"></script>
 
   <!-- WhatsApp Floating Button -->
   <a href="https://wa.me/573001234567" target="_blank" class="floating-wa" aria-label="Reservar por WhatsApp">

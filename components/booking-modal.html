@@ -1,0 +1,199 @@
+<div class="booking-modal-overlay" id="bookingModalOverlay">
+  <div class="booking-modal-container">
+    <button class="booking-modal-close" onclick="closeBookingModal()">&times;</button>
+    <div class="booking-wizard">
+      
+      <div class="wizard-header">
+        <h1 class="heading-lg">Reserva tu lugar</h1>
+        <p class="body-md">Sigue los pasos para agendar tu próxima visita.</p>
+        
+        <div class="wizard-progress">
+          <div class="progress-step active" data-step="1">1</div>
+          <div class="progress-line"></div>
+          <div class="progress-step" data-step="2">2</div>
+          <div class="progress-line"></div>
+          <div class="progress-step" data-step="3">3</div>
+          <div class="progress-line"></div>
+          <div class="progress-step" data-step="4">4</div>
+        </div>
+      </div>
+      
+      <form id="bookingForm" onsubmit="event.preventDefault(); submitBooking();">
+        
+        <!-- STEP 1: Servicio -->
+        <div class="wizard-step active" id="step1">
+          <h2 class="heading-sm mb-4">Selecciona el Servicio</h2>
+          
+          <div class="service-selection-grid">
+            <!-- Experiencias -->
+            <div class="service-card" data-service-id="plata" onclick="selectService('plata', this)">
+              <div class="service-card__badge">Experiencia</div>
+              <h3>Plata</h3>
+              <p class="price">$40.000</p>
+            </div>
+            <div class="service-card featured" data-service-id="oro" onclick="selectService('oro', this)">
+              <div class="service-card__badge">Experiencia</div>
+              <h3>Oro</h3>
+              <p class="price">$50.000</p>
+            </div>
+            <div class="service-card premium" data-service-id="diamante" onclick="selectService('diamante', this)">
+              <div class="service-card__badge">Experiencia</div>
+              <h3>Diamante</h3>
+              <p class="price">$60.000</p>
+            </div>
+            
+            <!-- Individuales -->
+            <div class="service-card" data-service-id="corte" onclick="selectService('corte', this)">
+              <div class="service-card__badge">Individual</div>
+              <h3>Corte</h3>
+              <p class="price">$36.000</p>
+            </div>
+            <div class="service-card" data-service-id="barba" onclick="selectService('barba', this)">
+              <div class="service-card__badge">Individual</div>
+              <h3>Barba</h3>
+              <p class="price">$22.000</p>
+            </div>
+            <div class="service-card" data-service-id="corte_barba" onclick="selectService('corte_barba', this)">
+              <div class="service-card__badge">Individual</div>
+              <h3>Corte + Barba</h3>
+              <p class="price">$50.000</p>
+            </div>
+            <div class="service-card" data-service-id="barba_ritual" onclick="selectService('barba_ritual', this)">
+              <div class="service-card__badge">Individual</div>
+              <h3>Barba con Ritual</h3>
+              <p class="price">$27.000</p>
+            </div>
+            <div class="service-card" data-service-id="corte_barba_ritual" onclick="selectService('corte_barba_ritual', this)">
+              <div class="service-card__badge">Individual</div>
+              <h3>Corte + Barba con ritual</h3>
+              <p class="price">$60.000</p>
+            </div>
+            <div class="service-card" data-service-id="full_servicio" onclick="selectService('full_servicio', this)">
+              <div class="service-card__badge">Premium</div>
+              <h3>Full servicio Furtivo</h3>
+              <p class="price">$79.000</p>
+            </div>
+          </div>
+          
+          <input type="hidden" id="selectedService" required>
+          
+          <div class="wizard-actions">
+            <div></div> <!-- Spacer -->
+            <button type="button" class="btn btn--primary" onclick="nextStep(1)">Siguiente <span class="arrow">→</span></button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Barbero -->
+        <div class="wizard-step" id="step2">
+          <h2 class="heading-sm mb-4">Selecciona tu Barbero</h2>
+          
+          <div class="barber-selection-grid">
+            <div class="barber-select-card" onclick="selectBarber('cualquiera', this)">
+              <div class="barber-avatar anyone">?</div>
+              <h3>Cualquiera</h3>
+              <p>El primero disponible</p>
+            </div>
+            <div class="barber-select-card" onclick="selectBarber('carlos', this)">
+              <div class="barber-avatar">CR</div>
+              <h3>Carlos Restrepo</h3>
+              <p>Master Barber</p>
+            </div>
+            <div class="barber-select-card" onclick="selectBarber('andres', this)">
+              <div class="barber-avatar">AM</div>
+              <h3>Andrés Muñoz</h3>
+              <p>Senior Barber</p>
+            </div>
+            <div class="barber-select-card" onclick="selectBarber('sebastian', this)">
+              <div class="barber-avatar">SR</div>
+              <h3>Sebastián Ríos</h3>
+              <p>Barber & Stylist</p>
+            </div>
+          </div>
+          
+          <input type="hidden" id="selectedBarber" required>
+          
+          <div class="wizard-actions">
+            <button type="button" class="btn btn--outline" onclick="prevStep(2)">← Atrás</button>
+            <button type="button" class="btn btn--primary" onclick="nextStep(2)">Siguiente <span class="arrow">→</span></button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Fecha y Hora -->
+        <div class="wizard-step" id="step3">
+          <h2 class="heading-sm mb-4">Fecha y Hora</h2>
+          
+          <div class="datetime-grid">
+            <div class="input-group">
+              <label>Selecciona la Fecha</label>
+              <div class="custom-date-input">
+                <input type="date" id="bookingDate" required>
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Selecciona la Hora</label>
+              <div class="time-slots" id="timeSlots">
+                <!-- Generated by JS -->
+                <div class="time-slot" onclick="selectTime('09:00', this)">09:00</div>
+                <div class="time-slot" onclick="selectTime('10:00', this)">10:00</div>
+                <div class="time-slot" onclick="selectTime('11:00', this)">11:00</div>
+                <div class="time-slot" onclick="selectTime('12:00', this)">12:00</div>
+                <div class="time-slot" onclick="selectTime('14:00', this)">14:00</div>
+                <div class="time-slot" onclick="selectTime('15:00', this)">15:00</div>
+                <div class="time-slot" onclick="selectTime('16:00', this)">16:00</div>
+                <div class="time-slot" onclick="selectTime('17:00', this)">17:00</div>
+                <div class="time-slot" onclick="selectTime('18:00', this)">18:00</div>
+              </div>
+              <input type="hidden" id="bookingTime" required>
+            </div>
+          </div>
+          
+          <div class="wizard-actions mt-4">
+            <button type="button" class="btn btn--outline" onclick="prevStep(3)">← Atrás</button>
+            <button type="button" class="btn btn--primary" onclick="nextStep(3)">Siguiente <span class="arrow">→</span></button>
+          </div>
+        </div>
+
+        <!-- STEP 4: Datos Personales -->
+        <div class="wizard-step" id="step4">
+          <h2 class="heading-sm mb-4">Tus Datos</h2>
+          <p class="body-sm mb-4">Ya casi terminamos. Déjanos tus datos para confirmar la reserva.</p>
+          
+          <div class="personal-data-form">
+            <div class="input-group">
+              <label>Tu Nombre Completo</label>
+              <input type="text" id="bookingName" required placeholder="Ej: Juan Pérez" class="premium-input">
+            </div>
+            <div class="input-group">
+              <label>Teléfono (WhatsApp)</label>
+              <input type="tel" id="bookingPhone" required placeholder="+57 300 000 0000" class="premium-input">
+            </div>
+            
+            <div class="booking-summary mt-4">
+              <h4>Resumen de tu cita</h4>
+              <div id="summaryDetails" class="summary-details">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+          </div>
+          
+          <div class="wizard-actions mt-4">
+            <button type="button" class="btn btn--outline" onclick="prevStep(4)">← Atrás</button>
+            <button type="submit" class="btn btn--primary" id="submitBtn">Confirmar Reserva <span class="glow"></span></button>
+          </div>
+        </div>
+
+      </form>
+
+      <!-- Success Message -->
+      <div id="successMsg" class="wizard-success">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg>
+        </div>
+        <h2 class="heading-lg">¡Cita Confirmada!</h2>
+        <p class="body-md">Hemos recibido tu solicitud. Te enviaremos un mensaje de WhatsApp para reconfirmar tu horario.</p>
+        <button class="btn btn--outline mt-4" onclick="closeBookingModal()">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+</div>

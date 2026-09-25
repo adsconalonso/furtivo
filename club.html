@@ -8,20 +8,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=FINAL2">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✂️</text></svg>">
 </head>
 <body>
   <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <div class="navbar__inner">
-      <a href="index.html" class="navbar__logo">Fur<span>tivo</span></a>
+      <a href="index.html" class="navbar__logo"><img src="assets/images/furtivo-logo-oficial.png?v=FINAL" alt="Furtivo Barbería"></a>
       <div class="navbar__menu" id="navMenu">
         <a href="experiencias.html" class="navbar__link">Experiencias</a>
         <a href="servicios.html" class="navbar__link">Servicios</a>
         <a href="barberos.html" class="navbar__link">Barberos</a>
         <a href="club.html" class="navbar__link" style="color:var(--accent);">Club Furtivo</a>
-        <a href="agendar.html" class="btn btn--primary btn--sm navbar__cta">Agendar Cita</a>
+        <a href="#" onclick="openBookingModal(); return false;" class="btn btn--primary btn--sm navbar__cta">Agendar Cita</a>
       </div>
       <button class="navbar__toggle" id="navToggle" aria-label="Abrir menú">
         <span></span><span></span><span></span>
@@ -34,7 +34,7 @@
     <a href="servicios.html" class="mobile-menu__link">Servicios</a>
     <a href="barberos.html" class="mobile-menu__link">Barberos</a>
     <a href="club.html" class="mobile-menu__link">Club Furtivo</a>
-    <a href="agendar.html" class="btn btn--primary btn--lg">Agendar Cita</a>
+    <a href="#" onclick="openBookingModal(); return false;" class="btn btn--primary btn--lg">Agendar Cita</a>
   </div>
 
   <!-- HERO CLUB -->
@@ -85,43 +85,43 @@
         
         <!-- Clásica -->
         <div class="membership-card reveal">
-          <span class="membership-card__tier">Clásica</span>
-          <div class="membership-card__price">$60.000 <span>/ mes</span></div>
-          <div class="membership-card__divider"></div>
-          <ul class="membership-card__features" style="margin-bottom: 2rem;">
-            <li class="membership-card__feature">
-              <span style="color:var(--accent);">✓</span> 2 Cortes de cabello al mes
-            </li>
-            <li class="membership-card__feature">
-              <span style="color:var(--accent);">✓</span> 1 Arreglo de barba básico
-            </li>
-            <li class="membership-card__feature">
-              <span style="color:var(--accent);">✓</span> Bebida de cortesía
-            </li>
-          </ul>
-          <a href="#solicitud" class="btn btn--outline" style="width:100%">Solicitar Cupo</a>
-        </div>
-
-        <!-- VIP -->
-        <div class="membership-card membership-card--vip reveal">
-          <span class="membership-card__tier">Premium VIP</span>
+          <span class="membership-card__tier">Membresía Clásica</span>
           <div class="membership-card__price">$100.000 <span>/ mes</span></div>
           <div class="membership-card__divider"></div>
           <ul class="membership-card__features" style="margin-bottom: 2rem;">
             <li class="membership-card__feature">
-              <span style="color:var(--accent);">✓</span> Cortes <strong>ILIMITADOS</strong>
+              <span style="color:var(--accent);">✓</span> 3 cortes
             </li>
             <li class="membership-card__feature">
-              <span style="color:var(--accent);">✓</span> Barba <strong>ILIMITADA</strong>
+              <span style="color:var(--accent);">✓</span> 1 limpieza facial y bebidas de cortesía
             </li>
             <li class="membership-card__feature">
-              <span style="color:var(--accent);">✓</span> 1 Limpieza facial mensual
-            </li>
-            <li class="membership-card__feature">
-              <span style="color:var(--accent);">✓</span> Cerveza premium ilimitada
+              <span style="color:var(--accent);">✓</span> Participación en Dinámicas
             </li>
           </ul>
-          <a href="#solicitud" class="btn btn--primary" style="width:100%">Solicitar Cupo</a>
+          <a href="https://wa.me/573001234567?text=Hola%20quiero%20adquirir%20la%20membresia%20Clasica" target="_blank" class="btn btn--outline" style="width:100%">Adquirir Membresía</a>
+        </div>
+
+        <!-- VIP -->
+        <div class="membership-card membership-card--vip reveal">
+          <span class="membership-card__tier">Membresía VIP</span>
+          <div class="membership-card__price">$200.000 <span>/ mes</span></div>
+          <div class="membership-card__divider"></div>
+          <ul class="membership-card__features" style="margin-bottom: 2rem;">
+            <li class="membership-card__feature">
+              <span style="color:var(--accent);">✓</span> 4 cortes con barba
+            </li>
+            <li class="membership-card__feature">
+              <span style="color:var(--accent);">✓</span> 2 limpiezas faciales
+            </li>
+            <li class="membership-card__feature">
+              <span style="color:var(--accent);">✓</span> Bebida al gusto
+            </li>
+            <li class="membership-card__feature">
+              <span style="color:var(--accent);">✓</span> Participación en Dinámicas
+            </li>
+          </ul>
+          <a href="https://wa.me/573001234567?text=Hola%20quiero%20adquirir%20la%20membresia%20VIP" target="_blank" class="btn btn--primary" style="width:100%">Adquirir Membresía</a>
         </div>
 
       </div>
@@ -135,7 +135,7 @@
         <h2 class="heading-lg" style="text-align: center; margin-bottom: 0.5rem;">Solicitud de Admisión</h2>
         <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Los cupos para el Club Furtivo son limitados para garantizar el mejor servicio.</p>
         
-        <form onsubmit="event.preventDefault(); alert('Solicitud enviada exitosamente. Nos contactaremos contigo pronto.');" style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <form onsubmit="event.preventDefault(); const planName = this.querySelector('select').value === 'vip' ? 'VIP' : 'Clasica'; window.open('https://wa.me/573001234567?text=Hola%20quiero%20adquirir%20la%20membresia%20' + planName, '_blank');" style="display: flex; flex-direction: column; gap: 1.5rem;">
           <div>
             <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light); font-size: 0.9rem;">Nombre Completo</label>
             <input type="text" required style="width: 100%; padding: 1rem; background: var(--bg-dark); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; color: white; font-family: var(--font-sans);">
@@ -147,28 +147,90 @@
           <div>
             <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light); font-size: 0.9rem;">Plan Deseado</label>
             <select style="width: 100%; padding: 1rem; background: var(--bg-dark); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; color: white; font-family: var(--font-sans); appearance: none;">
-              <option value="clasica">Membresía Clásica ($60.000)</option>
-              <option value="vip">Membresía Premium VIP ($100.000)</option>
+              <option value="clasica">Membresía Clásica ($100.000 / mes)</option>
+              <option value="vip">Membresía VIP ($200.000 / mes)</option>
             </select>
           </div>
-          <button type="submit" class="btn btn--primary" style="margin-top: 1rem;">Enviar Solicitud</button>
+          <button type="submit" class="btn btn--primary" style="margin-top: 1rem;">Solicitar por WhatsApp</button>
         </form>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
+    <footer class="footer" id="contacto">
     <div class="container">
+      <div class="footer__top">
+        <div class="footer__grid">
+          <!-- Brand -->
+          <div class="footer__brand">
+            <a href="index.html" class="footer__logo"><img src="assets/images/furtivo-logo-oficial.png?v=FINAL" alt="Furtivo Barbería"></a>
+            <p class="footer__tagline">Cortes, barba y cuidado personal en un espacio creado para verte bien, sentirte bien y salir mejor de como llegaste.</p>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h4 class="footer__heading">Navegación</h4>
+            <div class="footer__links">
+              <a href="experiencias.html" class="footer__link">Experiencias</a>
+              <a href="servicios.html" class="footer__link">Servicios</a>
+              <a href="barberos.html" class="footer__link">Barberos</a>
+              <a href="club.html" class="footer__link">Club Furtivo</a>
+              <a href="index.html#resenas" class="footer__link">Reseñas</a>
+            </div>
+          </div>
+
+          <!-- Services -->
+          <div>
+            <h4 class="footer__heading">Servicios</h4>
+            <div class="footer__links">
+              <a href="servicios.html" class="footer__link">Corte</a>
+              <a href="servicios.html" class="footer__link">Barba</a>
+              <a href="servicios.html" class="footer__link">Limpieza facial</a>
+              <a href="experiencias.html" class="footer__link">Combos</a>
+              <a href="servicios.html" class="footer__link">Full servicio</a>
+            </div>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h4 class="footer__heading">Contacto</h4>
+            <div class="footer__info-item">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1C4.7 1 2 3.7 2 7c0 4.5 6 8 6 8s6-3.5 6-8c0-3.3-2.7-6-6-6zm0 8a2 2 0 110-4 2 2 0 010 4z" stroke="currentColor" stroke-width="1.2"/></svg>
+              <span>Dirección Furtivo</span>
+            </div>
+            <div class="footer__info-item">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4l6 4 6-4M2 4h12v8H2V4z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Lunes - Sábado: 9 AM - 8 PM</span>
+            </div>
+            <div class="footer__info-item">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14.5 11.2v1.8a1.2 1.2 0 01-1.3 1.2A11.9 11.9 0 011.8 2.8 1.2 1.2 0 013 1.5h1.8a1.2 1.2 0 011.2 1c.1.7.3 1.4.6 2a1.2 1.2 0 01-.3 1.3L5.2 6.9a9.6 9.6 0 004 4l1.1-1.1a1.2 1.2 0 011.3-.3c.6.3 1.3.5 2 .6a1.2 1.2 0 011 1.2z" stroke="currentColor" stroke-width="1.2"/></svg>
+              <span>+00 000 000 000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="footer__bottom">
-        <p>&copy; 2026 Furtivo Barbería Premium. Todos los derechos reservados.</p>
+        <p class="footer__copy">© 2026 Furtivo Barbería Premium. Todos los derechos reservados.</p>
+        <div class="footer__socials">
+          <a href="#" class="footer__social" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="1.5" width="13" height="13" rx="3.5" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.2"/><circle cx="12" cy="4" r="0.8" fill="currentColor"/></svg>
+          </a>
+          <a href="#" class="footer__social" aria-label="TikTok">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M11.5 1.5h-2v9a2.5 2.5 0 11-2-2.45V6a4.5 4.5 0 104 4.5V5.85a4.8 4.8 0 002.5.7V4.5a2.5 2.5 0 01-2.5-3z"/></svg>
+          </a>
+          <a href="#" class="footer__social" aria-label="WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1A7 7 0 001.2 12.3L1 15l2.8-.7A7 7 0 108 1zm3.3 9.7c-.1.4-.8.7-1.1.8-.3 0-.6.1-1.9-.4s-3.1-2.2-3.2-2.3-.7-1-.7-1.8.5-1.3.6-1.5.3-.2.4-.2h.3c.1 0 .3 0 .4.3s.5 1.2.5 1.3 0 .2-.1.3-.1.2-.2.2l-.3.3c-.1.1-.2.2-.1.4s.5.8 1 1.3c.7.6 1.2.8 1.4.9s.3 0 .4-.1.6-.7.7-.9.3-.2.4-.1l1.3.6c.2.1.3.1.3.2s0 .7-.2 1z"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js?v=FINAL"></script>
 
   <!-- WhatsApp Floating Button -->
   <a href="https://wa.me/573001234567" target="_blank" class="floating-wa" aria-label="Reservar por WhatsApp">
