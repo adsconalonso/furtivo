@@ -350,28 +350,88 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // ── Swiper Reviews Carousel ──
-  if (typeof Swiper !== 'undefined' && document.querySelector('.reviews-swiper')) {
-    const reviewsSwiper = new Swiper('.reviews-swiper', {
-      slidesPerView: 1,
-      spaceBetween: 24,
-      loop: true,
-      autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-      },
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      breakpoints: {
-        640: {
-          slidesPerView: 2,
-        },
-        1024: {
-          slidesPerView: 3,
-        },
-      },
+  // ── Testimonials Social Proof: Filter & Lightbox ──
+  const filterBtns = document.querySelectorAll('.testimonial-filter-btn');
+  const testimonialCards = document.querySelectorAll('.testimonial-shot-card');
+  const lightbox = document.getElementById('testimonialLightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  const closeLightbox = document.getElementById('closeLightbox');
+
+  if (filterBtns.length && testimonialCards.length) {
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+
+        const filter = btn.dataset.filter;
+        testimonialCards.forEach(card => {
+          const category = card.dataset.category;
+          if (filter === 'all' || category === filter) {
+            card.style.display = 'flex';
+            if (typeof gsap !== 'undefined') {
+              gsap.fromTo(card, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' });
+            } else {
+              card.style.opacity = '1';
+            }
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  // Lightbox handlers
+  if (lightbox && lightboxImg) {
+    function openTestimonialLightbox(src, caption) {
+      lightboxImg.src = src;
+      lightboxCaption.textContent = caption || '';
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeTestimonialLightbox() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        lightboxImg.src = '';
+      }, 300);
+    }
+
+    testimonialCards.forEach(card => {
+      const media = card.querySelector('.testimonial-shot-card__media');
+      const zoomBtn = card.querySelector('.testimonial-zoom-btn');
+      
+      const triggerOpen = () => {
+        const src = media ? media.dataset.lightboxSrc : card.querySelector('img')?.src;
+        const caption = media ? media.dataset.lightboxCaption : '';
+        if (src) openTestimonialLightbox(src, caption);
+      };
+
+      if (media) media.addEventListener('click', triggerOpen);
+      if (zoomBtn) zoomBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        triggerOpen();
+      });
+    });
+
+    if (closeLightbox) {
+      closeLightbox.addEventListener('click', closeTestimonialLightbox);
+    }
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target.classList.contains('testimonial-lightbox__dialog')) {
+        closeTestimonialLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('is-open')) {
+        closeTestimonialLightbox();
+      }
     });
   }
 

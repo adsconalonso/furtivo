@@ -1,0 +1,123 @@
+[
+  {
+    "id": "google-1",
+    "type": "google",
+    "author": "Felipe Ruiz",
+    "rating": 5,
+    "time": "Hace 11 meses",
+    "source": "Google Maps",
+    "image": "assets/images/testimonials/review-google-1.png",
+    "highlight": "Excelente lugar, excelente servicio, sin duda un muy buen lugar para los amantes de la buena atención. Los mejores de Belén.",
+    "aspect": "horizontal"
+  },
+  {
+    "id": "whatsapp-1",
+    "type": "whatsapp",
+    "author": "Alejandro Furtivo",
+    "rating": 5,
+    "time": "Cliente Verificado",
+    "source": "WhatsApp Real",
+    "image": "assets/images/testimonials/review-whatsapp-1.jpg",
+    "highlight": "En Furtivo encontré el lugar perfecto para realizar mi corte de cabello ya que me prestan asesoría personalizada y son puntuales.",
+    "aspect": "vertical"
+  },
+  {
+    "id": "google-javier",
+    "type": "google",
+    "author": "Javier Tabarquino",
+    "rating": 5,
+    "time": "Hace 2 semanas",
+    "source": "Google Maps",
+    "image": "assets/images/testimonials/review-google-javier.png",
+    "highlight": "Chimbas de cortes y mela la atención. 🫡",
+    "aspect": "horizontal"
+  },
+  {
+    "id": "google-mateo",
+    "type": "google",
+    "author": "Mateo Jaramillo Salazar",
+    "rating": 5,
+    "time": "Hace 3 semanas",
+    "source": "Google Maps",
+    "image": "assets/images/testimonials/review-google-mateo.png",
+    "highlight": "Muy buen corte y buena asesoría a buen precio.",
+    "aspect": "horizontal"
+  },
+  {
+    "id": "google-miguel",
+    "type": "google",
+    "author": "Miguel Angel Bello",
+    "rating": 5,
+    "time": "Hace 6 días",
+    "source": "Google Maps",
+    "image": "assets/images/testimonials/review-google-miguel.png",
+    "highlight": "El corté y el barbero son severa calidad. ($40,000-50,000 · Duración: 1 a 2 h)",
+    "aspect": "horizontal"
+  },
+  {
+    "id": "google-marcel",
+    "type": "google",
+    "author": "Marcel Oliver Nöll",
+    "rating": 5,
+    "time": "Hace 3 meses",
+    "source": "Google Maps",
+    "image": "assets/images/testimonials/review-google-marcel.png",
+    "highlight": "Me gustó mucho. Me cortaron la barba muy bien y el corte de pelo de un amigo también quedó muy bien. Lo recomiendo totalmente. Son gente muy amable; incluso nos invitaron a un café.",
+    "aspect": "horizontal"
+  },
+  {
+    "id": "google-fabian",
+    "type": "google",
+    "author": "Fabian Galvis",
+    "rating": 5,
+    "time": "Hace 1 mes",
+    "source": "Google Maps",
+    "image": "assets/images/testimonials/review-google-fabian.png",
+    "highlight": "Qué nivel de lugar. Desde que cruzas la puerta te hacen sentir en casa; el ambiente, la comodidad y la buena energía están a otro nivel. La atención es impecable...",
+    "aspect": "horizontal"
+  },
+  {
+    "id": "google-2",
+    "type": "google",
+    "author": "Enrique Monsalve",
+    "rating": 5,
+    "time": "Hace 6 meses",
+    "source": "Google Maps",
+    "image": "assets/images/testimonials/review-google-2.png",
+    "highlight": "Excelente corte, servicio y ambiente. Y súper ubicación en la Nueva Villa de Aburrá. Para terminar y bajar a tomarse unas polas!!!",
+    "aspect": "horizontal"
+  },
+  {
+    "id": "google-carlos",
+    "type": "google",
+    "author": "Carlos Ramos",
+    "rating": 5,
+    "time": "Hace 5 meses",
+    "source": "Google Maps",
+    "image": "assets/images/testimonials/review-google-carlos.png",
+    "highlight": "El servicio es bueno, el muchacho que atiende es muy amable y está atento todo el tiempo al corte de cabello. Tienen buenos implementos.",
+    "aspect": "horizontal"
+  },
+  {
+    "id": "google-elizabeth",
+    "type": "google",
+    "author": "Elizabeth Pérez",
+    "rating": 5,
+    "time": "Hace 4 meses",
+    "source": "Google Maps",
+    "image": "assets/images/testimonials/review-google-elizabeth.png",
+    "highlight": "Mi hijo de 11 años solo quiere venir aquí lo atienden como un Rey y le encanta cómo lo escuchan para preparar su look perfecto 👌",
+    "aspect": "horizontal"
+  },
+  {
+    "id": "google-robert",
+    "type": "google",
+    "author": "Robert López (Local Guide)",
+    "rating": 5,
+    "time": "Hace 3 meses",
+    "source": "Google Maps",
+    "image": "assets/images/testimonials/review-google-robert.png",
+    "highlight": "Excelente servicio, buenos profesionales. Sigue siendo lo mejor 💥",
+    "aspect": "horizontal"
+  }
+]
