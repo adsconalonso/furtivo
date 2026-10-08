@@ -1308,8 +1308,12 @@ button {
     flex-shrink: 0;
     margin-bottom: 0 !important;
     height: auto !important;
-    display: flex !important;
-    flex-direction: column !important;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .testimonial-shot-card.is-hidden {
+    display: none !important;
   }
 
   /* Recorte inteligente de la imagen para que el scroll vertical no sea infinito */
@@ -1435,6 +1439,10 @@ button {
   display: flex;
   flex-direction: column;
   position: relative;
+}
+
+.testimonial-shot-card.is-hidden {
+  display: none !important;
 }
 
 .testimonial-shot-card:hover {

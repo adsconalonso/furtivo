@@ -359,15 +359,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeLightbox = document.getElementById('closeLightbox');
   const testimonialsCounter = document.getElementById('testimonialsCounter');
 
-  let testimonialsSwiper = null;
+  let currentFilter = 'all';
 
   function initTestimonialsSwiper() {
     if (typeof Swiper === 'undefined') return;
     const isMobile = window.innerWidth <= 768;
 
-    if (isMobile && !testimonialsSwiper && document.querySelector('.testimonials-swiper')) {
-      // Agregar clase swiper-slide a cada tarjeta
-      testimonialCards.forEach(card => card.classList.add('swiper-slide'));
+    if (isMobile && document.querySelector('.testimonials-swiper')) {
+      if (testimonialsSwiper) {
+        testimonialsSwiper.destroy(true, true);
+        testimonialsSwiper = null;
+      }
+
+      // Añadir swiper-slide a las tarjetas que NO están ocultas
+      testimonialCards.forEach(card => {
+        if (!card.classList.contains('is-hidden')) {
+          card.classList.add('swiper-slide');
+        } else {
+          card.classList.remove('swiper-slide');
+        }
+      });
 
       testimonialsSwiper = new Swiper('.testimonials-swiper', {
         slidesPerView: 1.15,
@@ -414,11 +425,34 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateTestimonialCounter(swiperInstance) {
-    if (!testimonialsCounter || !swiperInstance) return;
-    const visibleCards = Array.from(testimonialCards).filter(c => c.style.display !== 'none');
-    const total = visibleCards.length || testimonialCards.length;
-    const current = Math.min((swiperInstance.realIndex || 0) + 1, total);
+    if (!testimonialsCounter) return;
+    const visibleCards = Array.from(testimonialCards).filter(c => !c.classList.contains('is-hidden'));
+    const total = visibleCards.length;
+    if (total === 0) {
+      testimonialsCounter.textContent = '0 / 0';
+      return;
+    }
+    const current = swiperInstance ? Math.min((swiperInstance.realIndex || 0) + 1, total) : 1;
     testimonialsCounter.textContent = `${current} / ${total}`;
+  }
+
+  function applyTestimonialFilter(filter) {
+    currentFilter = filter;
+    testimonialCards.forEach(card => {
+      const category = card.dataset.category;
+      if (filter === 'all' || category === filter) {
+        card.classList.remove('is-hidden');
+      } else {
+        card.classList.add('is-hidden');
+      }
+    });
+
+    // En móvil, reinicializar Swiper con sólo los slides activos
+    if (window.innerWidth <= 768) {
+      initTestimonialsSwiper();
+    } else {
+      updateTestimonialCounter(null);
+    }
   }
 
   // Inicializar al cargar y escuchar resize
@@ -434,21 +468,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.classList.add('is-active');
 
         const filter = btn.dataset.filter;
-        testimonialCards.forEach(card => {
-          const category = card.dataset.category;
-          if (filter === 'all' || category === filter) {
-            card.style.display = 'flex';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-
-        // Si Swiper está activo, actualizarlo
-        if (testimonialsSwiper) {
-          testimonialsSwiper.update();
-          testimonialsSwiper.slideTo(0);
-          updateTestimonialCounter(testimonialsSwiper);
-        }
+        applyTestimonialFilter(filter);
       });
     });
   }
