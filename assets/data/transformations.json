@@ -1,0 +1,52 @@
+[
+  {
+    "id": "juan-1",
+    "barberId": "juan",
+    "barberName": "Juan Quintero",
+    "serviceName": "Textured Quiff + Taper Fade",
+    "beforeImage": "assets/images/before-after/before-juan-1.jpg",
+    "afterImage": "assets/images/before-after/after-juan-1.jpg",
+    "description": "Texturizado con volumen superior y desvanecido limpio en laterales y contornos.",
+    "dateAdded": "2026-10-07"
+  },
+  {
+    "id": "juan-2",
+    "barberId": "juan",
+    "barberName": "Juan Quintero",
+    "serviceName": "Mid Fade + Barba Esculpida",
+    "beforeImage": "assets/images/before-after/before-juan-2.jpg",
+    "afterImage": "assets/images/before-after/after-juan-2.jpg",
+    "description": "Desvanecido medio limpio en laterales con perfilado y esculpido de barba de alta precisión.",
+    "dateAdded": "2026-10-07"
+  },
+  {
+    "id": "fernando-1",
+    "barberId": "fernando",
+    "barberName": "Fernando Carmona",
+    "serviceName": "Modern Mullet + Taper Fade",
+    "beforeImage": "assets/images/before-after/before-fernando-1.jpg",
+    "afterImage": "assets/images/before-after/after-fernando-1.jpg",
+    "description": "Mullet contemporáneo texturizado a capas con desvanecido limpio en patilla y contornos.",
+    "dateAdded": "2026-10-07"
+  },
+  {
+    "id": "fernando-2",
+    "barberId": "fernando",
+    "barberName": "Fernando Carmona",
+    "serviceName": "Burst Fade + Textured Crop con Diseño",
+    "beforeImage": "assets/images/before-after/before-fernando-2.jpg",
+    "afterImage": "assets/images/before-after/after-fernando-2.jpg",
+    "description": "Desvanecido Burst Fade alrededor de la oreja con diseño freestyle a navaja en nuca y textura superior.",
+    "dateAdded": "2026-10-07"
+  },
+  {
+    "id": "fernando-3",
+    "barberId": "fernando",
+    "barberName": "Fernando Carmona",
+    "serviceName": "Blowout Taper Fade + Texturizado",
+    "beforeImage": "assets/images/before-after/before-fernando-3.jpg",
+    "afterImage": "assets/images/before-after/after-fernando-3.jpg",
+    "description": "Desvanecido Low Taper en patilla y nuca con corte texturizado a tijera resaltando el volumen y las ondas naturales.",
+    "dateAdded": "2026-10-07"
+  }
+]

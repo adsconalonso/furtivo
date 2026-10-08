@@ -3,6 +3,31 @@
    Animaciones GSAP, Smart Navbar, Smooth Scroll, Swiper
    ============================================================ */
 
+const firebaseConfig = {
+  apiKey: "AIzaSyAvm6chWOWkHQw08jvvwkVlrrKbaEVVxxc",
+  authDomain: "furtivo1509.firebaseapp.com",
+  projectId: "furtivo1509",
+  storageBucket: "furtivo1509.firebasestorage.app",
+  messagingSenderId: "696900722395",
+  appId: "1:696900722395:web:3a54e9280f1f94fa0276fe",
+  measurementId: "G-BJPEX2H1K1"
+};
+
+let db = null;
+let addDoc, collection, getDocs, query, where;
+
+import('https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js').then((appModule) => {
+  const app = appModule.initializeApp(firebaseConfig);
+  import('https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js').then((fsModule) => {
+    db = fsModule.getFirestore(app);
+    addDoc = fsModule.addDoc;
+    collection = fsModule.collection;
+    getDocs = fsModule.getDocs;
+    query = fsModule.query;
+    where = fsModule.where;
+  });
+});
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // ── Register GSAP Plugins ──
@@ -730,12 +755,12 @@ function setupWizardLogic() {
       <span class="date-chip-num">${d.getDate()}</span>
       <span class="date-chip-month">${MON_NAMES[d.getMonth()]}</span>
     `;
-    chip.addEventListener('click', () => {
+    chip.addEventListener('click', async () => {
       document.querySelectorAll('.date-chip').forEach(c => c.classList.remove('selected'));
       chip.classList.add('selected');
       bookingData.date = chip.dataset.dateStr;
       bookingData.time = null;
-      renderTimeChips(timeContainer, timeLabel);
+      await renderTimeChips(timeContainer, timeLabel);
       setNextBtn(false);
     });
     dateContainer.appendChild(chip);
@@ -762,9 +787,9 @@ function setupWizardLogic() {
 }
 
 // Generate time slots from barber schedule + service duration
-function renderTimeChips(container, label) {
-  container.innerHTML = '';
-  label.style.display = 'block';
+async function renderTimeChips(container, labelEl) {
+  container.innerHTML = '<p style="color:#555; font-size:0.85rem;">Cargando horarios...</p>';
+  labelEl.style.display = 'block';
 
   const schedule = BARBER_SCHEDULES[bookingData.barber];
   const duration = bookingData.duration || 30;
@@ -773,6 +798,25 @@ function renderTimeChips(container, label) {
     container.innerHTML = '<p style="color:#555; font-size:0.85rem;">Selecciona un barbero primero.</p>';
     return;
   }
+
+  let bookedTimes = [];
+  if (db && getDocs) {
+    try {
+      const q = query(
+        collection(db, "citas"),
+        where("barber", "==", bookingData.barber),
+        where("date", "==", bookingData.date)
+      );
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        bookedTimes.push(doc.data().time);
+      });
+    } catch (e) {
+      console.error("Error obteniendo citas: ", e);
+    }
+  }
+
+  container.innerHTML = '';
 
   // Build slots: every `duration` minutes from startH to (endH - duration/60)
   const slots = [];
@@ -784,8 +828,11 @@ function renderTimeChips(container, label) {
     const m   = currentMin % 60;
     const ampm = h < 12 ? 'AM' : 'PM';
     const h12  = h > 12 ? h - 12 : (h === 0 ? 12 : h);
-    const label = `${h12}:${m.toString().padStart(2, '0')} ${ampm}`;
-    slots.push({ label, totalMin: currentMin });
+    const slotLabel = `${h12}:${m.toString().padStart(2, '0')} ${ampm}`;
+    
+    if (!bookedTimes.includes(slotLabel)) {
+      slots.push({ label: slotLabel, totalMin: currentMin });
+    }
     currentMin += duration;
   }
 
@@ -833,11 +880,38 @@ function updateSummary() {
   }
 }
 
-function confirmBooking() {
+async function confirmBooking() {
   const btn = document.getElementById('btn-next');
   btn.innerText = 'Procesando...';
   btn.disabled  = true;
-  setTimeout(() => goToStep('success'), 1500);
+
+  try {
+    if (db && addDoc) {
+      await addDoc(collection(db, "citas"), {
+        service: bookingData.service,
+        serviceName: bookingData.serviceName,
+        duration: bookingData.duration,
+        barber: bookingData.barber,
+        barberName: bookingData.barberName,
+        date: bookingData.date,
+        time: bookingData.time,
+        name: bookingData.name,
+        phone: bookingData.phone,
+        createdAt: new Date()
+      });
+    }
+    
+    // Redirect to WhatsApp - ELIMINADO: ahora el backend enviará el mensaje
+    // const message = \`Hola, quiero confirmar mi cita en Furtivo:%0A*Servicio:* \${bookingData.serviceName}%0A*Barbero:* \${bookingData.barberName}%0A*Fecha:* \${bookingData.date}%0A*Hora:* \${bookingData.time}%0A*Nombre:* \${bookingData.name}%0A*Tel:* \${bookingData.phone}\`;
+    // window.open(\`https://wa.me/573000000000?text=\${message}\`, '_blank');
+    
+    goToStep('success');
+  } catch (e) {
+    console.error("Error al guardar la cita: ", e);
+    alert("Hubo un error al procesar tu cita. Por favor intenta de nuevo.");
+    btn.innerText = 'Confirmar Cita';
+    btn.disabled = false;
+  }
 }
 
 function goToStep(stepNum) {

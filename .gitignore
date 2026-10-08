@@ -2,9 +2,19 @@
 .DS_Store
 Thumbs.db
 
-# Dependencias Node (si aplica a futuro)
-node_modules/
+# Dependencias Node
+**/node_modules/
 
 # Archivos de Firebase
 .firebase/
 firebase-debug.log*
+
+# Secretos y credenciales backend
+backend/.env
+backend/*service-account*.json
+backend/.wwebjs_*
+backend/.wwebjs_auth/
+backend/.wwebjs_cache/
+
+# Temporales y prompts locales
+user_prompts.txt
