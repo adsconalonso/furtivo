@@ -511,8 +511,10 @@
         </button>
       </div>
 
-      <!-- Muro Bento / Masonry -->
-      <div class="testimonials-masonry reveal" id="testimonialsMasonry">
+      <!-- Contenedor Responsive: Malla Masonry en Desktop / Carrusel Swiper en Mobile -->
+      <div class="testimonials-wrapper reveal">
+        <div class="swiper testimonials-swiper">
+          <div class="swiper-wrapper testimonials-masonry" id="testimonialsMasonry">
         
         <!-- Tarjeta 1: Google Review - Felipe Ruiz -->
         <article class="testimonial-shot-card" data-category="google">
@@ -800,7 +802,25 @@
           </div>
         </article>
 
-      </div>
+          </div><!-- /.swiper-wrapper -->
+
+          <!-- Barra de navegación del carrusel (Visible en móviles / tablets) -->
+          <div class="testimonials-nav-bar">
+            <button class="testimonials-nav-btn testimonials-nav-btn--prev" aria-label="Opinión anterior">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              <span>Anterior</span>
+            </button>
+            <div class="testimonials-nav-counter" id="testimonialsCounter">1 / 11</div>
+            <button class="testimonials-nav-btn testimonials-nav-btn--next" aria-label="Siguiente opinión">
+              <span>Siguiente</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+
+          <!-- Paginación de puntos (Dots) -->
+          <div class="testimonials-swiper-pagination"></div>
+        </div><!-- /.swiper -->
+      </div><!-- /.testimonials-wrapper -->
 
       <!-- Lightbox Modal para ver capturas en pantalla completa -->
       <div class="testimonial-lightbox" id="testimonialLightbox" role="dialog" aria-modal="true" aria-hidden="true">

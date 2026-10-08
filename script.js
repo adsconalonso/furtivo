@@ -350,13 +350,82 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // ── Testimonials Social Proof: Filter & Lightbox ──
+  // ── Testimonials Social Proof: Swiper Carousel (Mobile) & Filtering ──
   const filterBtns = document.querySelectorAll('.testimonial-filter-btn');
   const testimonialCards = document.querySelectorAll('.testimonial-shot-card');
   const lightbox = document.getElementById('testimonialLightbox');
   const lightboxImg = document.getElementById('lightboxImg');
   const lightboxCaption = document.getElementById('lightboxCaption');
   const closeLightbox = document.getElementById('closeLightbox');
+  const testimonialsCounter = document.getElementById('testimonialsCounter');
+
+  let testimonialsSwiper = null;
+
+  function initTestimonialsSwiper() {
+    if (typeof Swiper === 'undefined') return;
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile && !testimonialsSwiper && document.querySelector('.testimonials-swiper')) {
+      // Agregar clase swiper-slide a cada tarjeta
+      testimonialCards.forEach(card => card.classList.add('swiper-slide'));
+
+      testimonialsSwiper = new Swiper('.testimonials-swiper', {
+        slidesPerView: 1.15,
+        spaceBetween: 16,
+        centeredSlides: false,
+        grabCursor: true,
+        navigation: {
+          nextEl: '.testimonials-nav-btn--next',
+          prevEl: '.testimonials-nav-btn--prev',
+        },
+        pagination: {
+          el: '.testimonials-swiper-pagination',
+          clickable: true,
+        },
+        breakpoints: {
+          480: {
+            slidesPerView: 1.25,
+            spaceBetween: 18,
+          },
+          600: {
+            slidesPerView: 1.5,
+            spaceBetween: 20,
+          }
+        },
+        on: {
+          init: function() {
+            updateTestimonialCounter(this);
+          },
+          slideChange: function() {
+            updateTestimonialCounter(this);
+          }
+        }
+      });
+    } else if (!isMobile && testimonialsSwiper) {
+      testimonialsSwiper.destroy(true, true);
+      testimonialsSwiper = null;
+      testimonialCards.forEach(card => {
+        card.classList.remove('swiper-slide');
+        card.style.transform = '';
+        card.style.marginRight = '';
+        card.style.width = '';
+      });
+    }
+  }
+
+  function updateTestimonialCounter(swiperInstance) {
+    if (!testimonialsCounter || !swiperInstance) return;
+    const visibleCards = Array.from(testimonialCards).filter(c => c.style.display !== 'none');
+    const total = visibleCards.length || testimonialCards.length;
+    const current = Math.min((swiperInstance.realIndex || 0) + 1, total);
+    testimonialsCounter.textContent = `${current} / ${total}`;
+  }
+
+  // Inicializar al cargar y escuchar resize
+  initTestimonialsSwiper();
+  window.addEventListener('resize', () => {
+    initTestimonialsSwiper();
+  });
 
   if (filterBtns.length && testimonialCards.length) {
     filterBtns.forEach(btn => {
@@ -369,15 +438,17 @@ document.addEventListener('DOMContentLoaded', () => {
           const category = card.dataset.category;
           if (filter === 'all' || category === filter) {
             card.style.display = 'flex';
-            if (typeof gsap !== 'undefined') {
-              gsap.fromTo(card, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' });
-            } else {
-              card.style.opacity = '1';
-            }
           } else {
             card.style.display = 'none';
           }
         });
+
+        // Si Swiper está activo, actualizarlo
+        if (testimonialsSwiper) {
+          testimonialsSwiper.update();
+          testimonialsSwiper.slideTo(0);
+          updateTestimonialCounter(testimonialsSwiper);
+        }
       });
     });
   }
