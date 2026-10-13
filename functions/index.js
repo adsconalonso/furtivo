@@ -187,30 +187,55 @@ exports.getDisponibilidad = onRequest(
         }
       });
 
-      // 2. Consultar citas activas en Firestore como respaldo
+      // 2. Manejo de citas y sincronización con Firestore:
+      // Google Calendar es la fuente única de verdad para citas confirmadas y bloqueos.
+      // Si una cita fue eliminada/cancelada en Google Calendar, la hora DEBE quedar libre.
+      const activeEventIds = new Set(
+        (calRes.data.items || [])
+          .filter((i) => i.status !== "cancelled")
+          .map((i) => i.id)
+      );
+
       const firestoreSnap = await db.collection("citas")
         .where("barber", "==", barber)
         .where("date", "==", dateStr)
         .get();
 
+      const nowMs = Date.now();
       firestoreSnap.forEach((doc) => {
         const cita = doc.data();
-        if (cita.time) {
-          const [hStr, mAmPm] = cita.time.split(":");
-          const [mStr, ampm] = mAmPm.split(" ");
-          let h = parseInt(hStr);
-          if (ampm === "PM" && h < 12) h += 12;
-          if (ampm === "AM" && h === 12) h = 0;
-          const startMin = h * 60 + parseInt(mStr);
-          const duration = cita.duration || 60;
-          const endMin = startMin + duration;
+        if (cita.cancelada || cita.estado === "cancelada") return;
 
-          const alreadyInCal = busyIntervals.some((b) => Math.abs(b.startMin - startMin) < 5);
-          if (!alreadyInCal) {
+        // Si la cita ya fue procesada y tenía evento en Calendar, pero ese evento ya no está activo:
+        if (cita.procesada && cita.calendarEventId && !activeEventIds.has(cita.calendarEventId)) {
+          // El barbero eliminó la cita en Google Calendar -> marcar como cancelada en Firestore
+          doc.ref.update({
+            estado: "cancelada",
+            cancelada: true,
+            canceladaEn: new Date(),
+          }).catch((err) => logger.warn("Error actualizando cita cancelada en Firestore:", err));
+          return; // No bloquea la hora
+        }
+
+        // Si la cita aún está en proceso de creación por la Cloud Function (menos de 2 minutos)
+        if (!cita.procesada && cita.time) {
+          const createdAtMs = cita.createdAt && cita.createdAt.toMillis
+            ? cita.createdAt.toMillis()
+            : (cita.createdAt ? new Date(cita.createdAt).getTime() : nowMs);
+
+          if (nowMs - createdAtMs < 2 * 60 * 1000) {
+            const [hStr, mAmPm] = cita.time.split(":");
+            const [mStr, ampm] = mAmPm.split(" ");
+            let h = parseInt(hStr);
+            if (ampm === "PM" && h < 12) h += 12;
+            if (ampm === "AM" && h === 12) h = 0;
+            const startMin = h * 60 + parseInt(mStr);
+            const duration = cita.duration || 60;
+            const endMin = startMin + duration;
             busyIntervals.push({
               startMin,
               endMin,
-              summary: cita.serviceName || "Reserva Web",
+              summary: cita.serviceName || "Reserva en proceso",
             });
           }
         }

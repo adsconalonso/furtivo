@@ -999,7 +999,10 @@ async function renderTimeChips(container, labelEl) {
         );
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
-          bookedTimes.push(doc.data().time);
+          const d = doc.data();
+          if (!d.cancelada && d.estado !== 'cancelada') {
+            bookedTimes.push(d.time);
+          }
         });
       } catch (e) {
         console.error("Error obteniendo citas en Firestore: ", e);
