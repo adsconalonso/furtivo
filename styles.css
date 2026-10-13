@@ -3038,6 +3038,17 @@ button {
   color: #0a0a0a;
   font-weight: 600;
 }
+.time-chip.disabled,
+.time-chip.is-busy {
+  opacity: 0.3;
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.06);
+  color: #555;
+  cursor: not-allowed;
+  pointer-events: none;
+  text-decoration: line-through;
+  filter: grayscale(1);
+}
 
 /* ── Booking Receipt (Step 4) ── */
 .booking-receipt {

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vincular WhatsApp — Furtivo Barbería</title>
+  <meta http-equiv="refresh" content="5">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0d0d0d;
+      color: #e5e5e5;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      background: #171717;
+      border: 1px solid #2a2a2a;
+      border-radius: 16px;
+      padding: 36px 30px;
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+    .badge-warning { background: #d97706; color: #fff; }
+    .badge-success { background: #16a34a; color: #fff; }
+    .badge-neutral { background: #374151; color: #9ca3af; }
+    h2 { font-size: 1.4rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    p { font-size: 0.9rem; color: #a3a3a3; line-height: 1.5; margin-bottom: 20px; }
+    .qr-box {
+      background: #fff;
+      padding: 16px;
+      border-radius: 12px;
+      display: inline-block;
+      margin: 10px 0 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .qr-img { width: 220px; height: 220px; display: block; }
+    .instructions {
+      text-align: left;
+      font-size: 0.82rem;
+      color: #bbb;
+      background: #202020;
+      padding: 16px 20px 16px 32px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+    .instructions li { margin-bottom: 6px; }
+    .instructions strong { color: #fff; }
+    .footer-note { font-size: 0.75rem; color: #666; }
+    .success-icon { font-size: 3rem; margin: 20px 0; }
+    .status-details {
+      background: #202020;
+      border-radius: 8px;
+      padding: 16px;
+      text-align: left;
+      font-size: 0.85rem;
+      color: #ccc;
+      line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+  
+      <div class="card">
+        <div class="badge badge-warning">⚡ ESCANEO REQUERIDO</div>
+        <h2>Vincular WhatsApp de Furtivo</h2>
+        <p>Escanea este código con el WhatsApp de la barbería para activar las notificaciones automáticas:</p>
+        <div class="qr-box">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAYAAAB5fY51AAAAAklEQVR4AewaftIAABO3SURBVO3BQY7cOhYAwUyh73/lHC8JblgtqOyvwYuwPxhjjBe4GGOMl7gYY4yXuBhjjJe4GGOMl7gYY4yXuBhjjJe4GGOMl7gYY4yXuBhjjJf44UMq/1LFTmVV8RSVk4o7VFYVO5VdxYnKEyruUNlVrFR2FTuVk4oTlV3FSmVXsVM5qThRuaPiROWkYqfyL1WcXIwxxktcjDHGS1yMMcZL/HBTxbeoPEXlW1R2FSuVv6lipbKruENlV7Gq2KmcqOwqTlROKnYqq4qdyq5ipbJTWVXsKnYqJyqrim+q+BaV37oYY4yXuBhjjJe4GGOMl7gYY4yX+OFBKndUPEFlV7FS2VWcqOwqnqDyCZVVxUnFTuWkYlexUzmpOFE5UdlVPEHljoqdyonKE1T+JpU7Kp5wMcYYL3ExxhgvcTHGGC9xMcYYL/HDi1X816isKnYqT1DZVZxU7FRWKruKk4oTlU+onKicVDxF5bdUnlKxUtlV7FT+H1yMMcZLXIwxxktcjDHGS/zwYionFScqd6jcUfEElROVT1ScqJyoPKVipbKrOFHZVdyhsqp4isqJyonKruL/wcUYY7zExRhjvMTFGGO8xMUYY7zEDw+q+JsqVipPqVip7Cp2KiuVv0llVfEJlVXFJyp+S+UpKneonFQ8QeVvqviWin/pYowxXuJijDFe4mKMMV7ih5tU/jWVVcVOZVWxU/mWip3KqmKnsqtYqewqViq7im9R2VWcVOxUVhU7lVXFTmVXsVJ5isqqYqeyq1ip7CpWKp9QWVV8QuW/5GKMMV7iYowxXuJijDFe4mKMMV7ihw9V/NdU/JbKN1WsVE5UdhU7lVXFScUdKndU3KFyR8VJxU7ljorfUrmjYqfyLRX/dRdjjPESF2OM8RIXY4zxEhdjjPES9gcfUFlVfELlv6Rip3JHxYnKrmKl8omKE5U7Kk5UvqVip/JbFTuVp1T8lsquYqdyUrFS2VWcqOwqTlR2FSuVOypOLsYY4yUuxhjjJS7GGOMl7A8+oPK3VOxU7qhYqfxNFTuVVcUdKk+pWKl8omKlsqs4UbmjYqXylIqdyqpip/L/qmKnsqrYqewqfutijDFe4mKMMV7iYowxXuJijDFewv7gBpVdxU7lpGKlsqs4UdlV3KGyqvgWladUnKjcUXGickfFTmVVsVM5qdiprCp2KruKlcodFTuVVcVTVP7rKk4uxhjjJS7GGOMlLsYY4yXsDx6isqtYqZxU7FT+pYqdyq5ipbKr+JdUnlKxUtlVnKjsKlYqu4q/SWVVsVNZVexUnlCxU9lVrFR2FXeonFTsVFYVJxdjjPESF2OM8RIXY4zxEhdjjPESP3xIZVXxCZWTipXKruJE5SkVT6i4Q2VXsVLZVZxU7FROKnYqJyqril3FScVOZVWxU7mjYlfxhIoTlV3FHSpPUNlVrFS+5WKMMV7iYowxXuJijDFe4mKMMV7ihw9VrFSeorKq+ITKb1V8QmVV8RSVVcWu4qTiRGVXcYfKruJE5URlV/EtFScqJxVPUVlV7FTuqFip7FR2FauKO1R2Fb91McYYL3ExxhgvcTHGGC9hf/ABlZOKncoTKnYqJxUrlV3FiconKlYqJxU7lTsqvkXlpOIpKquKncqqYqdyUrFTeULFHSq7ipXKruIOlV3Ft6isKk4uxhjjJS7GGOMlLsYY4yUuxhjjJX74UMVK5Vsqdiq7iieo3FGxU1lV/E0qd1SsVO5QOanYqXxLxU7lpOJbVHYVJyqrip3KU1RWFTuVOyp+62KMMV7iYowxXuJijDFe4mKMMV7ihw+prCp2KndUrFSeorKquENlp/IElV3FTmVVsVNZVexUdip3VJyorFS+RWVXsas4UfmvU9lV7FROKk5U7qjYqawqTi7GGOMlLsYY4yUuxhjjJX74UMVKZVexU1lVnFTsVHYqT1C5o2KnslLZVdxRsVI5UdlV7FROKnYqq4pdxUrlv0ZlV7FT+S+p2KmcVOxUdhWrihOVT1T81sUYY7zExRhjvMTFGGO8xMUYY7zEDx9SuaPiROWkYqdyUrFS+UTFicpJxU7lDpWTipXKTuUOlV3Ft1SsVO5QOan4loqnVKxU7lB5isqqYqdyUnFyMcYYL3ExxhgvcTHGGC/xw00VO5VdxUrlpGKn8oSKT6isKnYVO5WTihOVXcVvVXxC5aTiROW/pmKnslJ5SsWJyh0qq4pPqKwqdio7lW+p+K2LMcZ4iYsxxniJizHGeImLMcZ4CfuDG1R2FXeofEvFE1R2FScqJxWfUFlV7FTuqFip3FGxU7mjYqVyUrFTuaNip7KqOFHZVexUfqtip/KUihOVOyp+62KMMV7iYowxXuJijDFe4mKMMV7C/uADKquKncqu4ltUTipOVHYVd6j8LRU7lSdU7FROKu5Q+Zcqdip/U8VK5V+rWKncUfGEizHGeImLMcZ4iYsxxniJHz5U8QSV/5qKncqq4hMVK5VdxUplV3GiclLxCZWTip3KicpJxU7ltyp2KruKJ1TsVFYVO5Wdyqpip7KquEPlEyqrip3KquITKquKk4sxxniJizHGeImLMcZ4iYsxxngJ+4MPqKwqPqHyWxWfUDmpOFF5g4onqJxU7FR2Fb+l8omKE5WTip3KqmKnsqs4UVlV7FR2FU9QuaPiDpWTiidcjDHGS1yMMcZLXIwxxkvYH9ygsqvYqZxUrFQ+UXGisqrYqdxRsVP5rYqdyknFicquYqeyqtipfEvFTmVVsVO5o2KlsqvYqawqdirfUvEElU9UrFR2FSuVT1T81sUYY7zExRhjvMTFGGO8xMUYY7zEDzdV7FR2FSuVncqq4hMqq4pdxR0VK5U7KnYqT1DZVZyo7CpOKk5UnlLxLSqrip3KicquYqWyqzhROVH5RMW3qJxU7FRWFScXY4zxEhdjjPESF2OM8RIXY4zxEvYHN6jsKk5U7qi4Q2VVsVM5qdip7CpWKruKE5VdxYnKScVTVFYVJyqfqFipnFTsVO6o2KmcVPwtKk+p2KmsKk5U7qg4uRhjjJe4GGOMl7gYY4yX+OFDKt9ScYfKEyp2Kk+o2KmcVOxUTipWKp9QWVXsVHYVK5VdxariEyq/pfKJihOVXcVK5SkqJxUnFScqO5X/uosxxniJizHGeImLMcZ4iYsxxngJ+4MPqPzXVZyofKJipfKJihOVOyp+S+WOip3Kt1TcoXJS8S0qJxU7lV3FSuWkYqfyX1OxU1lVnFyMMcZLXIwxxktcjDHGS1yMMcZL/HBTxSdUTiruUPkWlVXFTuVE5aTib6o4UflExW+p7FROKnYVK5U7VHYVO5VVxU5lpfIJlVXFTuWkYqeyqrhDZVfxt1yMMcZLXIwxxktcjDHGS/zwoYo7KlYqJyq7ihOVXcWqYqeyq1ip7Cp2KquKncrfUrFTOanYqZyo7CruqFip7CpWFZ9Q+Vsqdiq7ipXKruJbVHYVJyonFU+4GGOMl7gYY4yXuBhjjJe4GGOMl/jhy1R+q+JfUzlR+RaVJ1TsKnYqT6j4r1F5SsVKZVdxUrFTWVXsVE4q7qh4QsW3XIwxxktcjDHGS1yMMcZL2B98QOWkYqfyL1WcqOwqTlROKk5UPlHxBJVdxUrlX6s4UVlV7FS+peJEZVdxorKrWKn8axUrlV3FEy7GGOMlLsYY4yUuxhjjJS7GGOMlfniQyknFTmVVsVP5loqdyqriKSp3qJxUrFSeUrFTWVXsVFYVO5Wdym+pfKJipbKr2KmcqJyofEvFicquYqfyX3IxxhgvcTHGGC9xMcYYL3Exxhgv8cODKk5UdhUrlU9UPEFlV3FSsVP5loqVyknFTuUOlV3FSuW/pmKnsqrYqewqVionFXeo7FRWFXdU7FR2Fd+isqo4uRhjjJe4GGOMl7gYY4yX+OHLVE5UVhU7lZ3KScVKZVexU1lV7FR2Fb9V8QmVVcVOZVXxlIpvqdipPEFlV7FS2VXsVH5L5RMVq4qdyonKruKk4g6VOyp+62KMMV7iYowxXuJijDFe4mKMMV7C/uADKndUnKicVJyofEvFJ1RWFXeo7Cq+ReWOipXKScVOZVdxorKq2KnsKlYqd1TsVL6lYqXyiYoTlZOKncqqYqdyUnFyMcYYL3ExxhgvcTHGGC/xw00VO5WdyknFHSonFSuVXcVO5Qkqu4qTip3KScVK5Y6KncpO5aTiWypWKn+TyknFJ1T+FpVPVKxUdhUnFU+4GGOMl7gYY4yXuBhjjJe4GGOMl/jhQRV3qDyh4qTib6q4Q+WkYqeyqviEykrlExUrlZ3KHSonFXeoPKFip/KEijsqnqKyqtip3FHxWxdjjPESF2OM8RIXY4zxEhdjjPESPzxIZVexUtlVnKjsKk5UVhV3qHyiYqVyUvGUijsq/qWKE5WTip3KruIJKruKE5UTlTtUdhWrik+orFTuqNiprCpOLsYY4yUuxhjjJS7GGOMl7A8+oLKq+BaVOyp2KquKt1L5looTlTsqViqfqFipnFQ8ReWkYqdyR8VK5VsqnqKyqtipnFScXIwxxktcjDHGS1yMMcZLXIwxxkvYH3yRyknFE1R2FScqu4qVyicqViq7ijtUTiqeoLKruEPlb6n4hMpJxU7lb6nYqawq7lDZVexUVhUnKp+o+K2LMcZ4iYsxxniJizHGeImLMcZ4iR8+pLKq2KmcVOxU/haVXcVOZVXxCZV/SWVVsVPZVfwtFTuVXcWJyr9UsVP5W1R2FScVO5U7VFYVn1BZVZxcjDHGS1yMMcZLXIwxxkv88GUVK5WTip3KrmKlslNZVexUdhUrlTsqdionFX+TyonKHRUrlU+oPEHlpOIOlZOKncqu4rcqdionFZ+oeILKruK3LsYY4yUuxhjjJS7GGOMlLsYY4yV++DKVk4qVyq5ip7KqeIrKScVOZaVyh8odFScVJyqfqFipnFTsVL6l4kTljooTlU+o/EsVO5WTipXKrmKnsqo4uRhjjJe4GGOMl7gYY4yXsD94iMqu4kRlVXGHyh0VO5WTiieo7CqeoLKr2KmsKv41lX+pYqdyUrFS+UTFicodFSuVXcVO5bcqvuVijDFe4mKMMV7iYowxXuJijDFewv7gi1SeUHGisqs4UTmp2KnsKn5L5V+ruEPlpGKlsqvYqZxUnKicVNyhclKxUzmpeIrKEyp2KquKT6isKk4uxhjjJS7GGOMlLsYY4yUuxhjjJewPHqJyR8WJyq7iRGVV8QmVVcVOZVexUtlVnKicVJyo7Cp2KicVJyonFTuVXcVK5aTiEyqrik+onFQ8QeWkYqeyq3iCyh0VT7gYY4yXuBhjjJe4GGOMl/jhQyqril3FicqJyq5ip3JSsVLZVXxLxU5lVbGrOFE5qbij4hMqJxV3qKwqdipPUNlV7CpOVE4q7qi4Q2VVsVPZVawqTlR2KruK37oYY4yXuBhjjJe4GGOMl7gYY4yX+OFDFSuVT1SsKk4qdiq7ipXKt6h8QuWk4kRlV7Gq2KmsVHYVd6g8QWVXcaKyqzhR2VWcqPxNKquKE5U7VHYVO5WTilXFJ1RWFScXY4zxEhdjjPESF2OM8RL2Bw9R+ZsqfkvlKRU7lVXFt6jsKlYqu4qdyt9S8RSVk4oTlV3FicodFTuV36rYqTyl4rdU7qg4uRhjjJe4GGOMl7gYY4yXuBhjjJf44UMqd1SsVHYV36LyhIqdyq5ipbKruENlVbFTWVXsVE4qvkXlExUnFScqJxU7lV3Fb1XsVHYV31JxonKisqs4qXjCxRhjvMTFGGO8xMUYY7zExRhjvMQPX6ayqjhR2VWcqOwqTlROVD6hcqLyBJU7KnYqJyr/NSp3VJxU/EsqT1G5Q+VE5Q6VVcXJxRhjvMTFGGO8xMUYY7zEDx+q+FsqPqGyqjhR2VWcqOwqdiqrin9JZVfxlIrfUvmEyknFSmVX8RSV31K5o+IpKquKO1SeUvFbF2OM8RIXY4zxEhdjjPESF2OM8RI/fEjlX6q4Q+VEZVexqrhDZVexUvmWik9UPEFlV3FHxUrlpGKnsqtYqewqTipOVHYVJyq7ihOVO1R2FScVK5VPqKwqTi7GGOMlLsYY4yUuxhjjJS7GGOMlfrip4ltU7lDZVdyhclKxq/iWipXKicrfVPEUlVXFHRU7lTsqVionFU9R+ZaKO1RWFTuVJ1yMMcZLXIwxxktcjDHGS/zwIJU7Kv5rKlYqO5VvqTip2KmsKu5Q+YTKt1SsVE4qdiq7ipXKTuWk4kTlKRUrlTtU/qaKJ1yMMcZLXIwxxktcjDHGS1yMMcZL/PB/pGKnsqrYqZxUfEJlVXGislO5o2KlsqvYqawqdip/k8qq4kTlv6Zip7KrOFE5qThR+UTFSmVXcYfKquLkYowxXuJijDFe4mKMMV7ihxerWKncUXGicofKUypWKt+isqvYqZxUrFQ+UbFSOan4hModFSuVk4pPqKwqdhVPqNip7FSeoPKEizHGeImLMcZ4iYsxxniJizHGeIkfHlTxX6fylIo7VFYVO5WdyqriDpVdxYnKScVJxU7lCSq7il3FHSpPqHiCyq7ib1L5Wy7GGOMlLsYY4yUuxhjjJS7GGOMl7A8+oPIvVexUfqviKSp3VKxUdhUnKruKlcodFTuVOypWKruKO1TuqFipfKJipfKUipXKG1V8QmVVcXIxxhgvcTHGGC9xMcYYL2F/MMYYL3AxxhgvcTHGGC9xMcYYL3ExxhgvcTHGGC9xMcYYL3ExxhgvcTHGGC/xP+ocbzOdt2/ZAAAAAElFTkSuQmCC" alt="Código QR WhatsApp" class="qr-img" />
+        </div>
+        <ol class="instructions">
+          <li>Abre <strong>WhatsApp</strong> en tu teléfono.</li>
+          <li>Toca <strong>Menú (⋮)</strong> o <strong>Configuración (⚙️)</strong>.</li>
+          <li>Selecciona <strong>Dispositivos vinculados</strong> y luego <strong>Vincular un dispositivo</strong>.</li>
+          <li>Apunta tu cámara a este código QR.</li>
+        </ol>
+        <div class="footer-note">Se actualiza automáticamente cada 5 segundos.</div>
+      </div>
+    
+</body>
+</html>

@@ -678,7 +678,7 @@ const bookingModalHTML = `
             <p class="wizard-step__title">¿Qué servicio quieres?</p>
             <div class="service-selection-grid">
               <div class="service-card" data-service="corte">
-                <h4>Corte Clásico</h4>
+                <h4>Corte de Cabello</h4>
                 <p>$30.000</p>
               </div>
               <div class="service-card" data-service="barba">
@@ -820,18 +820,18 @@ const BARBER_SCHEDULES = {
   fernando: { name: 'Fernando Carmona', startH: 13, endH: 19 }, // 1PM–7PM
 };
 
-// Duration in minutes per service
+// Duration in minutes per service (estándar universal: 60 minutos)
 const SERVICE_DURATIONS = {
-  corte:              30,  // Corte Clásico
-  barba:              30,  // Barba Express
-  barba_ritual:       45,  // Barba con Ritual
-  facial:             45,  // Limpieza Facial Profunda
+  corte:              60,  // Corte de Cabello
+  barba:              60,  // Barba Express
+  barba_ritual:       60,  // Barba con Ritual
+  facial:             60,  // Limpieza Facial Profunda
   corte_barba:        60,  // Corte + Barba
-  corte_barba_ritual: 75,  // Corte + Barba con Ritual
-  full_servicio:      90,  // Full servicio Furtivo
+  corte_barba_ritual: 60,  // Corte + Barba con Ritual
+  full_servicio:      60,  // Full servicio Furtivo
   plata:              60,  // Exp. Plata
   oro:                60,  // Exp. Oro
-  diamante:           75,  // Exp. Diamante
+  diamante:           60,  // Exp. Diamante
 };
 
 let currentStep = 1;
@@ -871,7 +871,7 @@ function setupWizardLogic() {
       card.classList.add('selected');
       bookingData.service     = card.dataset.service;
       bookingData.serviceName = card.querySelector('h4').innerText;
-      bookingData.duration    = SERVICE_DURATIONS[bookingData.service] || 30;
+      bookingData.duration    = 60; // Estándar universal: 60 minutos
       setNextBtn(true);
     });
   });
@@ -937,71 +937,115 @@ function setupWizardLogic() {
   });
 }
 
-// Generate time slots from barber schedule + service duration
+// Generate time slots from barber schedule + Google Calendar live availability
 async function renderTimeChips(container, labelEl) {
-  container.innerHTML = '<p style="color:#555; font-size:0.85rem;">Cargando horarios...</p>';
+  container.innerHTML = '<p style="color:#888; font-size:0.85rem;">Consultando agenda en Google Calendar...</p>';
   labelEl.style.display = 'block';
 
   const schedule = BARBER_SCHEDULES[bookingData.barber];
-  const duration = bookingData.duration || 30;
+  const duration = 60; // Todas las citas duran exactamente 1 hora
 
   if (!schedule) {
     container.innerHTML = '<p style="color:#555; font-size:0.85rem;">Selecciona un barbero primero.</p>';
     return;
   }
 
-  let bookedTimes = [];
-  if (db && getDocs) {
-    try {
-      const q = query(
-        collection(db, "citas"),
-        where("barber", "==", bookingData.barber),
-        where("date", "==", bookingData.date)
-      );
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        bookedTimes.push(doc.data().time);
+  let slotsToRender = [];
+  let fetchedFromCalendar = false;
+
+  // 1. Consultar disponibilidad en vivo desde Google Calendar (Cloud Function)
+  try {
+    const calUrl = `https://us-central1-furtivo1509.cloudfunctions.net/getDisponibilidad?barber=${encodeURIComponent(bookingData.barber)}&date=${encodeURIComponent(bookingData.date)}`;
+    const resp = await fetch(calUrl);
+    if (resp.ok) {
+      const data = await resp.json();
+      if (data.success && Array.isArray(data.allSlots) && data.allSlots.length > 0) {
+        slotsToRender = data.allSlots;
+        fetchedFromCalendar = true;
+      } else if (data.success && Array.isArray(data.availableSlots)) {
+        // Compatibilidad: construir a partir de availableSlots
+        const availLabels = data.availableSlots.map(s => s.label);
+        let currentMin = schedule.startH * 60;
+        const lastStart = schedule.endH * 60 - duration;
+        while (currentMin <= lastStart) {
+          const h   = Math.floor(currentMin / 60);
+          const m   = currentMin % 60;
+          const ampm = h < 12 ? 'AM' : 'PM';
+          const h12  = h > 12 ? h - 12 : (h === 0 ? 12 : h);
+          const slotLabel = `${h12}:${m.toString().padStart(2, '0')} ${ampm}`;
+          slotsToRender.push({
+            label: slotLabel,
+            totalMin: currentMin,
+            available: availLabels.includes(slotLabel)
+          });
+          currentMin += duration;
+        }
+        fetchedFromCalendar = true;
+      }
+    }
+  } catch (err) {
+    console.warn("Fallo al consultar Google Calendar en vivo, usando respaldo Firestore:", err);
+  }
+
+  // 2. Si la Cloud Function no respondió, respaldo con Firestore
+  if (!fetchedFromCalendar) {
+    let bookedTimes = [];
+    if (db && getDocs) {
+      try {
+        const q = query(
+          collection(db, "citas"),
+          where("barber", "==", bookingData.barber),
+          where("date", "==", bookingData.date)
+        );
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          bookedTimes.push(doc.data().time);
+        });
+      } catch (e) {
+        console.error("Error obteniendo citas en Firestore: ", e);
+      }
+    }
+
+    let currentMin = schedule.startH * 60;
+    const lastStart = schedule.endH * 60 - duration;
+    while (currentMin <= lastStart) {
+      const h   = Math.floor(currentMin / 60);
+      const m   = currentMin % 60;
+      const ampm = h < 12 ? 'AM' : 'PM';
+      const h12  = h > 12 ? h - 12 : (h === 0 ? 12 : h);
+      const slotLabel = `${h12}:${m.toString().padStart(2, '0')} ${ampm}`;
+      
+      slotsToRender.push({
+        label: slotLabel,
+        totalMin: currentMin,
+        available: !bookedTimes.includes(slotLabel)
       });
-    } catch (e) {
-      console.error("Error obteniendo citas: ", e);
+      currentMin += duration;
     }
   }
 
   container.innerHTML = '';
 
-  // Build slots: every `duration` minutes from startH to (endH - duration/60)
-  const slots = [];
-  let currentMin = schedule.startH * 60; // minutes from midnight
-  const lastStart = schedule.endH * 60 - duration; // last slot that fits before closing
-
-  while (currentMin <= lastStart) {
-    const h   = Math.floor(currentMin / 60);
-    const m   = currentMin % 60;
-    const ampm = h < 12 ? 'AM' : 'PM';
-    const h12  = h > 12 ? h - 12 : (h === 0 ? 12 : h);
-    const slotLabel = `${h12}:${m.toString().padStart(2, '0')} ${ampm}`;
-    
-    if (!bookedTimes.includes(slotLabel)) {
-      slots.push({ label: slotLabel, totalMin: currentMin });
-    }
-    currentMin += duration;
-  }
-
-  if (slots.length === 0) {
-    container.innerHTML = '<p style="color:#555; font-size:0.85rem;">No hay horarios disponibles.</p>';
+  if (slotsToRender.length === 0) {
+    container.innerHTML = '<p style="color:#888; font-size:0.85rem;">No hay horarios configurados para este día.</p>';
     return;
   }
 
-  slots.forEach(({ label: slotLabel, totalMin }) => {
+  slotsToRender.forEach(({ label: slotLabel, totalMin, available }) => {
     const chip = document.createElement('div');
-    chip.className = 'time-chip';
+    chip.className = `time-chip ${available ? '' : 'disabled is-busy'}`;
     chip.innerText = slotLabel;
-    chip.addEventListener('click', () => {
-      document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('selected'));
-      chip.classList.add('selected');
-      bookingData.time = slotLabel;
-      setNextBtn(true);
-    });
+    
+    if (available) {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('selected'));
+        chip.classList.add('selected');
+        bookingData.time = slotLabel;
+        setNextBtn(true);
+      });
+    } else {
+      chip.setAttribute('title', 'Horario ocupado en Google Calendar');
+    }
     container.appendChild(chip);
   });
 }
@@ -1016,16 +1060,13 @@ function setNextBtn(enabled, label = 'Siguiente') {
 }
 
 function updateSummary() {
-  const duration = bookingData.duration || 30;
-  const durationLabel = duration === 60 ? '1 hora' : `${duration} min`;
-
   document.getElementById('summary-service').innerText = bookingData.serviceName || '—';
   document.getElementById('summary-barber').innerText  = bookingData.barberName  || '—';
   document.getElementById('summary-date').innerText    = bookingData.date        || '—';
 
   const timeEl = document.getElementById('summary-time');
   if (bookingData.time) {
-    timeEl.innerText = `${bookingData.time} (${durationLabel})`;
+    timeEl.innerText = `${bookingData.time} (1 hora)`;
   } else {
     timeEl.innerText = '—';
   }
@@ -1041,7 +1082,7 @@ async function confirmBooking() {
       await addDoc(collection(db, "citas"), {
         service: bookingData.service,
         serviceName: bookingData.serviceName,
-        duration: bookingData.duration,
+        duration: 60, // Estándar universal: 1 hora
         barber: bookingData.barber,
         barberName: bookingData.barberName,
         date: bookingData.date,
@@ -1051,10 +1092,6 @@ async function confirmBooking() {
         createdAt: new Date()
       });
     }
-    
-    // Redirect to WhatsApp - ELIMINADO: ahora el backend enviará el mensaje
-    // const message = \`Hola, quiero confirmar mi cita en Furtivo:%0A*Servicio:* \${bookingData.serviceName}%0A*Barbero:* \${bookingData.barberName}%0A*Fecha:* \${bookingData.date}%0A*Hora:* \${bookingData.time}%0A*Nombre:* \${bookingData.name}%0A*Tel:* \${bookingData.phone}\`;
-    // window.open(\`https://wa.me/573000000000?text=\${message}\`, '_blank');
     
     goToStep('success');
   } catch (e) {

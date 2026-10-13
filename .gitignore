@@ -8,13 +8,17 @@ Thumbs.db
 # Archivos de Firebase
 .firebase/
 firebase-debug.log*
+*.log
+backend/*.log
 
-# Secretos y credenciales backend
+# Secretos y credenciales backend y functions
 backend/.env
 backend/*service-account*.json
 backend/.wwebjs_*
 backend/.wwebjs_auth/
 backend/.wwebjs_cache/
+functions/*service-account*.json
+functions/.env*
 
 # Temporales y prompts locales
 user_prompts.txt
