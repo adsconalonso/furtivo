@@ -752,39 +752,57 @@ const bookingModalHTML = `
             <div class="time-chips-container" id="timeChipsContainer"></div>
           </div>
 
-          <!-- PASO 4: CONFIRMACIÓN -->
+          <!-- PASO 4: CONFIRMACIÓN Y DATOS DE CONTACTO (ALTA VISIBILIDAD) -->
           <div class="wizard-step" id="step-4">
-            <p class="wizard-step__title">Confirma tu reserva</p>
+            <p class="wizard-step__title" style="color: #C9A96E; font-size: 0.8rem; letter-spacing: 0.08em; margin-bottom: 0.35rem;">Paso final</p>
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #fff; margin-bottom: 0.35rem; font-weight: 600;">Confirma tus Datos</h3>
+            <p style="font-size: 0.84rem; color: #aaa; margin-bottom: 1.15rem; line-height: 1.4;">
+              Ingresa tu nombre y celular para enviarte la confirmación oficial y recordatorio por WhatsApp.
+            </p>
 
-            <div class="booking-receipt">
-              <p class="receipt-header">Resumen de Cita</p>
-              <div class="receipt-row">
-                <span class="receipt-label">Servicio</span>
-                <span class="receipt-value" id="summary-service">—</span>
+            <!-- Card de Datos de Contacto - Máxima Claridad y Accesibilidad -->
+            <div class="contact-inputs-card">
+              <div class="form-group-premium">
+                <label for="user-name" class="premium-label">
+                  <span class="label-icon">👤</span> Nombre completo <span class="required-star">*</span>
+                </label>
+                <input type="text" id="user-name" class="premium-input-v2" placeholder="Ej: Alonso Herrera" autocomplete="name" required>
               </div>
-              <div class="receipt-row">
-                <span class="receipt-label">Profesional</span>
-                <span class="receipt-value" id="summary-barber">—</span>
-              </div>
-              <div class="receipt-row">
-                <span class="receipt-label">Fecha</span>
-                <span class="receipt-value" id="summary-date">—</span>
-              </div>
-              <div class="receipt-row">
-                <span class="receipt-label">Hora</span>
-                <span class="receipt-value" id="summary-time">—</span>
+
+              <div class="form-group-premium">
+                <label for="user-phone" class="premium-label">
+                  <span class="label-icon">📱</span> Celular para WhatsApp <span class="required-star">*</span>
+                </label>
+                <div class="phone-input-wrapper">
+                  <span class="country-prefix">🇨🇴 +57</span>
+                  <input type="tel" id="user-phone" class="premium-input-v2 phone-input" placeholder="312 884 6263" autocomplete="tel" required>
+                </div>
+                <p class="input-helper-text">🔒 Te enviaremos el mensaje de confirmación y recordatorio a este número.</p>
               </div>
             </div>
 
-            <div style="display: grid; gap: 1rem;">
-              <div>
-                <label for="user-name" class="wizard-step__title" style="margin-bottom: 0.5rem; display: block;">Tu nombre</label>
-                <input type="text" id="user-name" class="premium-input" placeholder="Ej: Juan Pérez">
+            <!-- Resumen de Cita Compacto -->
+            <div class="booking-receipt-compact">
+              <div class="receipt-header-compact">
+                <span>📋 Resumen de tu reserva</span>
               </div>
-              <div>
-                <label for="user-phone" class="wizard-step__title" style="margin-bottom: 0.5rem; display: block;">Tu celular</label>
-                <input type="tel" id="user-phone" class="premium-input" placeholder="Ej: 300 123 4567">
-                <p style="font-size: 0.75rem; color: #444; margin-top: 0.4rem;">Recibirás la confirmación por WhatsApp.</p>
+              <div class="receipt-grid-compact">
+                <div class="receipt-item-compact">
+                  <span class="label">Servicio</span>
+                  <span class="value" id="summary-service">—</span>
+                </div>
+                <div class="receipt-item-compact">
+                  <span class="label">Barbero</span>
+                  <span class="value" id="summary-barber">—</span>
+                </div>
+                <div class="receipt-item-compact">
+                  <span class="label">Fecha</span>
+                  <span class="value" id="summary-date">—</span>
+                </div>
+                <div class="receipt-item-compact">
+                  <span class="label">Hora</span>
+                  <span class="value" id="summary-time">—</span>
+                </div>
               </div>
             </div>
           </div>
@@ -887,45 +905,78 @@ function setupWizardLogic() {
     });
   });
 
-  // ── Step 3: Date chips ────────────────────────────────────────
+  // ── Step 3: Date chips con filtrado de hora en Colombia (GMT-5) ──
   const dateContainer = document.getElementById('dateChipsContainer');
   const timeContainer = document.getElementById('timeChipsContainer');
   const timeLabel     = document.getElementById('time-label');
-  const today         = new Date();
-  const DAY_NAMES     = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
-  const MON_NAMES     = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
 
-  for (let i = 0; i < 14; i++) {
-    const d = new Date(today);
-    d.setDate(d.getDate() + i);
-    const chip = document.createElement('div');
-    chip.className = 'date-chip';
-    chip.dataset.dateStr = `${DAY_NAMES[d.getDay()]} ${d.getDate()} ${MON_NAMES[d.getMonth()]}`;
-    chip.innerHTML = `
-      <span class="date-chip-day">${DAY_NAMES[d.getDay()]}</span>
-      <span class="date-chip-num">${d.getDate()}</span>
-      <span class="date-chip-month">${MON_NAMES[d.getMonth()]}</span>
-    `;
-    chip.addEventListener('click', async () => {
-      document.querySelectorAll('.date-chip').forEach(c => c.classList.remove('selected'));
-      chip.classList.add('selected');
-      bookingData.date = chip.dataset.dateStr;
-      bookingData.time = null;
-      await renderTimeChips(timeContainer, timeLabel);
-      setNextBtn(false);
-    });
-    dateContainer.appendChild(chip);
+  // Hora exacta en Colombia
+  const colNow = getColombiaNowDate();
+  const currentColombiaMin = colNow.getHours() * 60 + colNow.getMinutes();
+  const todayIsClosed = currentColombiaMin >= (18 * 60); // A las 6:00 PM culmina la jornada (cierra 7 PM)
+
+  const DAY_NAMES = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  const MON_NAMES = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+
+  if (dateContainer) {
+    dateContainer.innerHTML = '';
+
+    for (let i = 0; i < 14; i++) {
+      const d = new Date(colNow);
+      d.setDate(d.getDate() + i);
+      const chip = document.createElement('div');
+      const isToday = (i === 0);
+      const isClosedToday = isToday && todayIsClosed;
+
+      chip.className = `date-chip ${isClosedToday ? 'date-chip--closed' : ''}`;
+      chip.dataset.dateStr = `${DAY_NAMES[d.getDay()]} ${d.getDate()} ${MON_NAMES[d.getMonth()]}`;
+
+      const dayLabel = isToday ? 'Hoy' : DAY_NAMES[d.getDay()];
+      const subLabel = isClosedToday ? 'Cerrado' : MON_NAMES[d.getMonth()];
+
+      chip.innerHTML = `
+        <span class="date-chip-day">${dayLabel}</span>
+        <span class="date-chip-num">${d.getDate()}</span>
+        <span class="date-chip-month">${subLabel}</span>
+      `;
+
+      if (isClosedToday) {
+        chip.setAttribute('title', 'La jornada de hoy ya culminó. Por favor selecciona otro día.');
+      } else {
+        chip.addEventListener('click', async () => {
+          document.querySelectorAll('.date-chip').forEach(c => c.classList.remove('selected'));
+          chip.classList.add('selected');
+          bookingData.date = chip.dataset.dateStr;
+          bookingData.time = null;
+          await renderTimeChips(timeContainer, timeLabel);
+          setNextBtn(false);
+        });
+      }
+
+      dateContainer.appendChild(chip);
+    }
   }
 
-  // ── Step 4: Name + Phone ──────────────────────────────────────
+  // ── Step 4: Name + Phone con validación en tiempo real ──
   const nameInput  = document.getElementById('user-name');
   const phoneInput = document.getElementById('user-phone');
+
   function checkStep4() {
-    const ok = nameInput.value.trim().length > 2 && phoneInput.value.trim().length > 6;
-    setNextBtn(ok, 'Confirmar Cita');
+    const n = nameInput ? nameInput.value.trim() : '';
+    const p = phoneInput ? phoneInput.value.trim().replace(/\D/g, '') : '';
+    bookingData.name = n;
+    bookingData.phone = p;
+
+    const ok = n.length >= 3 && p.length >= 10;
+    if (ok) {
+      setNextBtn(true, 'Confirmar Cita ✂️');
+    } else {
+      setNextBtn(false, 'Ingresa tus datos');
+    }
   }
-  nameInput.addEventListener('input',  (e) => { bookingData.name  = e.target.value; checkStep4(); });
-  phoneInput.addEventListener('input', (e) => { bookingData.phone = e.target.value; checkStep4(); });
+
+  if (nameInput)  nameInput.addEventListener('input', checkStep4);
+  if (phoneInput) phoneInput.addEventListener('input', checkStep4);
 
   // ── Navigation ────────────────────────────────────────────────
   document.getElementById('btn-next').addEventListener('click', () => {
@@ -1053,34 +1104,47 @@ async function renderTimeChips(container, labelEl) {
   });
 }
 
+function getColombiaNowDate() {
+  const now = new Date();
+  const utcMs = now.getTime() + (now.getTimezoneOffset() * 60000);
+  return new Date(utcMs - (5 * 60 * 60 * 1000));
+}
+
 function setNextBtn(enabled, label = 'Siguiente') {
   const btn = document.getElementById('btn-next');
   if (!btn) return;
   btn.disabled = !enabled;
-  btn.style.opacity = enabled ? '1' : '0.4';
+  btn.style.opacity = enabled ? '1' : '0.45';
   btn.style.pointerEvents = enabled ? 'auto' : 'none';
   btn.innerText = label;
 }
 
 function updateSummary() {
-  document.getElementById('summary-service').innerText = bookingData.serviceName || '—';
-  document.getElementById('summary-barber').innerText  = bookingData.barberName  || '—';
-  document.getElementById('summary-date').innerText    = bookingData.date        || '—';
+  const sServ = document.getElementById('summary-service');
+  const sBarb = document.getElementById('summary-barber');
+  const sDate = document.getElementById('summary-date');
+  const sTime = document.getElementById('summary-time');
 
-  const timeEl = document.getElementById('summary-time');
-  if (bookingData.time) {
-    timeEl.innerText = `${bookingData.time} (1 hora)`;
-  } else {
-    timeEl.innerText = '—';
+  if (sServ) sServ.innerText = bookingData.serviceName || '—';
+  if (sBarb) sBarb.innerText = bookingData.barberName  || '—';
+  if (sDate) sDate.innerText = bookingData.date        || '—';
+  if (sTime) {
+    sTime.innerText = bookingData.time ? `${bookingData.time} (1h)` : '—';
   }
 }
 
 async function confirmBooking() {
   const btn = document.getElementById('btn-next');
-  btn.innerText = 'Procesando...';
+  btn.innerText = 'Procesando tu cita...';
   btn.disabled  = true;
 
   try {
+    // Limpiar y formatear celular para asegurar Colombia +57
+    let cleanPhone = String(bookingData.phone || '').replace(/\D/g, '');
+    if (cleanPhone.length === 10 && cleanPhone.startsWith('3')) {
+      cleanPhone = '57' + cleanPhone;
+    }
+
     if (db && addDoc) {
       await addDoc(collection(db, "citas"), {
         service: bookingData.service,
@@ -1091,8 +1155,8 @@ async function confirmBooking() {
         date: bookingData.date,
         time: bookingData.time,
         name: bookingData.name,
-        phone: bookingData.phone,
-        createdAt: new Date()
+        phone: cleanPhone,
+        createdAt: new Date().toISOString()
       });
     }
     
@@ -1100,7 +1164,7 @@ async function confirmBooking() {
   } catch (e) {
     console.error("Error al guardar la cita: ", e);
     alert("Hubo un error al procesar tu cita. Por favor intenta de nuevo.");
-    btn.innerText = 'Confirmar Cita';
+    btn.innerText = 'Confirmar Cita ✂️';
     btn.disabled = false;
   }
 }
@@ -1114,14 +1178,15 @@ function goToStep(stepNum) {
   if (stepNum === 'success') {
     document.getElementById('step-success').classList.add('active');
     if (timeline) timeline.style.display = 'none';
-    if (footer) footer.innerHTML = `<button class="btn btn--primary" id="btn-finish" style="flex:1;">Cerrar</button>`;
+    if (footer) footer.innerHTML = `<button class="btn btn--primary" id="btn-finish" style="flex:1;">Finalizar</button>`;
     const bf = document.getElementById('btn-finish');
     if (bf) bf.addEventListener('click', closeBookingModal);
     return;
   }
 
   currentStep = stepNum;
-  document.getElementById(`step-${stepNum}`).classList.add('active');
+  const targetStep = document.getElementById(`step-${stepNum}`);
+  if (targetStep) targetStep.classList.add('active');
   if (timeline) timeline.style.display = 'flex';
 
   // Timeline visuals
@@ -1137,21 +1202,23 @@ function goToStep(stepNum) {
   // Back button
   if (btnPrev) btnPrev.style.display = stepNum > 1 ? 'flex' : 'none';
 
-  // Re-render time chips when entering step 3 — ALWAYS reset date+time so user must pick fresh
+  // Paso 3: Horarios
   if (stepNum === 3) {
-    // Reset previous selections so user MUST select date AND time
     bookingData.date = null;
     bookingData.time = null;
-    // Clear any previously selected chips
     document.querySelectorAll('.date-chip').forEach(c => c.classList.remove('selected'));
     document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('selected'));
-    // Reset time chips area
     const tc = document.getElementById('timeChipsContainer');
     const tl = document.getElementById('time-label');
     if (tl) tl.style.display = 'none';
     if (tc) tc.innerHTML = '';
-    // Button always starts disabled on step 3
     setNextBtn(false);
+
+    // Auto-seleccionar primer día hábil abierto (si hoy ya cerró, selecciona mañana)
+    const firstOpenChip = document.querySelector('.date-chip:not(.date-chip--closed)');
+    if (firstOpenChip) {
+      setTimeout(() => firstOpenChip.click(), 120);
+    }
   } else if (stepNum === 1) {
     setNextBtn(!!bookingData.service);
   } else if (stepNum === 2) {
@@ -1169,78 +1236,68 @@ function goToStep(stepNum) {
     updateSummary();
     const ni = document.getElementById('user-name');
     const pi = document.getElementById('user-phone');
-    const ok = ni && pi && ni.value.trim().length > 2 && pi.value.trim().length > 6;
-    setNextBtn(ok, 'Confirmar Cita');
+
+    // Scroll al inicio del formulario para máxima visibilidad
+    const scrollArea = document.querySelector('.booking-modal-scroll');
+    if (scrollArea) scrollArea.scrollTop = 0;
+
+    // Auto-enfoque al campo de nombre
+    setTimeout(() => {
+      if (ni && !ni.value) ni.focus();
+    }, 180);
+
+    const n = ni ? ni.value.trim() : '';
+    const p = pi ? pi.value.trim().replace(/\D/g, '') : '';
+    const ok = n.length >= 3 && p.length >= 10;
+    if (ok) {
+      setNextBtn(true, 'Confirmar Cita ✂️');
+    } else {
+      setNextBtn(false, 'Ingresa tus datos');
+    }
   }
 }
 
+// ─── Control Universal de Reservas (Redirección a reservar.html) ───
 window.openBookingModal = function(param1 = null, param2 = null) {
-  injectBookingModal();
-  const overlay = document.getElementById('bookingModalOverlay');
-  overlay.classList.add('active');
-  document.body.style.overflow = 'hidden';
+  const isReservarPage = window.location.pathname.endsWith('reservar.html') || window.location.pathname.endsWith('reservar');
 
+  // Si estamos en cualquier otra página de la web (index, barberos, servicios, etc.),
+  // redirigimos a la página canónica y perfecta reservar.html con los parámetros limpios.
+  if (!isReservarPage) {
+    let url = 'reservar.html';
+    const params = new URLSearchParams();
+
+    let preService = null;
+    let preBarber  = null;
+
+    if (typeof param1 === 'object' && param1 !== null) {
+      preService = param1.service || null;
+      preBarber  = param1.barber  || null;
+    } else if (typeof param1 === 'string' && ['fernando', 'juan', 'cualquiera'].includes(param1.toLowerCase())) {
+      preBarber  = param1.toLowerCase();
+      preService = param2;
+    } else {
+      preService = param1;
+      preBarber  = param2 ? param2.toLowerCase() : null;
+    }
+
+    if (preService) params.set('service', preService);
+    if (preBarber)  params.set('barber', preBarber);
+
+    const qs = params.toString();
+    window.location.href = qs ? `${url}?${qs}` : url;
+    return;
+  }
+
+  // Si ya estamos en reservar.html, reiniciamos el wizard al paso 1
   currentStep = 1;
   bookingData.service = bookingData.serviceName = bookingData.duration = null;
   bookingData.barber  = bookingData.barberName  = null;
   bookingData.date    = bookingData.time = null;
   bookingData.name    = bookingData.phone = null;
-
-  let preselectedService = null;
-  let preselectedBarber  = null;
-
-  if (typeof param1 === 'object' && param1 !== null) {
-    preselectedService = param1.service || null;
-    preselectedBarber  = param1.barber  || null;
-  } else if (typeof param1 === 'string' && ['fernando', 'juan', 'cualquiera'].includes(param1.toLowerCase())) {
-    preselectedBarber  = param1.toLowerCase();
-    preselectedService = param2;
-  } else {
-    preselectedService = param1;
-    preselectedBarber  = param2 ? param2.toLowerCase() : null;
-  }
-
-  // Actualizar título del modal si se especificó barbero
-  const modalTitle = document.querySelector('.booking-modal-title');
-  if (modalTitle) {
-    if (preselectedBarber === 'fernando') {
-      modalTitle.textContent = 'Reserva con Fernando Carmona';
-    } else if (preselectedBarber === 'juan') {
-      modalTitle.textContent = 'Reserva con Juan Quintero';
-    } else {
-      modalTitle.textContent = 'Reserva tu lugar';
-    }
-  }
-
-  // Preseleccionar barbero
-  if (preselectedBarber) {
-    const barberCard = document.querySelector(`.barber-card-premium[data-barber="${preselectedBarber}"]`);
-    if (barberCard) {
-      document.querySelectorAll('.barber-card-premium').forEach(c => c.classList.remove('selected'));
-      barberCard.classList.add('selected');
-      bookingData.barber = preselectedBarber;
-      const h4 = barberCard.querySelector('h4');
-      bookingData.barberName = h4 ? h4.innerText : (preselectedBarber === 'fernando' ? 'Fernando Carmona' : 'Juan Quintero');
-    }
-  } else {
-    document.querySelectorAll('.barber-card-premium').forEach(c => c.classList.remove('selected'));
-  }
-
   goToStep(1);
-
-  if (preselectedService) {
-    const card = document.querySelector(`.service-card[data-service="${preselectedService}"]`);
-    if (card) {
-      card.click();
-      setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'center' }), 60);
-    }
-  }
 };
 
 window.closeBookingModal = function() {
-  const overlay = document.getElementById('bookingModalOverlay');
-  if (overlay) {
-    overlay.classList.remove('active');
-    document.body.style.overflow = '';
-  }
+  window.location.href = 'index.html';
 };

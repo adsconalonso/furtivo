@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="styles.css?v=20261013-1h">
+  <link rel="stylesheet" href="styles.css?v=20261018-ux">
 
   <!-- Favicon (inline SVG) -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✂️</text></svg>">
@@ -35,7 +35,7 @@
         <a href="servicios.html" class="navbar__link">Servicios</a>
         <a href="barberos.html" class="navbar__link">Barberos</a>
         <a href="club.html" class="navbar__link">Club Furtivo</a>
-        <a href="#" onclick="openBookingModal(); return false;" class="btn btn--primary btn--sm navbar__cta">Agendar Cita</a>
+        <a href="reservar.html" class="btn btn--primary btn--sm navbar__cta">Agendar Cita</a>
       </div>
 
       <button class="navbar__toggle" id="navToggle" aria-label="Abrir menú">
@@ -51,7 +51,7 @@
     <a href="servicios.html" class="mobile-menu__link">Servicios</a>
     <a href="barberos.html" class="mobile-menu__link">Barberos</a>
     <a href="club.html" class="mobile-menu__link">Club Furtivo</a>
-    <a href="#" onclick="openBookingModal(); return false;" class="btn btn--primary btn--lg">Agendar Cita</a>
+    <a href="reservar.html" class="btn btn--primary btn--lg">Agendar Cita</a>
   </div>
 
   <!-- ============================================================
@@ -69,7 +69,7 @@
         <h1 class="heading-xl hero__title">Tu estilo empieza con un buen corte.</h1>
         <p class="hero__description">Cortes, barba y cuidado personal en un espacio creado para verte bien, sentirte bien y salir mejor de como llegaste.</p>
         <div class="btn-group">
-          <a href="#" onclick="openBookingModal(); return false;" class="btn btn--primary btn--lg">Agendar mi cita</a>
+          <a href="reservar.html" class="btn btn--primary btn--lg">Agendar mi cita</a>
           <a href="servicios.html" class="btn btn--outline btn--lg">Ver servicios y precios</a>
         </div>
       </div>
@@ -103,7 +103,7 @@
             <li>Mascarilla</li>
             <li>Lavado</li>
           </ul>
-          <a href="#" onclick="openBookingModal('plata'); return false;" class="btn btn--outline" style="width:100%">Reservar Plata</a>
+          <a href="reservar.html?service=plata" class="btn btn--outline" style="width:100%">Reservar Plata</a>
           <p class="combo-card__description">Una experiencia sencilla para renovar tu imagen y seguir.</p>
         </div>
 
@@ -118,7 +118,7 @@
             <li>Vapor</li>
             <li>Lavado</li>
           </ul>
-          <a href="#" onclick="openBookingModal('oro'); return false;" class="btn btn--primary" style="width:100%">Reservar Oro</a>
+          <a href="reservar.html?service=oro" class="btn btn--primary" style="width:100%">Reservar Oro</a>
           <p class="combo-card__description">Para quienes quieren dedicarle un poco más de tiempo a su imagen.</p>
         </div>
 
@@ -135,7 +135,7 @@
             <li>Lavado final</li>
             <li>Limpieza facial</li>
           </ul>
-          <a href="#" onclick="openBookingModal('diamante'); return false;" class="btn btn--outline" style="width:100%">Reservar Diamante</a>
+          <a href="reservar.html?service=diamante" class="btn btn--outline" style="width:100%">Reservar Diamante</a>
           <p class="combo-card__description">La experiencia Furtivo completa.</p>
         </div>
       </div>
@@ -391,7 +391,7 @@
       </div>
 
       <div style="text-align: center; margin-top: var(--space-lg);">
-        <a href="#" onclick="openBookingModal(); return false;" class="btn btn--primary btn--lg reveal">Quiero mi cambio</a>
+        <a href="reservar.html" class="btn btn--primary btn--lg reveal">Quiero mi cambio</a>
       </div>
     </div>
   </section>
@@ -439,7 +439,7 @@
             <h3 class="barber-card__name">Juan Quintero</h3>
             <p class="barber-card__role">Senior Barber • <span style="color:var(--accent); font-weight:600;">10 años exp.</span></p>
             <p class="barber-card__bio">Experiencia perfeccionando la técnica. Excelencia comprobada en cada corte clásico y estructurado.</p>
-            <a href="#" onclick="openBookingModal('juan'); return false;" class="btn btn--ghost" style="margin-top: 0.75rem;">Reservar con Juan →</a>
+            <a href="reservar.html?barber=juan" class="btn btn--ghost" style="margin-top: 0.75rem;">Reservar con Juan →</a>
           </div>
         </div>
 
@@ -451,7 +451,7 @@
             <h3 class="barber-card__name">Fernando Carmona</h3>
             <p class="barber-card__role">Senior Barber • <span style="color:var(--accent); font-weight:600;">17 años exp.</span></p>
             <p class="barber-card__bio">Especialista en atención al detalle y acabados premium. Tu experiencia en la silla es su máxima prioridad.</p>
-            <a href="#" onclick="openBookingModal('fernando'); return false;" class="btn btn--ghost" style="margin-top: 0.75rem;">Reservar con Fernando →</a>
+            <a href="reservar.html?barber=fernando" class="btn btn--ghost" style="margin-top: 0.75rem;">Reservar con Fernando →</a>
           </div>
         </div>
       </div>
@@ -911,7 +911,7 @@
           <h2 class="heading-lg">Una barbería para quienes valoran cómo se ven.</h2>
           <p>Nos gusta la buena barbería. La técnica, los detalles, una buena conversación y ese momento en el que te miras al espejo después del corte y sabes que quedó como debía quedar.</p>
           <p>Furtivo nace para convertir algo cotidiano en una experiencia a la que quieras regresar.</p>
-          <a href="#" onclick="openBookingModal(); return false;" class="btn btn--primary" style="align-self: flex-start; margin-top: 0.5rem;">Reservar mi lugar</a>
+          <a href="reservar.html" class="btn btn--primary" style="align-self: flex-start; margin-top: 0.5rem;">Reservar mi lugar</a>
         </div>
         <div class="about-image reveal-right">
           <img src="assets/images/about.jpg?v=STATION" alt="Detalle del interior de Furtivo Barbería" loading="lazy">
@@ -929,7 +929,7 @@
       <h2 class="cta-banner__title reveal">Tu próximo corte puede ser cualquiera.<br>O puede ser <span style="color:var(--accent)">Furtivo.</span></h2>
       <p class="cta-banner__text reveal">Elige tu servicio, reserva tu horario y nosotros nos encargamos del resto.</p>
       <div class="reveal" style="display:flex; justify-content:center;">
-        <a href="#" onclick="openBookingModal(); return false;" class="btn btn--primary btn--lg">Agendar mi cita ahora</a>
+        <a href="reservar.html" class="btn btn--primary btn--lg">Agendar mi cita ahora</a>
       </div>
       
       <!-- Redes Sociales Destacadas -->
@@ -1033,7 +1033,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="script.js?v=20261013-1h"></script>
+  <script src="script.js?v=20261018-ux"></script>
 
   <!-- WhatsApp Floating Button -->
   <a href="https://wa.me/573001234567" target="_blank" class="floating-wa" aria-label="Reservar por WhatsApp">

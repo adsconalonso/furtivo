@@ -34,7 +34,13 @@ const BARBER_SCHEDULES = {
 // ==========================================
 
 function parseDateStrToDay(dateStr) {
-  const partes = (dateStr || "").trim().split(" ");
+  const clean = (dateStr || "").trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(clean)) {
+    const [y, m, d] = clean.split("-").map(Number);
+    return { year: y, monthIndex: m - 1, diaNum: d };
+  }
+
+  const partes = clean.split(" ");
   let diaNum = 1;
   let mesStr = "Ene";
   if (partes.length >= 3) {
@@ -84,7 +90,14 @@ function parseEventToColombiaMinutes(dateTimeStr, year, monthIndex, diaNum) {
   return Math.max(0, Math.min(24 * 60, min));
 }
 
-function calculateAllSlots(schedule, busyIntervals, slotDurationMinutes = 60) {
+function getColombiaNow() {
+  const now = new Date();
+  // Colombia siempre está en UTC-5 (sin cambio de horario de verano)
+  const utcMs = now.getTime() + (now.getTimezoneOffset() * 60000);
+  return new Date(utcMs - (5 * 60 * 60 * 1000));
+}
+
+function calculateAllSlots(schedule, busyIntervals, slotDurationMinutes = 60, currentColombiaMin = -1) {
   const allSlots = [];
   let currentMin = schedule.startH * 60;
   const lastStart = schedule.endH * 60 - slotDurationMinutes;
@@ -93,9 +106,13 @@ function calculateAllSlots(schedule, busyIntervals, slotDurationMinutes = 60) {
     const slotStartMin = currentMin;
     const slotEndMin = currentMin + slotDurationMinutes;
 
+    // Si la consulta es para el día de hoy en Colombia, descartar turnos pasados
+    // o con menos de 30 minutos de anticipación mínima de cortesía.
+    const isPastTime = currentColombiaMin >= 0 && slotStartMin < (currentColombiaMin + 30);
+
     // Colisión de intervalo: [slotStart, slotEnd] se solapa con [busyStart, busyEnd]
     // si slotStart < busyEnd && slotEnd > busyStart
-    const conflict = busyIntervals.find((b) => {
+    const conflict = isPastTime ? { summary: "Horario ya transcurrido" } : busyIntervals.find((b) => {
       return slotStartMin < b.endMin && slotEndMin > b.startMin;
     });
 
@@ -145,6 +162,16 @@ exports.getDisponibilidad = onRequest(
       }
 
       const { year, monthIndex, diaNum } = parseDateStrToDay(dateStr);
+      const colombiaNow = getColombiaNow();
+      const isTodayInColombia = (
+        colombiaNow.getFullYear() === year &&
+        colombiaNow.getMonth() === monthIndex &&
+        colombiaNow.getDate() === diaNum
+      );
+      const currentColombiaMin = isTodayInColombia
+        ? (colombiaNow.getHours() * 60 + colombiaNow.getMinutes())
+        : -1;
+
       const pad = (n) => String(n).padStart(2, "0");
       const timeMin = `${year}-${pad(monthIndex + 1)}-${pad(diaNum)}T00:00:00-05:00`;
       const timeMax = `${year}-${pad(monthIndex + 1)}-${pad(diaNum)}T23:59:59-05:00`;
@@ -242,13 +269,15 @@ exports.getDisponibilidad = onRequest(
       });
 
       // 3. Calcular todos los slots con su estado de disponibilidad (1 hora cada uno)
-      const allSlots = calculateAllSlots(schedule, busyIntervals, 60);
+      const allSlots = calculateAllSlots(schedule, busyIntervals, 60, currentColombiaMin);
       const availableSlots = allSlots.filter((s) => s.available).map((s) => ({ label: s.label, totalMin: s.totalMin }));
 
       return res.status(200).json({
         success: true,
         barber,
         date: dateStr,
+        isToday: isTodayInColombia,
+        allPast: isTodayInColombia && availableSlots.length === 0,
         busyIntervals,
         allSlots,
         availableSlots,
@@ -323,15 +352,25 @@ exports.onCitaCreada = onDocumentCreated(
       // ── Enviar Notificaciones de WhatsApp (Meta Cloud API) ──
       const barberoNombre = cita.barberName || BARBER_SCHEDULES[barberKey]?.name || barberKey;
       const servicioNombre = cita.serviceName || "Corte de Cabello";
+      const adminPhone = process.env.ADMIN_PHONE || "573187511510";
 
-      const mensajeCliente = `💈 *¡Cita Confirmada en Furtivo Barbería!* 💈\n\nHola ${cita.name || ""}, tu cita ha sido agendada con éxito:\n\n✂️ *Servicio:* ${servicioNombre}\n👤 *Barbero:* ${barberoNombre}\n📅 *Fecha:* ${cita.date}\n⏰ *Hora:* ${cita.time}\n⏱️ *Duración:* 1 hora\n📍 *Ubicación:* Calle 10 # 5-23, Furtivo Barbería\n\n¡Te esperamos con la mejor atención y café de cortesía! ☕`;
+      const templateParams = [
+        cita.name || "Cliente",
+        servicioNombre,
+        barberoNombre,
+        cita.date || "",
+        cita.time || "",
+      ];
 
-      const adminPhone = process.env.ADMIN_PHONE || "573186777060";
       const mensajeAdmin = `🔔 *Nueva Cita Web en Furtivo*\n\n👤 *Cliente:* ${cita.name}\n📱 *Teléfono:* ${cita.phone}\n✂️ *Servicio:* ${servicioNombre}\n💈 *Barbero:* ${barberoNombre}\n📅 *Fecha:* ${cita.date}\n⏰ *Hora:* ${cita.time}\n⏱️ *Duración:* 1 hora`;
 
       try {
         await Promise.allSettled([
-          sendWhatsApp(cita.phone, mensajeCliente),
+          // 1. Envío de plantilla oficial aprobada al cliente (utilidad garantizada 24/7)
+          sendWhatsAppTemplate(cita.phone, "confirmacion", "es_CO", templateParams),
+          // 2. Envío de plantilla de confirmación al administrador para asegurar entrega
+          sendWhatsAppTemplate(adminPhone, "confirmacion", "es_CO", templateParams),
+          // 3. Envío de detalle ampliado al administrador por texto
           sendWhatsApp(adminPhone, mensajeAdmin),
         ]);
       } catch (waErr) {
@@ -349,7 +388,12 @@ exports.onCitaCreada = onDocumentCreated(
 // ==========================================
 // 3. ENVÍO DE MENSAJES WHATSAPP (META CLOUD API)
 // ==========================================
-async function sendWhatsApp(toPhone, messageText) {
+
+/**
+ * Envía una plantilla oficial de WhatsApp Cloud API preaprobada por Meta.
+ * Garantiza entrega inmediata 24/7 sin requerir que el cliente haya escrito antes.
+ */
+async function sendWhatsAppTemplate(toPhone, templateName, languageCode, bodyParams = []) {
   const token = process.env.WHATSAPP_TOKEN;
   const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
 
@@ -358,14 +402,78 @@ async function sendWhatsApp(toPhone, messageText) {
     return { skipped: true };
   }
 
-  // Limpiar y formatear número (ej. Colombia 57XXXXXXXXXX)
   let cleanPhone = String(toPhone || "").replace(/\D/g, "");
   if (cleanPhone.length === 10 && cleanPhone.startsWith("3")) {
     cleanPhone = "57" + cleanPhone;
   }
 
   if (!cleanPhone) {
-    logger.warn(`Número de teléfono inválido para WhatsApp: ${toPhone}`);
+    logger.warn(`Número de teléfono inválido para WhatsApp Template: ${toPhone}`);
+    return { error: "Número inválido" };
+  }
+
+  const url = `https://graph.facebook.com/v21.0/${phoneNumberId}/messages`;
+  const body = {
+    messaging_product: "whatsapp",
+    recipient_type: "individual",
+    to: cleanPhone,
+    type: "template",
+    template: {
+      name: templateName,
+      language: { code: languageCode },
+      components: [
+        {
+          type: "body",
+          parameters: bodyParams.map((val) => ({
+            type: "text",
+            text: String(val || ""),
+          })),
+        },
+      ],
+    },
+  };
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      logger.error(`❌ Error respuesta WhatsApp Template '${templateName}' (${res.status}):`, data);
+      return { success: false, data };
+    }
+
+    logger.info(`✅ Plantilla WhatsApp '${templateName}' enviada con éxito a ${cleanPhone} (ID: ${data.messages?.[0]?.id})`);
+    return { success: true, data };
+  } catch (err) {
+    logger.error(`❌ Error de conexión al enviar plantilla '${templateName}':`, err);
+    return { success: false, error: err.message };
+  }
+}
+
+/**
+ * Envío de mensaje de texto libre (requiere ventana de 24h activa)
+ */
+async function sendWhatsApp(toPhone, messageText) {
+  const token = process.env.WHATSAPP_TOKEN;
+  const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
+
+  if (!token || !phoneNumberId) {
+    return { skipped: true };
+  }
+
+  let cleanPhone = String(toPhone || "").replace(/\D/g, "");
+  if (cleanPhone.length === 10 && cleanPhone.startsWith("3")) {
+    cleanPhone = "57" + cleanPhone;
+  }
+
+  if (!cleanPhone) {
     return { error: "Número inválido" };
   }
 
@@ -393,14 +501,14 @@ async function sendWhatsApp(toPhone, messageText) {
 
     const data = await res.json();
     if (!res.ok) {
-      logger.error(`❌ Error respuesta WhatsApp Cloud API (${res.status}):`, data);
+      logger.warn(`⚠️ Aviso WhatsApp texto (${res.status}):`, data);
       return { success: false, data };
     }
 
-    logger.info(`✅ WhatsApp enviado con éxito a ${cleanPhone} (ID: ${data.messages?.[0]?.id})`);
+    logger.info(`✅ WhatsApp texto enviado con éxito a ${cleanPhone}`);
     return { success: true, data };
   } catch (err) {
-    logger.error("❌ Error de conexión al enviar WhatsApp:", err);
+    logger.warn("⚠️ Aviso de conexión al enviar WhatsApp texto:", err);
     return { success: false, error: err.message };
   }
 }

@@ -3086,24 +3086,189 @@ button {
   max-width: 60%;
 }
 
-/* ── Premium Inputs ── */
+/* ── Premium Inputs & Step 4 Contact Details ── */
 .premium-input {
   width: 100%;
   padding: 0.9rem 1rem;
   background: #171717;
-  border: 1.5px solid #222;
+  border: 1.5px solid #333;
   border-radius: 10px;
-  color: #e0e0e0;
+  color: #ffffff;
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: 1rem;
   transition: all 0.25s ease;
   box-sizing: border-box;
 }
-.premium-input::placeholder { color: #444; }
+.premium-input::placeholder { color: #888; }
 .premium-input:focus {
   outline: none;
   border-color: var(--accent);
-  background: rgba(201,169,110,0.03);
+  background: rgba(201,169,110,0.05);
+}
+
+/* ── Closed / Past Date Chip ── */
+.date-chip.date-chip--closed {
+  opacity: 0.35 !important;
+  cursor: not-allowed !important;
+  pointer-events: none;
+  filter: grayscale(1);
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+.date-chip.date-chip--closed .date-chip-month {
+  color: #e05555 !important;
+  font-weight: 700;
+  font-size: 0.65rem;
+}
+
+/* ── Contact Inputs Card (Alta Visibilidad) ── */
+.contact-inputs-card {
+  background: #171717;
+  border: 1.5px solid rgba(201, 169, 110, 0.35);
+  border-radius: 14px;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.form-group-premium {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.premium-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #FFFFFF !important;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  letter-spacing: 0.01em;
+}
+
+.premium-label .label-icon {
+  font-size: 1.05rem;
+}
+
+.premium-label .required-star {
+  color: #C9A96E;
+  font-weight: 700;
+}
+
+.phone-input-wrapper {
+  display: flex;
+  align-items: center;
+  background: #111111;
+  border: 1.5px solid #333333;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.phone-input-wrapper:focus-within {
+  border-color: #C9A96E;
+  box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.2);
+}
+
+.country-prefix {
+  padding: 0.85rem 0.9rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: #C9A96E;
+  font-size: 0.92rem;
+  font-weight: 700;
+  border-right: 1px solid #333333;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.premium-input-v2 {
+  width: 100%;
+  padding: 0.88rem 1rem;
+  background: #111111;
+  border: 1.5px solid #333333;
+  border-radius: 10px;
+  color: #FFFFFF;
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-size: 1rem; /* 16px para evitar auto-zoom molesto en iPhone */
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+.phone-input-wrapper .phone-input {
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  flex: 1;
+}
+
+.phone-input-wrapper .phone-input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.premium-input-v2::placeholder {
+  color: #888888 !important;
+  opacity: 1;
+}
+
+.premium-input-v2:focus {
+  outline: none;
+  border-color: #C9A96E;
+  box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.2);
+  background: #141414;
+}
+
+.input-helper-text {
+  font-size: 0.78rem;
+  color: #A0A0A0;
+  line-height: 1.35;
+  margin-top: 0.2rem;
+}
+
+/* ── Resumen Compacto de Cita ── */
+.booking-receipt-compact {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.receipt-header-compact {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #C9A96E;
+  margin-bottom: 0.6rem;
+}
+
+.receipt-grid-compact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1rem;
+}
+
+.receipt-item-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.receipt-item-compact .label {
+  font-size: 0.72rem;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.receipt-item-compact .value {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #FFFFFF;
 }
 
 /* ── Wizard Actions Footer ── */
