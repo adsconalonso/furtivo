@@ -728,7 +728,7 @@ const bookingModalHTML = `
                 <div class="barber-avatar"><img src="assets/images/barber-1.jpg?v=FINAL" alt="Juan Quintero"></div>
                 <div class="barber-info">
                   <h4>Juan Quintero</h4>
-                  <p>Disponible 10:00 AM – 7:00 PM</p>
+                  <p>Disponible 10:00 AM – 10:00 PM</p>
                 </div>
                 <div class="barber-radio"></div>
               </div>
@@ -736,7 +736,7 @@ const bookingModalHTML = `
                 <div class="barber-avatar"><img src="assets/images/barber-2.jpg?v=FINAL" alt="Fernando Carmona"></div>
                 <div class="barber-info">
                   <h4>Fernando Carmona</h4>
-                  <p>Disponible 1:00 PM – 7:00 PM</p>
+                  <p>Disponible 1:00 PM – 10:00 PM</p>
                 </div>
                 <div class="barber-radio"></div>
               </div>
@@ -834,8 +834,8 @@ const bookingModalHTML = `
 // ─── Booking Data & Config ─────────────────────────────────────
 
 const BARBER_SCHEDULES = {
-  juan:     { name: 'Juan Quintero',   startH: 10, endH: 19 },  // 10AM–7PM
-  fernando: { name: 'Fernando Carmona', startH: 13, endH: 19 }, // 1PM–7PM
+  juan:     { name: 'Juan Quintero',   startH: 10, endH: 22 },  // 10AM–10PM (última cita 9PM)
+  fernando: { name: 'Fernando Carmona', startH: 13, endH: 22 }, // 1PM–10PM (última cita 9PM)
 };
 
 // Duration in minutes per service (estándar universal: 60 minutos)
@@ -913,7 +913,7 @@ function setupWizardLogic() {
   // Hora exacta en Colombia
   const colNow = getColombiaNowDate();
   const currentColombiaMin = colNow.getHours() * 60 + colNow.getMinutes();
-  const todayIsClosed = currentColombiaMin >= (18 * 60); // A las 6:00 PM culmina la jornada (cierra 7 PM)
+  const todayIsClosed = currentColombiaMin >= (21 * 60); // A las 9:00 PM arranca el último turno (cierra 10:00 PM)
 
   const DAY_NAMES = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
   const MON_NAMES = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];

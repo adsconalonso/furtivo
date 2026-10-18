@@ -77,33 +77,15 @@ function getColombiaISO(dateStr, timeStr, durationMinutes = 60) {
 }
 
 // ==========================================
-// 3. ENVÍO A GOOGLE CALENDAR
+// 3. ENVÍO A GOOGLE CALENDAR (DELEGADO A CLOUD FUNCTIONS)
 // ==========================================
 
 async function scheduleInCalendar(cita) {
-  const barberKey = (cita.barber || '').toLowerCase().trim();
-  const calendarId = CALENDARS[barberKey];
-  if (!calendarId) {
-    throw new Error(`Barbero "${cita.barber}" no válido o ID de calendario no configurado.`);
-  }
-
-  const durationMinutes = cita.duration || 60;
-  const { startISO, endISO } = getColombiaISO(cita.date, cita.time, durationMinutes);
-
-  const event = {
-    summary: `Cita: ${cita.serviceName || cita.service || 'Servicio'} - ${cita.name || 'Cliente'}`,
-    description: `👤 Cliente: ${cita.name}\n📱 Teléfono: ${cita.phone}\n✂️ Servicio: ${cita.serviceName}\n💈 Barbero: ${cita.barberName || barberKey}\n⏱️ Duración: ${durationMinutes} min (1 hora)`,
-    start: { dateTime: startISO, timeZone: 'America/Bogota' },
-    end: { dateTime: endISO, timeZone: 'America/Bogota' },
-  };
-
-  const res = await calendar.events.insert({
-    calendarId: calendarId,
-    resource: event,
-  });
-
-  console.log(`📅 ✅ Evento insertado en Google Calendar (${res.data.id}) para ${cita.barberName || barberKey}`);
-  return res.data.id;
+  // NOTA CRÍTICA: La sincronización oficial con Google Calendar se realiza
+  // de forma centralizada y atómica en la Cloud Function 'onCitaCreada'.
+  // Para evitar eventos duplicados en Google Calendar, este método local no inserta.
+  console.log(`📅 [Aviso] Google Calendar gestionado centralmente por Cloud Function para cita de ${cita.name}.`);
+  return null;
 }
 
 // ==========================================

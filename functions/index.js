@@ -25,8 +25,8 @@ const CALENDARS = {
 
 // Horarios de atención de cada barbero
 const BARBER_SCHEDULES = {
-  juan:     { name: "Juan Quintero",   startH: 10, endH: 19 }, // 10:00 AM a 7:00 PM
-  fernando: { name: "Fernando Carmona", startH: 13, endH: 19 }, // 1:00 PM a 7:00 PM
+  juan:     { name: "Juan Quintero",   startH: 10, endH: 22 }, // 10:00 AM a 10:00 PM (última cita 9:00 PM)
+  fernando: { name: "Fernando Carmona", startH: 13, endH: 22 }, // 1:00 PM a 10:00 PM (última cita 9:00 PM)
 };
 
 // ==========================================
@@ -307,8 +307,8 @@ exports.onCitaCreada = onDocumentCreated(
     const cita = snap.data();
     const citaId = event.params.citaId;
 
-    if (cita.procesada) {
-      logger.info(`La cita ${citaId} ya fue procesada anteriormente.`);
+    if (cita.procesada || cita.calendarEventId) {
+      logger.info(`La cita ${citaId} ya fue procesada anteriormente (calendarEventId: ${cita.calendarEventId}).`);
       return null;
     }
 
