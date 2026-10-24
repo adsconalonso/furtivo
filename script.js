@@ -72,20 +72,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const navToggle = document.getElementById('navToggle');
   const mobileMenu = document.getElementById('mobileMenu');
 
-  navToggle.addEventListener('click', () => {
-    navToggle.classList.toggle('is-active');
-    mobileMenu.classList.toggle('is-active');
-    document.body.style.overflow = mobileMenu.classList.contains('is-active') ? 'hidden' : '';
-  });
-
-  // Close mobile menu on link click
-  document.querySelectorAll('.mobile-menu__link, .mobile-menu .btn').forEach(link => {
-    link.addEventListener('click', () => {
-      navToggle.classList.remove('is-active');
-      mobileMenu.classList.remove('is-active');
-      document.body.style.overflow = '';
+  if (navToggle && mobileMenu) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('is-active');
+      mobileMenu.classList.toggle('is-active');
+      document.body.style.overflow = mobileMenu.classList.contains('is-active') ? 'hidden' : '';
     });
-  });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-menu__link, .mobile-menu .btn').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('is-active');
+        mobileMenu.classList.remove('is-active');
+        document.body.style.overflow = '';
+      });
+    });
+  }
 
   // ── Smooth Scroll for Anchor Links ──
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -700,17 +702,9 @@ const bookingModalHTML = `
                 <h4>Barba con Ritual</h4>
                 <p>$30.000</p>
               </div>
-              <div class="service-card" data-service="corte_barba_ritual">
-                <h4>Corte + Barba Ritual</h4>
-                <p>$60.000</p>
-              </div>
               <div class="service-card" data-service="facial">
                 <h4>Limpieza Facial</h4>
                 <p>$25.000</p>
-              </div>
-              <div class="service-card" data-service="full_servicio">
-                <h4>Full Servicio</h4>
-                <p>$79.000</p>
               </div>
               <div class="service-card" data-service="plata">
                 <h4>Exp. Plata</h4>
@@ -852,8 +846,6 @@ const SERVICE_DURATIONS = {
   barba_ritual:       60,  // Barba con Ritual
   facial:             60,  // Limpieza Facial Profunda
   corte_barba:        60,  // Corte + Barba
-  corte_barba_ritual: 60,  // Corte + Barba con Ritual
-  full_servicio:      60,  // Full servicio Furtivo
   plata:              60,  // Exp. Plata
   oro:                60,  // Exp. Oro
   diamante:           60,  // Exp. Diamante

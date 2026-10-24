@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261024-v2">
+  <link rel="stylesheet" href="styles.css?v=20261024-v3">
   <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
 </head>
 <body>
@@ -19,8 +19,8 @@
     <div class="navbar__inner">
       <a href="index.html" class="navbar__logo"><img src="assets/images/furtivo-logo-oficial.png?v=FINAL" alt="Furtivo Barbería"></a>
       <div class="navbar__menu" id="navMenu">
-        <a href="experiencias.html" class="navbar__link">Experiencias</a>
         <a href="servicios.html" class="navbar__link" style="color:var(--accent);">Servicios</a>
+        <a href="experiencias.html" class="navbar__link">Experiencias</a>
         <a href="barberos.html" class="navbar__link">Barberos</a>
         <a href="club.html" class="navbar__link">Club Furtivo</a>
         <a href="reservar.html" class="btn btn--primary btn--sm navbar__cta">Agendar Cita</a>
@@ -32,8 +32,8 @@
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
+    <a href="servicios.html" class="mobile-menu__link" style="color:var(--accent);">Servicios</a>
     <a href="experiencias.html" class="mobile-menu__link">Experiencias</a>
-    <a href="servicios.html" class="mobile-menu__link">Servicios</a>
     <a href="barberos.html" class="mobile-menu__link">Barberos</a>
     <a href="club.html" class="mobile-menu__link">Club Furtivo</a>
     <a href="reservar.html" class="btn btn--primary btn--lg">Agendar Cita</a>
@@ -90,13 +90,6 @@
           <span class="service-item__price">$30.000</span>
         </div>
 
-        <div class="service-item reveal stagger-5" data-service-id="corte_barba_ritual" onclick="openBookingModal('corte_barba_ritual');" style="cursor: pointer;">
-          <div class="service-item__info">
-            <h3 class="service-item__name">Corte + Barba con Ritual</h3>
-            <p class="service-item__desc">Cabello y barba trabajados como una sola imagen, acompañados de toalla caliente, aceites esenciales y navaja.</p>
-          </div>
-          <span class="service-item__price">$60.000</span>
-        </div>
 
         <div class="service-item reveal stagger-6" data-service-id="facial" onclick="openBookingModal('facial');" style="cursor: pointer;">
           <div class="service-item__info">
@@ -130,13 +123,6 @@
           <span class="service-item__price">$60.000</span>
         </div>
 
-        <div class="service-item service-item--featured reveal stagger-10" data-service-id="full_servicio" onclick="openBookingModal('full_servicio');" style="cursor: pointer;">
-          <div class="service-item__info">
-            <h3 class="service-item__name">Full Servicio Furtivo</h3>
-            <p class="service-item__desc">Para el que no quiere escoger. Quiere salir completo: Corte de cabello maestro, barba con ritual, limpieza facial y tratamiento de acabado.</p>
-          </div>
-          <span class="service-item__price">$79.000</span>
-        </div>
       </div>
 
       <!-- BANNER DE AGENDAMIENTO -->
@@ -205,7 +191,6 @@
               <a href="servicios.html" class="footer__link">Barba</a>
               <a href="servicios.html" class="footer__link">Limpieza facial</a>
               <a href="experiencias.html" class="footer__link">Combos</a>
-              <a href="servicios.html" class="footer__link">Full servicio</a>
             </div>
           </div>
 
@@ -247,7 +232,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="script.js?v=20261024-v2"></script>
+  <script src="script.js?v=20261024-v3"></script>
 
   <!-- WhatsApp Floating Button -->
   <a href="https://wa.me/573137511510" target="_blank" class="floating-wa" aria-label="Reservar por WhatsApp">

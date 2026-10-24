@@ -65,6 +65,9 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 body {
@@ -73,6 +76,9 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  position: relative;
 }
 
 a {
@@ -193,10 +199,11 @@ button {
   width: 48px;
 }
 
-/* --- Section Spacing --- */
 .section {
   padding: var(--space-3xl) 0;
   position: relative;
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 .section--alt {
@@ -753,6 +760,7 @@ button {
   position: relative;
   max-width: 580px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .ba-slide {
@@ -2150,6 +2158,30 @@ button {
   :root {
     --nav-height: 64px;
     --space-3xl: 5rem;
+  }
+
+  /* Universal button & grid responsive fluidity */
+  .btn, .btn--lg {
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    word-break: normal;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-content {
+    overflow: hidden;
+  }
+
+  .cta-banner::before {
+    width: 100vw;
+    max-width: 360px;
+    height: 360px;
   }
 
   .navbar__menu {

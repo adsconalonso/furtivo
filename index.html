@@ -15,7 +15,7 @@
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
-  <link rel="stylesheet" href="styles.css?v=20261024-v2">
+  <link rel="stylesheet" href="styles.css?v=20261024-v3">
 
   <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
 </head>
@@ -29,8 +29,8 @@
       <a href="#" class="navbar__logo"><img src="assets/images/furtivo-logo-oficial.png?v=FINAL" alt="Furtivo Barbería"></a>
 
       <div class="navbar__menu" id="navMenu">
-        <a href="experiencias.html" class="navbar__link">Experiencias</a>
         <a href="servicios.html" class="navbar__link">Servicios</a>
+        <a href="experiencias.html" class="navbar__link">Experiencias</a>
         <a href="barberos.html" class="navbar__link">Barberos</a>
         <a href="club.html" class="navbar__link">Club Furtivo</a>
         <a href="reservar.html" class="btn btn--primary btn--sm navbar__cta">Agendar Cita</a>
@@ -45,8 +45,8 @@
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
-    <a href="experiencias.html" class="mobile-menu__link">Experiencias</a>
     <a href="servicios.html" class="mobile-menu__link">Servicios</a>
+    <a href="experiencias.html" class="mobile-menu__link">Experiencias</a>
     <a href="barberos.html" class="mobile-menu__link">Barberos</a>
     <a href="club.html" class="mobile-menu__link">Club Furtivo</a>
     <a href="reservar.html" class="btn btn--primary btn--lg">Agendar Cita</a>
@@ -68,7 +68,7 @@
         <p class="hero__description">Cortes, barba y cuidado personal en un espacio creado para verte bien, sentirte bien y salir mejor de como llegaste.</p>
         <div class="btn-group">
           <a href="reservar.html" class="btn btn--primary btn--lg">Agendar mi cita</a>
-          <a href="servicios.html" class="btn btn--outline btn--lg">Ver servicios y precios</a>
+          <a href="#servicios" class="btn btn--outline btn--lg">Ver servicios y precios</a>
         </div>
       </div>
     </div>
@@ -80,9 +80,67 @@
   </section>
 
   <!-- ============================================================
+       SERVICIOS Y PRECIOS
+       ============================================================ -->
+  <section class="section section--alt" id="servicios">
+    <div class="container">
+      <div class="section__header reveal">
+        <span class="section-label">Sin Sorpresas</span>
+        <h2 class="heading-lg">Sabes qué quieres. Sabes cuánto cuesta.</h2>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-item reveal stagger-1" data-service-id="corte">
+          <div class="service-item__info">
+            <h3 class="service-item__name">Corte de Cabello</h3>
+            <p class="service-item__desc">Un corte pensado según tu estilo y resultado que estás buscando.</p>
+          </div>
+          <span class="service-item__price">$30.000</span>
+        </div>
+
+        <div class="service-item reveal stagger-2" data-service-id="barba">
+          <div class="service-item__info">
+            <h3 class="service-item__name">Barba Express</h3>
+            <p class="service-item__desc">Perfilado y arreglo para recuperar forma, definición y presencia.</p>
+          </div>
+          <span class="service-item__price">$20.000</span>
+        </div>
+
+        <div class="service-item reveal stagger-3" data-service-id="corte_barba">
+          <div class="service-item__info">
+            <h3 class="service-item__name">Corte + Barba</h3>
+            <p class="service-item__desc">Todo lo necesario para renovar tu imagen en una sola visita.</p>
+          </div>
+          <span class="service-item__price">$50.000</span>
+        </div>
+
+        <div class="service-item reveal stagger-4" data-service-id="barba_ritual">
+          <div class="service-item__info">
+            <h3 class="service-item__name">Barba con Ritual</h3>
+            <p class="service-item__desc">Más tiempo, más detalle y una experiencia de cuidado completa para tu barba.</p>
+          </div>
+          <span class="service-item__price">$30.000</span>
+        </div>
+
+        <div class="service-item reveal stagger-5" data-service-id="facial">
+          <div class="service-item__info">
+            <h3 class="service-item__name">Limpieza Facial Profunda</h3>
+            <p class="service-item__desc">Una pausa para limpiar, cuidar y refrescar tu rostro.</p>
+          </div>
+          <span class="service-item__price">$25.000</span>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: var(--space-xl);">
+        <a href="servicios.html" class="btn btn--outline btn--lg reveal">Ver todos los servicios y FAQs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
        EXPERIENCIAS / COMBOS
        ============================================================ -->
-  <section class="section section--alt" id="experiencias">
+  <section class="section" id="experiencias">
     <div class="container">
       <div class="section__header reveal">
         <span class="section-label">Elige cómo quieres vivir Furtivo</span>
@@ -140,83 +198,6 @@
 
       <div style="text-align: center; margin-top: var(--space-xl);">
         <a href="experiencias.html" class="btn btn--outline btn--lg reveal">Conoce a detalle nuestras experiencias</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SERVICIOS Y PRECIOS
-       ============================================================ -->
-  <section class="section" id="servicios">
-    <div class="container">
-      <div class="section__header reveal">
-        <span class="section-label">Sin Sorpresas</span>
-        <h2 class="heading-lg">Sabes qué quieres. Sabes cuánto cuesta.</h2>
-      </div>
-
-      <div class="services-grid">
-        <div class="service-item reveal stagger-1" data-service-id="corte">
-          <div class="service-item__info">
-            <h3 class="service-item__name">Corte de Cabello</h3>
-            <p class="service-item__desc">Un corte pensado según tu estilo y resultado que estás buscando.</p>
-          </div>
-          <span class="service-item__price">$30.000</span>
-        </div>
-
-        <div class="service-item reveal stagger-2" data-service-id="barba">
-          <div class="service-item__info">
-            <h3 class="service-item__name">Barba Express</h3>
-            <p class="service-item__desc">Perfilado y arreglo para recuperar forma, definición y presencia.</p>
-          </div>
-          <span class="service-item__price">$20.000</span>
-        </div>
-
-        <div class="service-item reveal stagger-3" data-service-id="corte_barba">
-          <div class="service-item__info">
-            <h3 class="service-item__name">Corte + Barba</h3>
-            <p class="service-item__desc">Todo lo necesario para renovar tu imagen en una sola visita.</p>
-          </div>
-          <span class="service-item__price">$50.000</span>
-        </div>
-
-        <div class="service-item reveal stagger-4" data-service-id="barba_ritual">
-          <div class="service-item__info">
-            <h3 class="service-item__name">Barba con Ritual</h3>
-            <p class="service-item__desc">Más tiempo, más detalle y una experiencia de cuidado completa para tu barba.</p>
-          </div>
-          <span class="service-item__price">$30.000</span>
-        </div>
-
-        <div class="service-item reveal stagger-5" data-service-id="corte_barba_ritual">
-          <div class="service-item__info">
-            <h3 class="service-item__name">Corte + Barba con ritual</h3>
-            <p class="service-item__desc">Cabello y barba trabajados como una sola imagen.</p>
-          </div>
-          <span class="service-item__price">$60.000</span>
-        </div>
-
-        <div class="service-item reveal stagger-6" data-service-id="facial">
-          <div class="service-item__info">
-            <h3 class="service-item__name">Limpieza Facial Profunda</h3>
-            <p class="service-item__desc">Una pausa para limpiar, cuidar y refrescar tu rostro.</p>
-          </div>
-          <span class="service-item__price">$25.000</span>
-        </div>
-
-
-
-        <!-- Featured Full Service -->
-        <div class="service-item service-item--featured reveal stagger-10" data-service-id="full_servicio">
-          <div class="service-item__info">
-            <h3 class="service-item__name">Full servicio Furtivo</h3>
-            <p class="service-item__desc">Para el que no quiere escoger. Quiere salir completo.</p>
-          </div>
-          <span class="service-item__price">$79.000</span>
-        </div>
-      </div>
-
-      <div style="text-align: center; margin-top: var(--space-xl);">
-        <a href="servicios.html" class="btn btn--outline btn--lg reveal">Ver todos los servicios y FAQs</a>
       </div>
     </div>
   </section>
@@ -987,7 +968,6 @@
               <a href="servicios.html" class="footer__link">Barba</a>
               <a href="servicios.html" class="footer__link">Limpieza facial</a>
               <a href="experiencias.html" class="footer__link">Combos</a>
-              <a href="servicios.html" class="footer__link">Full servicio</a>
             </div>
           </div>
 
@@ -1034,7 +1014,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="script.js?v=20261024-v2"></script>
+  <script src="script.js?v=20261024-v3"></script>
 
   <!-- WhatsApp Floating Button -->
   <a href="https://wa.me/573137511510" target="_blank" class="floating-wa" aria-label="Reservar por WhatsApp">
