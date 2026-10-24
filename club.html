@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261018-ux">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✂️</text></svg>">
+  <link rel="stylesheet" href="styles.css?v=20261024-v2">
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
 </head>
 <body>
   <!-- NAVBAR -->
@@ -57,20 +57,20 @@
       <p class="body-lg reveal">Pensado para el hombre moderno que entiende que su imagen es una inversión constante, no un gasto ocasional. El Club Furtivo te garantiza lucir impecable los 365 días del año.</p>
     </div>
     <div class="container">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-        <div class="reveal" style="text-align: center; padding: 2rem; background: var(--bg-card); border-radius: var(--radius-md);">
-          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🗓️</div>
-          <h3 style="font-family: var(--font-heading); color: var(--text-light); margin-bottom: 1rem;">Agenda Prioritaria</h3>
+      <div class="club-perks-grid">
+        <div class="club-perk-card reveal">
+          <div class="club-perk-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="3" stroke="#C9A96E" stroke-width="1.5"/><path d="M3 9H21" stroke="#C9A96E" stroke-width="1.5"/><path d="M8 2V5" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round"/><path d="M16 2V5" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="14" r="1.2" fill="#C9A96E"/><circle cx="12" cy="14" r="1.2" fill="#C9A96E"/><circle cx="16" cy="14" r="1.2" fill="#C9A96E"/></svg></div>
+          <h3 style="font-family: var(--font-heading); color: var(--text-light); margin-bottom: 0.75rem;">Agenda Prioritaria</h3>
           <p style="color: var(--text-muted); font-size: 0.95rem;">Reserva con horas de anticipación. Siempre habrá un espacio para ti.</p>
         </div>
-        <div class="reveal" style="text-align: center; padding: 2rem; background: var(--bg-card); border-radius: var(--radius-md);">
-          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🥃</div>
-          <h3 style="font-family: var(--font-heading); color: var(--text-light); margin-bottom: 1rem;">Barra Libre</h3>
+        <div class="club-perk-card reveal">
+          <div class="club-perk-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 4H19L17.5 17C17.5 19.5 15.5 21 12 21C8.5 21 6.5 19.5 6.5 17L5 4Z" stroke="#C9A96E" stroke-width="1.5"/><path d="M5.5 8H18.5" stroke="#C9A96E" stroke-width="1.2" stroke-dasharray="2 2"/><path d="M9 13L11 15L15 11" stroke="#C9A96E" stroke-width="1.2"/></svg></div>
+          <h3 style="font-family: var(--font-heading); color: var(--text-light); margin-bottom: 0.75rem;">Barra Libre</h3>
           <p style="color: var(--text-muted); font-size: 0.95rem;">Whiskey, cerveza premium o café de especialidad en cada visita.</p>
         </div>
-        <div class="reveal" style="text-align: center; padding: 2rem; background: var(--bg-card); border-radius: var(--radius-md);">
-          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎁</div>
-          <h3 style="font-family: var(--font-heading); color: var(--text-light); margin-bottom: 1rem;">Productos Furtivo</h3>
+        <div class="club-perk-card reveal">
+          <div class="club-perk-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="8" width="18" height="13" rx="2" stroke="#C9A96E" stroke-width="1.5"/><path d="M12 8V21" stroke="#C9A96E" stroke-width="1.5"/><path d="M2 12H22" stroke="#C9A96E" stroke-width="1.5"/><path d="M12 8C10 5 7 5 7 7C7 8 12 8 12 8Z" stroke="#C9A96E" stroke-width="1.3"/><path d="M12 8C14 5 17 5 17 7C17 8 12 8 12 8Z" stroke="#C9A96E" stroke-width="1.3"/></svg></div>
+          <h3 style="font-family: var(--font-heading); color: var(--text-light); margin-bottom: 0.75rem;">Productos Furtivo</h3>
           <p style="color: var(--text-muted); font-size: 0.95rem;">15% de descuento en pomadas, aceites para barba y mercancía oficial.</p>
         </div>
       </div>
@@ -99,7 +99,7 @@
               <span style="color:var(--accent);">✓</span> Participación en Dinámicas
             </li>
           </ul>
-          <a href="https://wa.me/573001234567?text=Hola%20quiero%20adquirir%20la%20membresia%20Clasica" target="_blank" class="btn btn--outline" style="width:100%">Adquirir Membresía</a>
+          <a href="https://wa.me/573137511510?text=Hola%2C%20quiero%20adquirir%20la%20Membres%C3%ADa%20Cl%C3%A1sica%20de%20Club%20Furtivo" target="_blank" class="btn btn--outline" style="width:100%">Adquirir Membresía</a>
         </div>
 
         <!-- VIP -->
@@ -121,7 +121,7 @@
               <span style="color:var(--accent);">✓</span> Participación en Dinámicas
             </li>
           </ul>
-          <a href="https://wa.me/573001234567?text=Hola%20quiero%20adquirir%20la%20membresia%20VIP" target="_blank" class="btn btn--primary" style="width:100%">Adquirir Membresía</a>
+          <a href="https://wa.me/573137511510?text=Hola%2C%20quiero%20adquirir%20la%20Membres%C3%ADa%20VIP%20de%20Club%20Furtivo" target="_blank" class="btn btn--primary" style="width:100%">Adquirir Membresía</a>
         </div>
 
       </div>
@@ -135,7 +135,7 @@
         <h2 class="heading-lg" style="text-align: center; margin-bottom: 0.5rem;">Solicitud de Admisión</h2>
         <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Los cupos para el Club Furtivo son limitados para garantizar el mejor servicio.</p>
         
-        <form onsubmit="event.preventDefault(); const planName = this.querySelector('select').value === 'vip' ? 'VIP' : 'Clasica'; window.open('https://wa.me/573001234567?text=Hola%20quiero%20adquirir%20la%20membresia%20' + planName, '_blank');" style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <form onsubmit="event.preventDefault(); const planName = this.querySelector('select').value === 'vip' ? 'VIP' : 'Clasica'; window.open('https://wa.me/573137511510?text=Hola%2C%20quiero%20adquirir%20la%20Membres%C3%ADa%20' + planName + '%20de%20Club%20Furtivo', '_blank');" style="display: flex; flex-direction: column; gap: 1.5rem;">
           <div>
             <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light); font-size: 0.9rem;">Nombre Completo</label>
             <input type="text" required style="width: 100%; padding: 1rem; background: var(--bg-dark); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; color: white; font-family: var(--font-sans);">
@@ -197,7 +197,7 @@
             <h4 class="footer__heading">Contacto</h4>
             <div class="footer__info-item">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1C4.7 1 2 3.7 2 7c0 4.5 6 8 6 8s6-3.5 6-8c0-3.3-2.7-6-6-6zm0 8a2 2 0 110-4 2 2 0 010 4z" stroke="currentColor" stroke-width="1.2"/></svg>
-              <span>Dirección Furtivo</span>
+              <span><a href="https://maps.google.com/?q=Furtivo+Barberia+Medellin" target="_blank" rel="noopener noreferrer" style="color:inherit;">Medellín, Colombia</a></span>
             </div>
             <div class="footer__info-item">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4l6 4 6-4M2 4h12v8H2V4z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -205,22 +205,22 @@
             </div>
             <div class="footer__info-item">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14.5 11.2v1.8a1.2 1.2 0 01-1.3 1.2A11.9 11.9 0 011.8 2.8 1.2 1.2 0 013 1.5h1.8a1.2 1.2 0 011.2 1c.1.7.3 1.4.6 2a1.2 1.2 0 01-.3 1.3L5.2 6.9a9.6 9.6 0 004 4l1.1-1.1a1.2 1.2 0 011.3-.3c.6.3 1.3.5 2 .6a1.2 1.2 0 011 1.2z" stroke="currentColor" stroke-width="1.2"/></svg>
-              <span>+00 000 000 000</span>
+              <span><a href="tel:+573137511510" style="color:inherit;">+57 313 751 1510</a></span>
             </div>
           </div>
         </div>
       </div>
 
       <div class="footer__bottom">
-        <p class="footer__copy">© 2026 Furtivo Barbería Premium. Todos los derechos reservados. <br><span style="opacity: 0.7; font-size: 0.9em;">Desarrollado por <a href="https://www.adsconalonso.com" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">Alonso Herrera</a></span></p>
+        <p class="footer__copy">© 2026 Furtivo Barbería Premium. Todos los derechos reservados. <br><span style="opacity: 0.7; font-size: 0.9em;">Desarrollado por <a href="https://alonsoherrera.co" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">Alonso Herrera</a></span></p>
         <div class="footer__socials">
-          <a href="#" class="footer__social" aria-label="Instagram">
+          <a href="https://www.instagram.com/furtivo_barberia/" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="Instagram">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="1.5" width="13" height="13" rx="3.5" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.2"/><circle cx="12" cy="4" r="0.8" fill="currentColor"/></svg>
           </a>
-          <a href="#" class="footer__social" aria-label="TikTok">
+          <a href="https://www.tiktok.com/@furtivobarberia25" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="TikTok">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M11.5 1.5h-2v9a2.5 2.5 0 11-2-2.45V6a4.5 4.5 0 104 4.5V5.85a4.8 4.8 0 002.5.7V4.5a2.5 2.5 0 01-2.5-3z"/></svg>
           </a>
-          <a href="#" class="footer__social" aria-label="WhatsApp">
+          <a href="https://wa.me/573137511510" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="WhatsApp">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1A7 7 0 001.2 12.3L1 15l2.8-.7A7 7 0 108 1zm3.3 9.7c-.1.4-.8.7-1.1.8-.3 0-.6.1-1.9-.4s-3.1-2.2-3.2-2.3-.7-1-.7-1.8.5-1.3.6-1.5.3-.2.4-.2h.3c.1 0 .3 0 .4.3s.5 1.2.5 1.3 0 .2-.1.3-.1.2-.2.2l-.3.3c-.1.1-.2.2-.1.4s.5.8 1 1.3c.7.6 1.2.8 1.4.9s.3 0 .4-.1.6-.7.7-.9.3-.2.4-.1l1.3.6c.2.1.3.1.3.2s0 .7-.2 1z"/></svg>
           </a>
         </div>
@@ -230,10 +230,10 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="script.js?v=20261018-ux"></script>
+  <script src="script.js?v=20261024-v2"></script>
 
   <!-- WhatsApp Floating Button -->
-  <a href="https://wa.me/573001234567" target="_blank" class="floating-wa" aria-label="Reservar por WhatsApp">
+  <a href="https://wa.me/573137511510" target="_blank" class="floating-wa" aria-label="Reservar por WhatsApp">
     <svg viewBox="0 0 24 24">
       <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.665.592 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 1.856.001 3.598.723 4.907 2.034 1.31 1.311 2.031 3.054 2.03 4.908-.001 3.825-3.113 6.938-6.937 6.938z"/>
     </svg>

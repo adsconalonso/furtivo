@@ -360,6 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const testimonialsCounter = document.getElementById('testimonialsCounter');
 
   let currentFilter = 'all';
+  let testimonialsSwiper = null;
 
   function initTestimonialsSwiper() {
     if (typeof Swiper === 'undefined') return;
@@ -534,6 +535,8 @@ document.addEventListener('DOMContentLoaded', () => {
       loop: false,
       grabCursor: false,
       allowTouchMove: true,
+      noSwiping: true,
+      noSwipingSelector: '.ba-comparison, .ba-handle',
       pagination: {
         el: '.ba-swiper-pagination',
         clickable: true,
@@ -564,9 +567,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Only start drag if on the handle area or close to divider
         isDragging = true;
         comparison.classList.add('ba-dragging');
-        comparison.setPointerCapture(e.pointerId);
+        try {
+          comparison.setPointerCapture(e.pointerId);
+        } catch (err) {}
         // Disable swiper touch while dragging handle
-        baSwiper.allowTouchMove = false;
+        if (baSwiper) baSwiper.allowTouchMove = false;
         updatePosition(e.clientX);
         e.preventDefault();
       }
@@ -581,9 +586,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isDragging) return;
         isDragging = false;
         comparison.classList.remove('ba-dragging');
-        comparison.releasePointerCapture(e.pointerId);
+        try {
+          comparison.releasePointerCapture(e.pointerId);
+        } catch (err) {}
         // Re-enable swiper touch
-        baSwiper.allowTouchMove = true;
+        if (baSwiper) baSwiper.allowTouchMove = true;
       }
 
       comparison.addEventListener('pointerdown', onPointerDown);
@@ -1250,7 +1257,7 @@ function goToStep(stepNum) {
     const p = pi ? pi.value.trim().replace(/\D/g, '') : '';
     const ok = n.length >= 3 && p.length >= 10;
     if (ok) {
-      setNextBtn(true, 'Confirmar Cita ✂️');
+      setNextBtn(true, 'Confirmar Cita');
     } else {
       setNextBtn(false, 'Ingresa tus datos');
     }
