@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ── GSAP Hero Animation ──
-  if (typeof gsap !== 'undefined') {
+  if (typeof gsap !== 'undefined' && document.querySelector('.hero__title')) {
     const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
     heroTl
@@ -889,7 +889,14 @@ function setupWizardLogic() {
       bookingData.service     = card.dataset.service;
       bookingData.serviceName = card.querySelector('h4').innerText;
       bookingData.duration    = 60; // Estándar universal: 60 minutos
-      setNextBtn(true);
+      setNextBtn(true, 'Continuar con ' + bookingData.serviceName);
+
+      // Auto-avance inteligente al Paso 2 (Barbero) tras micro-feedback táctil (220ms)
+      setTimeout(() => {
+        if (currentStep === 1 && bookingData.service) {
+          goToStep(2);
+        }
+      }, 220);
     });
   });
 
@@ -900,7 +907,32 @@ function setupWizardLogic() {
       card.classList.add('selected');
       bookingData.barber     = card.dataset.barber;
       bookingData.barberName = card.querySelector('h4').innerText;
-      setNextBtn(true);
+      setNextBtn(true, 'Continuar con ' + bookingData.barberName);
+
+      // Auto-avance inteligente al Paso 3 (Horarios) tras micro-feedback táctil (220ms)
+      setTimeout(() => {
+        if (currentStep === 2 && bookingData.barber) {
+          goToStep(3);
+        }
+      }, 220);
+    });
+  });
+
+  // ── Timeline: Navegación Bidireccional Interactiva ───────────────
+  document.querySelectorAll('.timeline-step').forEach((stepEl, idx) => {
+    stepEl.style.cursor = 'pointer';
+    stepEl.addEventListener('click', () => {
+      const targetStep = idx + 1;
+      // Permite regresar a pasos completados o avanzar si los requisitos previos ya están listos
+      if (targetStep < currentStep) {
+        goToStep(targetStep);
+      } else if (targetStep === 2 && bookingData.service) {
+        goToStep(2);
+      } else if (targetStep === 3 && bookingData.service && bookingData.barber) {
+        goToStep(3);
+      } else if (targetStep === 4 && bookingData.service && bookingData.barber && bookingData.date && bookingData.time) {
+        goToStep(4);
+      }
     });
   });
 
@@ -1094,7 +1126,14 @@ async function renderTimeChips(container, labelEl) {
         document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('selected'));
         chip.classList.add('selected');
         bookingData.time = slotLabel;
-        setNextBtn(true);
+        setNextBtn(true, 'Continuar al Paso Final');
+
+        // Auto-avance inteligente al Paso 4 (Confirmar datos) tras seleccionar hora (240ms)
+        setTimeout(() => {
+          if (currentStep === 3 && bookingData.time) {
+            goToStep(4);
+          }
+        }, 240);
       });
     } else {
       chip.setAttribute('title', 'Horario ocupado en Google Calendar');
@@ -1185,14 +1224,22 @@ function goToStep(stepNum) {
 
   currentStep = stepNum;
   const targetStep = document.getElementById(`step-${stepNum}`);
-  if (targetStep) targetStep.classList.add('active');
+  if (targetStep) {
+    targetStep.classList.add('active');
+    const scrollArea = document.querySelector('.booking-modal-scroll');
+    if (scrollArea) scrollArea.scrollTop = 0;
+
+    if (window.gsap) {
+      gsap.fromTo(targetStep, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.22, ease: 'power2.out' });
+    }
+  }
   if (timeline) timeline.style.display = 'flex';
 
   // Timeline visuals
   document.querySelectorAll('.timeline-step').forEach((el, i) => {
-    if (i + 1 < stepNum)       el.className = 'timeline-step completed';
+    if (i + 1 < stepNum)        el.className = 'timeline-step completed';
     else if (i + 1 === stepNum) el.className = 'timeline-step active';
-    else                        el.className = 'timeline-step';
+    else                         el.className = 'timeline-step';
   });
   document.querySelectorAll('.timeline-line').forEach((line, i) => {
     line.classList.toggle('filled', i + 1 < stepNum);
@@ -1211,7 +1258,7 @@ function goToStep(stepNum) {
     const tl = document.getElementById('time-label');
     if (tl) tl.style.display = 'none';
     if (tc) tc.innerHTML = '';
-    setNextBtn(false);
+    setNextBtn(false, 'Elige una hora');
 
     // Auto-seleccionar primer día hábil abierto (si hoy ya cerró, selecciona mañana)
     const firstOpenChip = document.querySelector('.date-chip:not(.date-chip--closed)');
@@ -1219,7 +1266,8 @@ function goToStep(stepNum) {
       setTimeout(() => firstOpenChip.click(), 120);
     }
   } else if (stepNum === 1) {
-    setNextBtn(!!bookingData.service);
+    const hasS = !!bookingData.service;
+    setNextBtn(hasS, hasS ? 'Continuar con ' + bookingData.serviceName : 'Siguiente');
   } else if (stepNum === 2) {
     if (bookingData.barber) {
       document.querySelectorAll('.barber-card-premium').forEach(c => {
@@ -1230,7 +1278,8 @@ function goToStep(stepNum) {
         }
       });
     }
-    setNextBtn(!!bookingData.barber);
+    const hasB = !!bookingData.barber;
+    setNextBtn(hasB, hasB ? 'Continuar con ' + bookingData.barberName : 'Siguiente');
   } else if (stepNum === 4) {
     updateSummary();
     const ni = document.getElementById('user-name');
